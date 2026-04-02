@@ -3,24 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>橘譜立 Jeeplee 彩排室 | 經典木質調錄音空間</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>橘譜立 Jeeplee | 彩排室與音樂空間</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- 全域變數與重置 (Classic Wood Tone Variables) --- */
+        /* --- Notion 風格變數 --- */
         :root {
-            /* 主配色 */
-            --bg-walnut: #2A1E17;       /* 深胡桃木主背景 */
-            --bg-warm-brown: #3D2C22;   /* 暖心褐次背景/卡片 */
-            --text-cream: #F5EEDC;     /* 奶油暖白文字 */
-            --text-dim: #D1C0A8;       /* 柔和沙色，用於次要資訊 */
-            --accent-gold: #C19A6B;    /* 古典金/黃銅強調色 */
-            --accent-gold-dark: #A17F5B; /* 深金，用於懸停效果 */
-            
-            /* 其他變數 */
-            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --font-title: 'Playfair Display', serif; /* 經典襯線體 */
-            --font-body: 'Inter', sans-serif;       /* 現代無襯線體 */
-            --border-classic: 1px solid rgba(193, 154, 107, 0.3); /* 古銅色細邊框 */
+            --notion-bg: #ffffff;
+            --notion-text: #37352f;
+            --notion-text-light: #73726e;
+            --notion-border: #e9e9e9;
+            --notion-hover: #f1f1f1;
+            --notion-blue: #2383e2;
+            --notion-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px;
+            --transition: all 0.2s ease-in-out;
         }
 
         * {
@@ -29,585 +24,293 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth; /* 平滑滾動 */
-        }
-
         body {
-            font-family: var(--font-body);
-            background-color: var(--bg-walnut);
-            color: var(--text-cream);
-            line-height: 1.8;
-            overflow-x: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--notion-bg);
+            color: var(--notion-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        a { text-decoration: none; color: inherit; transition: var(--transition); }
-        ul { list-style: none; }
-        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
 
-        /* 通用樣式 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section {
-            padding: 100px 0;
-        }
-
-        .section-title {
-            font-family: var(--font-title);
-            font-size: 3rem;
-            color: var(--accent-gold);
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 900;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-dim);
-            font-size: 1.1rem;
-            margin-bottom: 70px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn {
-            display: inline-block;
-            font-family: var(--font-body);
-            font-weight: 700;
-            padding: 15px 35px;
-            border-radius: 30px; /* 圓潤按鈕 */
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: var(--transition);
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-gold);
-            color: var(--bg-walnut); /* 反差色，確保可讀性 */
-            border: 1px solid var(--accent-gold);
-        }
-
-        .btn-primary:hover {
-            background-color: transparent;
-            color: var(--accent-gold);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(193, 154, 107, 0.4);
-        }
-
-        /* --- 1. 導覽列 (Classic Navbar) --- */
+        /* --- 導覽列 --- */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 8%;
-            background: rgba(42, 30, 23, 0.9); /* 半透明胡桃木色 */
-            position: fixed;
-            width: 100%;
+            padding: 12px 20px;
+            position: sticky;
             top: 0;
-            z-index: 1000;
-            border-bottom: var(--border-classic);
-            backdrop-filter: blur(5px); /* 毛玻璃效果 */
+            background: white;
+            z-index: 100;
+            border-bottom: 1px solid var(--notion-border);
         }
 
         .logo {
-            font-family: var(--font-title);
-            font-size: 2rem;
-            font-weight: 900;
-            color: #fff;
-            letter-spacing: -1px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .logo span {
-            color: var(--accent-gold);
-        }
+        .logo-emoji { font-size: 1.4rem; }
 
         .nav-links {
             display: flex;
-            gap: 35px;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a {
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--accent-gold);
-            bottom: -5px;
-            left: 0;
-            transition: var(--transition);
+            gap: 20px;
+            font-size: 0.9rem;
+            color: var(--notion-text-light);
         }
 
         .nav-links a:hover {
-            color: var(--accent-gold);
+            background-color: var(--notion-hover);
+            color: var(--notion-text);
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin: -4px -8px;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .btn-cta {
+            background-color: var(--notion-blue);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
         }
 
-        .nav-booking {
-            background-color: transparent;
-            border: 2px solid var(--accent-gold);
-            color: var(--accent-gold);
-            padding: 10px 25px;
-        }
+        .btn-cta:hover { opacity: 0.9; }
 
-        .nav-booking:hover {
-            background-color: var(--accent-gold);
-            color: var(--bg-walnut);
-        }
-
-        /* --- 2. 首頁英雄區 (Acoustic Hero) --- */
+        /* --- Hero Section --- */
         .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(42, 30, 23, 0.6), rgba(42, 30, 23, 0.9)), 
-                        url('https://api.solas.ai/api/v1/image-file/image_7.png') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            max-width: 900px;
+            margin: 80px auto;
             padding: 0 20px;
-            margin-top: 0; /* No offset needed with transparent nav */
+            text-align: left;
         }
+
+        .hero-emoji { font-size: 4rem; margin-bottom: 20px; }
 
         .hero h1 {
-            font-family: var(--font-title);
-            font-size: 5rem;
-            color: #fff;
-            margin-bottom: 25px;
-            font-weight: 900;
-            line-height: 1.1;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
         }
 
         .hero p {
-            font-size: 1.4rem;
-            color: var(--text-dim);
-            margin-bottom: 50px;
-            max-width: 800px;
+            font-size: 1.25rem;
+            color: var(--notion-text-light);
+            margin-bottom: 40px;
         }
 
-        /* --- 3. 空間介紹 (Spaces Section) --- */
-        .spaces {
-            background-color: var(--bg-walnut);
-        }
-
-        .spaces-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 50px;
-        }
-
-        .space-card {
-            background-color: var(--bg-warm-brown);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: var(--transition);
-            border: var(--border-classic);
-        }
-
-        .space-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            border-color: var(--accent-gold);
-        }
-
-        .space-img-wrapper {
-            height: 280px;
-            overflow: hidden;
-            border-bottom: var(--border-classic);
-        }
-
-        .space-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .space-info {
-            padding: 35px;
-        }
-
-        .space-info h3 {
-            font-family: var(--font-title);
-            font-size: 2rem;
-            color: #fff;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .space-info p {
-            color: var(--text-dim);
-            margin-bottom: 25px;
-            font-size: 1rem;
-        }
-
-        .space-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .feature-tag {
-            background-color: rgba(193, 154, 107, 0.1);
-            color: var(--accent-gold);
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            border: 1px solid rgba(193, 154, 107, 0.2);
-        }
-
-        /* --- 4. 專業器材 (Gear Section) --- */
-        .gear {
-            background-color: var(--bg-warm-brown); /* Contrast with walnut */
-            border-top: var(--border-classic);
-            border-bottom: var(--border-classic);
-        }
-
-        .gear .section-title { color: var(--text-cream); }
-
-        .gear-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-        }
-
-        .gear-item {
-            background-color: var(--bg-walnut);
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            border: var(--border-classic);
-            transition: var(--transition);
-        }
-
-        .gear-item:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-5px);
-        }
-
-        .gear-img-wrapper {
-            height: 200px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            border: var(--border-classic);
-        }
-
-        .gear-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .gear-item h4 {
-            font-family: var(--font-title);
-            color: var(--accent-gold);
-            margin-bottom: 8px;
-            font-size: 1.3rem;
-        }
-
-        .gear-item p {
-            font-size: 0.9rem;
-            color: var(--text-dim);
-        }
-
-        /* --- 5. 錄音室/混音 (Studio Section) --- */
-        .studio {
-            background: linear-gradient(rgba(42, 30, 23, 0.8), rgba(42, 30, 23, 0.95)), 
-                        url('https://api.solas.ai/api/v1/image-file/image_3.png') center/cover no-repeat fixed;
-            text-align: center;
-        }
-
-        .studio-content {
-            max-width: 800px;
+        /* --- 內容區塊 --- */
+        .container {
+            max-width: 900px;
             margin: 0 auto;
+            padding: 0 20px 100px;
         }
 
-        .studio h2 { color: #fff; }
-        .studio p { color: var(--text-dim); margin-bottom: 50px; font-size: 1.2rem; }
-
-        /* --- 6. 聯絡與地圖 (Contact Section) --- */
-        .contact {
-            background-color: var(--bg-walnut);
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 60px 0 24px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--notion-border);
         }
 
-        .contact-wrapper {
+        /* --- 卡片設計 --- */
+        .grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 24px;
         }
 
-        .contact-info h3 {
-            font-family: var(--font-title);
-            font-size: 2.5rem;
-            color: #fff;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-
-        .contact-details {
-            margin-bottom: 50px;
-        }
-
-        .contact-details p {
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.05rem;
-        }
-
-        .contact-details span {
-            color: var(--accent-gold);
-            font-weight: 700;
-        }
-
-        .map-container {
-            border-radius: 15px;
+        .card {
+            border: 1px solid var(--notion-border);
+            border-radius: 8px;
             overflow: hidden;
-            border: var(--border-classic);
-            height: 450px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transition: var(--transition);
+            cursor: pointer;
         }
 
-        /* --- 7. Footer (Classic Footer) --- */
-        footer {
-            background-color: #1A1310; /* Darker walnut */
-            padding: 80px 0;
-            text-align: center;
-            border-top: var(--border-classic);
+        .card:hover { background-color: var(--notion-hover); }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--notion-border);
         }
 
-        .footer-logo {
-            font-family: var(--font-title);
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
+        .card-content { padding: 20px; }
 
-        .footer-logo span {
-            color: var(--accent-gold);
-        }
-
-        .social-links {
-            margin: 40px 0;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
+        .card-title {
+            font-weight: 600;
             font-size: 1.1rem;
-            font-weight: 500;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .social-links a {
-            color: var(--text-dim);
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--notion-text-light);
+            margin-bottom: 16px;
         }
 
-        .social-links a:hover {
-            color: var(--accent-gold);
-            transform: scale(1.1);
-        }
+        .tags { display: flex; gap: 8px; flex-wrap: wrap; }
 
-        .copyright {
-            font-size: 0.85rem;
+        .tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 3px;
+            background: #eee;
             color: #666;
-            margin-top: 40px;
         }
 
-        /* --- 8. 響應式媒體查詢 (Responsive Media Queries) --- */
-        @media (max-width: 1024px) {
-            .hero h1 { font-size: 4rem; }
-            .spaces-grid { grid-template-columns: 1fr; gap: 40px; }
-            .space-img-wrapper { height: 350px; }
+        /* Notion 標籤顏色範例 */
+        .tag-blue { background: #E1F0FF; color: #0B6E99; }
+        .tag-red { background: #FFE2E5; color: #D44040; }
+        .tag-green { background: #E2F5E9; color: #1C8145; }
+
+        /* --- 器材列表 (Notion List View) --- */
+        .list-view {
+            border: 1px solid var(--notion-border);
+            border-radius: 8px;
         }
 
-        @media (max-width: 768px) {
-            nav { padding: 15px 5%; }
-            .logo { font-size: 1.6rem; }
-            .nav-links { display: none; } /* TODO: Implement hamburger menu */
-            .hero h1 { font-size: 3rem; }
-            .hero p { font-size: 1.1rem; }
-            .section-title { font-size: 2.5rem; }
-            .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
-            .map-container { height: 350px; }
+        .list-item {
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--notion-border);
+        }
+
+        .list-item:last-child { border-bottom: none; }
+
+        .list-item:hover { background-color: var(--notion-hover); }
+
+        .item-info { display: flex; align-items: center; gap: 12px; }
+
+        /* --- Footer --- */
+        footer {
+            padding: 60px 20px;
+            border-top: 1px solid var(--notion-border);
+            color: var(--notion-text-light);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* --- 響應式 --- */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo"><span>橘譜立</span> Jeeplee</a>
-        <ul class="nav-links">
-            <li><a href="#spaces">空間介紹</a></li>
-            <li><a href="#gear">專業器材</a></li>
-            <li><a href="#studio">專業錄音</a></li>
-            <li><a href="#contact">聯絡我們</a></li>
-        </ul>
-        <a href="#booking" class="btn btn-booking nav-booking">立即預約</a>
+        <div class="logo"><span class="logo-emoji">🎹</span> 橘譜立 Jeeplee</div>
+        <div class="nav-links">
+            <a href="#rooms">彩排空間</a>
+            <a href="#gear">器材</a>
+            <a href="#contact">聯絡</a>
+            <a href="https://www.instagram.com/jeeplee_official/" target="_blank">Instagram</a>
+        </div>
+        <a href="#booking" class="btn-cta">立即預約</a>
     </nav>
 
     <header class="hero">
-        <div class="container">
-            <h1>讓原音再次重現</h1>
-            <p>橘譜立 Jeeplee 彩排室，深沉胡桃木打造的經典錄音空間。專業隔音與 Marshall、Fender 等頂級器材，為追求卓越音色的樂團，提供最溫暖、最真實的共鳴場域。</p>
-            <a href="#spaces" class="btn btn-primary">探索空間</a>
-        </div>
+        <div class="hero-emoji">🎸</div>
+        <h1>橘譜立 Jeeplee 彩排室</h1>
+        <p>一個為樂手量身打造的極簡、專注且專業的音樂創作空間。位於台北市中心，提供頂級隔音與經典背板器材。</p>
     </header>
 
-    <section class="section spaces" id="spaces">
-        <div class="container">
-            <h2 class="section-title">經典錄音空間</h2>
-            <p class="section-subtitle">每一間彩排室皆採用專業級隔音工程，搭配溫暖的木質地板與吸音設計，讓練習成為一種享受。</p>
-            <div class="spaces-grid">
-                <div class="space-card">
-                    <div class="space-img-wrapper">
-                        <img src="https://api.solas.ai/api/v1/image-file/image_4.png" alt="Studio A 大彩排室" class="space-img">
-                    </div>
-                    <div class="space-info">
-                        <h3>Studio A (大練)</h3>
-                        <p>專為 5-8 人大編制樂團設計，空間寬敞，擁有絕佳的自然混響效果。</p>
-                        <div class="space-features">
-                            <span class="feature-tag">超大空間</span>
-                            <span class="feature-tag">透視窗鼓組</span>
-                            <span class="feature-tag">經典音箱壁</span>
-                        </div>
-                        <a href="#booking" class="btn btn-primary">查看詳情 & 預約</a>
+    <main class="container">
+        
+        <div class="section-header" id="rooms">
+            <span>🏠</span> 彩排空間
+        </div>
+        <div class="grid">
+            <div class="card">
+                <img src="https://api.solas.ai/api/v1/image-file/image_7.png" class="card-img" alt="Studio A">
+                <div class="card-content">
+                    <div class="card-title">Studio A (大彩排室)</div>
+                    <div class="card-desc">適合 5-8 人編制。擁有大面透視窗與專業隔音牆設計，空間寬敞，適合大型排練。</div>
+                    <div class="tags">
+                        <span class="tag tag-blue">大型編制</span>
+                        <span class="tag tag-green">$600/hr</span>
+                        <span class="tag">專業隔音</span>
                     </div>
                 </div>
-                
-                <div class="space-card">
-                    <div class="space-img-wrapper">
-                        <img src="https://api.solas.ai/api/v1/image-file/image_1.png" alt="Studio B 中彩排室" class="space-img">
-                    </div>
-                    <div class="space-info">
-                        <h3>Studio B (中練)</h3>
-                        <p>適合 3-5 人標準編制，平衡的吸音與擴散設計，讓每一個細節都清晰可見。</p>
-                        <div class="space-features">
-                            <span class="feature-tag">標準編制</span>
-                            <span class="feature-tag">Roland 鍵盤</span>
-                            <span class="feature-tag">舒適環境</span>
-                        </div>
-                        <a href="#booking" class="btn btn-primary">查看詳情 & 預約</a>
+            </div>
+            <div class="card">
+                <img src="https://api.solas.ai/api/v1/image-file/image_1.png" class="card-img" alt="Studio B">
+                <div class="card-content">
+                    <div class="card-title">Studio B (標準彩排室)</div>
+                    <div class="card-desc">適合 3-5 人標準編制。環境舒適，搭載 Roland 專業鍵盤，是精準排練的最佳選擇。</div>
+                    <div class="tags">
+                        <span class="tag tag-blue">標準編制</span>
+                        <span class="tag tag-green">$450/hr</span>
+                        <span class="tag">高CP值</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section class="section gear" id="gear">
-        <div class="container">
-            <h2 class="section-title">頂級專業背板</h2>
-            <p class="section-subtitle">我們深知器材對音色的影響，因此堅持提供樂手公認的經典型號，滿足你對聲音的挑剔需求。</p>
-            <div class="gear-grid">
-                <div class="gear-item">
-                    <div class="gear-img-wrapper">
-                        <img src="https://api.solas.ai/api/v1/image-file/image_8.png" alt="Marshall Amp" class="gear-img">
-                    </div>
-                    <h4>Marshall</h4>
-                    <p>經典搖滾音色 JCM 系列</p>
-                </div>
-                <div class="gear-item">
-                    <div class="gear-img-wrapper">
-                        <img src="https://api.solas.ai/api/v1/image-file/image_8.png" alt="Fender Amp" class="gear-img" style="object-position: right;">
-                    </div>
-                    <h4>Fender</h4>
-                    <p>復古清音 Twin Reverb</p>
-                </div>
-                <div class="gear-item">
-                    <div class="gear-img-wrapper">
-                        <img src="https://api.solas.ai/api/v1/image-file/image_9.png" alt="Roland JUNO-DS" class="gear-img">
-                    </div>
-                    <h4>Roland</h4>
-                    <p>JUNO-DS 專業合成器</p>
-                </div>
-                <div class="gear-item">
-                    <div class="gear-img-wrapper">
-                        <img src="https://api.solas.ai/api/v1/image-file/image_0.png" alt="Drum Kit" class="gear-img">
-                    </div>
-                    <h4>專業鼓組</h4>
-                    <p>Pearl/Yamaha 搭配 Zildjian 鈸</p>
-                </div>
+        <div class="section-header" id="gear">
+            <span>🔌</span> 專業器材清單
+        </div>
+        <div class="list-view">
+            <div class="list-item">
+                <div class="item-info"><span>🎸</span> Marshall JCM 系列</div>
+                <div class="tag">吉他音箱</div>
+            </div>
+            <div class="list-item">
+                <div class="item-info"><span>🎸</span> Fender Twin Reverb</div>
+                <div class="tag">吉他音箱</div>
+            </div>
+            <div class="list-item">
+                <div class="item-info"><span>🎹</span> Roland JUNO-DS</div>
+                <div class="tag">合成器</div>
+            </div>
+            <div class="list-item">
+                <div class="item-info"><span>🥁</span> Yamaha / Pearl 鼓組</div>
+                <div class="tag">爵士鼓</div>
+            </div>
+            <div class="list-item">
+                <div class="item-info"><span>🎚️</span> 專業錄音/混音服務</div>
+                <div class="tag tag-red">專業服務</div>
             </div>
         </div>
-    </section>
 
-    <section class="section studio" id="studio">
-        <div class="container">
-            <div class="studio-content">
-                <h2 class="section-title">專業錄音 & 混音服務</h2>
-                <p>除了彩排，我們更提供發行等級的專業錄音與後期混音。利用 `image_3.png` 中的專業混音空間，讓你的作品達到前所未有的高度。</p>
-                <a href="#contact" class="btn btn-primary">諮詢錄音服務</a>
-            </div>
+        <div class="section-header" id="contact">
+            <span>📍</span> 聯絡資訊
         </div>
-    </section>
+        <div class="card" style="padding: 24px; cursor: default;">
+            <p style="margin-bottom: 12px;"><strong>地址：</strong> 台北市信義區音樂路 101 號 B1</p>
+            <p style="margin-bottom: 12px;"><strong>電話：</strong> (02) 2345-6789</p>
+            <p style="margin-bottom: 12px;"><strong>營業時間：</strong> 10:00 - 24:00</p>
+            <p><strong>LINE：</strong> <a href="#" style="color: var(--notion-blue); text-decoration: underline;">@jeeplee_studio</a></p>
+        </div>
 
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <h3>聯絡我們</h3>
-                    <div class="contact-details">
-                        <p><span>地址：</span>台北市信義區音樂路 101 號 B1</p>
-                        <p><span>電話：</span>(02) 2345-6789</p>
-                        <p><span>營業時間：</span>10:00 - 24:00 (週一至週日)</p>
-                        <p><span>Instagram：</span><a href="https://www.instagram.com/jeeplee_official/" target="_blank">@jeeplee_official</a></p>
-                    </div>
-                    <a href="https://line.me/ti/p/[你的LINE ID]" target="_blank" class="btn btn-primary">LINE 立即預約</a>
-                </div>
-                <div class="map-container">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m4!1m3!1m2!1m1!1z5Y-w5YyX5biC5L-h576p5Y2A!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abb6da80a7ad%3A0x6a0a09e0a8e0!2zMTEx5Y-w5YyX5biC5L-h576p5Y2A!5e0!3m2!1szh-TW!2stw!4v1716000000000!5m2!1szh-TW!2stw" 
-                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
+    </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-logo"><span>橘譜立</span> Jeeplee</div>
-            <p>經典音色，由此開啟。</p>
-            <div class="social-links">
-                <a href="https://www.instagram.com/jeeplee_official/" target="_blank">IG</a> |
-                <a href="#" target="_blank">FB</a> |
-                <a href="#" target="_blank">LINE</a>
-            </div>
-            <p class="copyright">&copy; 2024 Jeeplee Studio. All rights reserved.</p>
-        </div>
+        <p>© 2026 橘譜立 Jeeplee Studio. Built with passion for musicians.</p>
+        <p style="margin-top: 8px;">Made in Taipei, Taiwan</p>
     </footer>
 
-    <script>
-        // 1. 導覽列滾動效果
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.padding = '15px 8%';
-                nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
-                nav.style.backgroundColor = 'rgba(42, 30, 23, 0.98)'; /* 更不透明 */
-            } else {
-                nav.style.padding = '25px 8%';
-                nav.style.boxShadow = 'none';
-                nav.style.backgroundColor = 'rgba(42, 30, 23, 0.9)'; /* 更透明 */
-            }
-        });
-    </script>
 </body>
 </html>
