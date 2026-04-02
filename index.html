@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>橘譜立 Jeeplee | 彩排室與音樂空間</title>
+    <title>橘譜立 Jeeplee | 專業彩排與錄音空間</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* --- Notion 風格變數 --- */
@@ -82,34 +82,31 @@
             transition: var(--transition);
         }
 
-        .btn-cta:hover { opacity: 0.9; }
-
         /* --- Hero Section --- */
         .hero {
-            max-width: 900px;
-            margin: 80px auto;
+            max-width: 800px;
+            margin: 60px auto 40px;
             padding: 0 20px;
-            text-align: left;
         }
 
-        .hero-emoji { font-size: 4rem; margin-bottom: 20px; }
+        .hero-emoji { font-size: 4.5rem; margin-bottom: 10px; }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 16px;
             letter-spacing: -0.02em;
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: var(--notion-text-light);
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
-        /* --- 內容區塊 --- */
+        /* --- 內容容器 --- */
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 0 20px 100px;
         }
@@ -118,88 +115,76 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            margin: 60px 0 24px;
+            margin: 48px 0 20px;
             padding-bottom: 8px;
             border-bottom: 1px solid var(--notion-border);
         }
 
-        /* --- 卡片設計 --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 24px;
+        /* --- 空間展示 (Callout Style) --- */
+        .space-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border: 1px solid var(--notion-border);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            transition: var(--transition);
         }
 
-        .card {
+        .space-item:hover { background-color: var(--notion-hover); }
+
+        .space-img-sm {
+            width: 120px;
+            height: 120px;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 1px solid var(--notion-border);
+        }
+
+        .space-text h3 { font-size: 1.1rem; margin-bottom: 6px; }
+        .space-text p { font-size: 0.95rem; color: var(--notion-text-light); }
+
+        /* --- 器材列表 (Notion Database Table Style) --- */
+        .gear-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
             border: 1px solid var(--notion-border);
             border-radius: 8px;
             overflow: hidden;
-            transition: var(--transition);
-            cursor: pointer;
         }
 
-        .card:hover { background-color: var(--notion-hover); }
-
-        .card-img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
+        .gear-table th, .gear-table td {
+            padding: 12px 16px;
+            text-align: left;
             border-bottom: 1px solid var(--notion-border);
         }
 
-        .card-content { padding: 20px; }
-
-        .card-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .card-desc {
-            font-size: 0.95rem;
+        .gear-table th {
+            background-color: #f7f7f7;
             color: var(--notion-text-light);
-            margin-bottom: 16px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
         }
 
-        .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .gear-table tr:last-child td { border-bottom: none; }
+        .gear-table tr:hover td { background-color: var(--notion-hover); }
 
+        .gear-cat { display: flex; align-items: center; gap: 8px; }
+
+        /* --- 標籤樣式 --- */
         .tag {
             font-size: 0.75rem;
             padding: 2px 8px;
             border-radius: 3px;
-            background: #eee;
-            color: #666;
+            font-weight: 500;
         }
-
-        /* Notion 標籤顏色範例 */
         .tag-blue { background: #E1F0FF; color: #0B6E99; }
-        .tag-red { background: #FFE2E5; color: #D44040; }
-        .tag-green { background: #E2F5E9; color: #1C8145; }
-
-        /* --- 器材列表 (Notion List View) --- */
-        .list-view {
-            border: 1px solid var(--notion-border);
-            border-radius: 8px;
-        }
-
-        .list-item {
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--notion-border);
-        }
-
-        .list-item:last-child { border-bottom: none; }
-
-        .list-item:hover { background-color: var(--notion-hover); }
-
-        .item-info { display: flex; align-items: center; gap: 12px; }
+        .tag-gray { background: #EEEEEE; color: #666666; }
+        .tag-purple { background: #F3E5F5; color: #7B1FA2; }
 
         /* --- Footer --- */
         footer {
@@ -210,11 +195,9 @@
             text-align: center;
         }
 
-        /* --- 響應式 --- */
         @media (max-width: 600px) {
-            .hero h1 { font-size: 2rem; }
-            .grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
+            .space-item { flex-direction: column; }
+            .space-img-sm { width: 100%; height: 180px; }
         }
     </style>
 </head>
@@ -223,93 +206,115 @@
     <nav>
         <div class="logo"><span class="logo-emoji">🎹</span> 橘譜立 Jeeplee</div>
         <div class="nav-links">
-            <a href="#rooms">彩排空間</a>
-            <a href="#gear">器材</a>
-            <a href="#contact">聯絡</a>
+            <a href="#spaces">空間介紹</a>
+            <a href="#gear">器材規格</a>
             <a href="https://www.instagram.com/jeeplee_official/" target="_blank">Instagram</a>
         </div>
-        <a href="#booking" class="btn-cta">立即預約</a>
+        <a href="https://line.me/ti/p/[YOUR_ID]" class="btn-cta">預約諮詢</a>
     </nav>
 
     <header class="hero">
-        <div class="hero-emoji">🎸</div>
-        <h1>橘譜立 Jeeplee 彩排室</h1>
-        <p>一個為樂手量身打造的極簡、專注且專業的音樂創作空間。位於台北市中心，提供頂級隔音與經典背板器材。</p>
+        <div class="hero-emoji">🎙️</div>
+        <h1>橘譜立 Jeeplee</h1>
+        <p>台北專業音樂彩排與空間租借。提供一站式的高品質彩排環境，從頂級 Tama 鼓組到 Marshall 經典音箱，只為純粹的聲音而生。</p>
     </header>
 
     <main class="container">
         
-        <div class="section-header" id="rooms">
-            <span>🏠</span> 彩排空間
+        <div class="section-header" id="spaces">
+            <span>🗺️</span> 空間配置
         </div>
-        <div class="grid">
-            <div class="card">
-                <img src="https://api.solas.ai/api/v1/image-file/image_7.png" class="card-img" alt="Studio A">
-                <div class="card-content">
-                    <div class="card-title">Studio A (大彩排室)</div>
-                    <div class="card-desc">適合 5-8 人編制。擁有大面透視窗與專業隔音牆設計，空間寬敞，適合大型排練。</div>
-                    <div class="tags">
-                        <span class="tag tag-blue">大型編制</span>
-                        <span class="tag tag-green">$600/hr</span>
-                        <span class="tag">專業隔音</span>
-                    </div>
-                </div>
+
+        <div class="space-item">
+            <img src="https://api.solas.ai/api/v1/image-file/image_7.png" class="space-img-sm" alt="大彩排室">
+            <div class="space-text">
+                <h3>大彩排室 (Main Studio)</h3>
+                <p>旗艦級彩排空間，擁有極佳的聲學處理與視覺透視窗。適合完整樂團編制排練與前置製作。</p>
             </div>
-            <div class="card">
-                <img src="https://api.solas.ai/api/v1/image-file/image_1.png" class="card-img" alt="Studio B">
-                <div class="card-content">
-                    <div class="card-title">Studio B (標準彩排室)</div>
-                    <div class="card-desc">適合 3-5 人標準編制。環境舒適，搭載 Roland 專業鍵盤，是精準排練的最佳選擇。</div>
-                    <div class="tags">
-                        <span class="tag tag-blue">標準編制</span>
-                        <span class="tag tag-green">$450/hr</span>
-                        <span class="tag">高CP值</span>
-                    </div>
-                </div>
+        </div>
+
+        <div class="space-item">
+            <img src="https://api.solas.ai/api/v1/image-file/image_3.png" class="space-img-sm" alt="控制室">
+            <div class="space-text">
+                <h3>控制室 (Control Room)</h3>
+                <p>專業混音與錄音控制環境，與彩排室連通，支援同步錄音與高品質後期製作。</p>
+            </div>
+        </div>
+
+        <div class="space-item">
+            <img src="https://api.solas.ai/api/v1/image-file/image_5.png" class="space-img-sm" alt="交誼廳">
+            <div class="space-text">
+                <h3>交誼廳 (Lounge)</h3>
+                <p>創作者的休息據點。提供舒適的沙發與放鬆氛圍，讓你在排練間隙重拾靈感。</p>
             </div>
         </div>
 
         <div class="section-header" id="gear">
-            <span>🔌</span> 專業器材清單
-        </div>
-        <div class="list-view">
-            <div class="list-item">
-                <div class="item-info"><span>🎸</span> Marshall JCM 系列</div>
-                <div class="tag">吉他音箱</div>
-            </div>
-            <div class="list-item">
-                <div class="item-info"><span>🎸</span> Fender Twin Reverb</div>
-                <div class="tag">吉他音箱</div>
-            </div>
-            <div class="list-item">
-                <div class="item-info"><span>🎹</span> Roland JUNO-DS</div>
-                <div class="tag">合成器</div>
-            </div>
-            <div class="list-item">
-                <div class="item-info"><span>🥁</span> Yamaha / Pearl 鼓組</div>
-                <div class="tag">爵士鼓</div>
-            </div>
-            <div class="list-item">
-                <div class="item-info"><span>🎚️</span> 專業錄音/混音服務</div>
-                <div class="tag tag-red">專業服務</div>
-            </div>
+            <span>🔧</span> 器材清單 (Gear List)
         </div>
 
-        <div class="section-header" id="contact">
-            <span>📍</span> 聯絡資訊
+        <table class="gear-table">
+            <thead>
+                <tr>
+                    <th>類型</th>
+                    <th>型號 / 規格</th>
+                    <th>備註</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="gear-cat">🥁 爵士鼓</td>
+                    <td>Tama Starclassic Performer</td>
+                    <td><span class="tag tag-blue">旗艦級</span></td>
+                </tr>
+                <tr>
+                    <td class="gear-cat">🥁 小鼓</td>
+                    <td>Sonor Kompressor</td>
+                    <td><span class="tag tag-blue">頂級音色</span></td>
+                </tr>
+                <tr>
+                    <td class="gear-cat">🎸 吉他音箱</td>
+                    <td>Fender Twin Reverb</td>
+                    <td><span class="tag tag-gray">經典清音</span></td>
+                </tr>
+                <tr>
+                    <td class="gear-cat">🎸 吉他音箱</td>
+                    <td>Marshall JCM2000</td>
+                    <td><span class="tag tag-gray">搖滾必備</span></td>
+                </tr>
+                <tr>
+                    <td class="gear-cat">🎸 Bass 音箱</td>
+                    <td>Ampeg SVT-15E</td>
+                    <td><span class="tag tag-gray">深沉低頻</span></td>
+                </tr>
+                <tr>
+                    <td class="gear-cat">🎹 鍵盤</td>
+                    <td>Roland JUNO-DS88</td>
+                    <td><span class="tag tag-purple">全配重</span></td>
+                </tr>
+                <tr>
+                    <td class="gear-cat">🎧 監聽系統</td>
+                    <td>IEM DB48</td>
+                    <td><span class="tag tag-purple">專業監聽</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="section-header">
+            <span>📍</span> 交通資訊
         </div>
-        <div class="card" style="padding: 24px; cursor: default;">
-            <p style="margin-bottom: 12px;"><strong>地址：</strong> 台北市信義區音樂路 101 號 B1</p>
-            <p style="margin-bottom: 12px;"><strong>電話：</strong> (02) 2345-6789</p>
-            <p style="margin-bottom: 12px;"><strong>營業時間：</strong> 10:00 - 24:00</p>
-            <p><strong>LINE：</strong> <a href="#" style="color: var(--notion-blue); text-decoration: underline;">@jeeplee_studio</a></p>
+        <div style="border: 1px solid var(--notion-border); border-radius: 8px; padding: 24px;">
+            <p style="margin-bottom: 8px;"><strong>地址：</strong> 台北市信義區音樂路 101 號 B1</p>
+            <p style="margin-bottom: 8px;"><strong>電話：</strong> (02) 2345-6789</p>
+            <p style="margin-bottom: 8px;"><strong>IG：</strong> <a href="https://www.instagram.com/jeeplee_official/" target="_blank" style="color: var(--notion-blue);">@jeeplee_official</a></p>
+            <p><strong>預約管道：</strong> 歡迎透過官方 LINE 洽詢檔期</p>
         </div>
 
     </main>
 
     <footer>
-        <p>© 2026 橘譜立 Jeeplee Studio. Built with passion for musicians.</p>
-        <p style="margin-top: 8px;">Made in Taipei, Taiwan</p>
+        <p>© 2026 橘譜立 Jeeplee Studio. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 0.75rem;">精心打造的音樂空間，讓聲音回歸本質。</p>
     </footer>
 
 </body>
