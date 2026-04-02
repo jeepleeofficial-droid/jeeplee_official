@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>橘譜立 Jeeplee 彩排室 | 專業音樂空間</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>橘譜立 Jeeplee 彩排室 | 經典木質調錄音空間</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* --- 1. 全域變數與重置 (CSS Variables & Reset) --- */
+        /* --- 全域變數與重置 (Classic Wood Tone Variables) --- */
         :root {
-            --primary-red: #E63946;    /* 取自吸音板的激情紅 */
-            --bg-dark: #1A1A1A;       /* 取自隔音牆的深邃灰 */
-            --bg-card: #252525;       /* 卡片背景 */
-            --text-light: #F1FAEE;    /* 暖白文字 */
-            --text-dim: #A8DADC;      /* 淡青文字，用於次要資訊 */
-            --warm-wood: #D4A373;     /* 木地板的暖色調，用於點綴 */
-            --transition: all 0.3s ease;
-            --font-title: 'Montserrat', sans-serif;
-            --font-body: 'Noto Sans TC', sans-serif;
+            /* 主配色 */
+            --bg-walnut: #2A1E17;       /* 深胡桃木主背景 */
+            --bg-warm-brown: #3D2C22;   /* 暖心褐次背景/卡片 */
+            --text-cream: #F5EEDC;     /* 奶油暖白文字 */
+            --text-dim: #D1C0A8;       /* 柔和沙色，用於次要資訊 */
+            --accent-gold: #C19A6B;    /* 古典金/黃銅強調色 */
+            --accent-gold-dark: #A17F5B; /* 深金，用於懸停效果 */
+            
+            /* 其他變數 */
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --font-title: 'Playfair Display', serif; /* 經典襯線體 */
+            --font-body: 'Inter', sans-serif;       /* 現代無襯線體 */
+            --border-classic: 1px solid rgba(193, 154, 107, 0.3); /* 古銅色細邊框 */
         }
 
         * {
@@ -31,8 +35,8 @@
 
         body {
             font-family: var(--font-body);
-            background-color: var(--bg-dark);
-            color: var(--text-light);
+            background-color: var(--bg-walnut);
+            color: var(--text-cream);
             line-height: 1.8;
             overflow-x: hidden;
         }
@@ -48,98 +52,127 @@
             padding: 0 20px;
         }
 
-        .section-title {
-            font-family: var(--font-title);
-            font-size: 2.5rem;
-            color: var(--primary-red);
-            text-align: center;
-            margin-bottom: 60px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .section {
+            padding: 100px 0;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--primary-red);
-            margin: 15px auto 0;
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 3rem;
+            color: var(--accent-gold);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-bottom: 70px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .btn {
             display: inline-block;
-            font-family: var(--font-title);
+            font-family: var(--font-body);
             font-weight: 700;
-            padding: 12px 30px;
-            border-radius: 5px;
+            padding: 15px 35px;
+            border-radius: 30px; /* 圓潤按鈕 */
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             transition: var(--transition);
+            font-size: 0.9rem;
         }
 
         .btn-primary {
-            background-color: var(--primary-red);
-            color: #fff;
+            background-color: var(--accent-gold);
+            color: var(--bg-walnut); /* 反差色，確保可讀性 */
+            border: 1px solid var(--accent-gold);
         }
 
         .btn-primary:hover {
-            background-color: #BF2A37;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+            background-color: transparent;
+            color: var(--accent-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(193, 154, 107, 0.4);
         }
 
-        /* --- 2. 導覽列 (Navbar) --- */
+        /* --- 1. 導覽列 (Classic Navbar) --- */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background: rgba(26, 26, 26, 0.95);
+            padding: 25px 8%;
+            background: rgba(42, 30, 23, 0.9); /* 半透明胡桃木色 */
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid #333;
+            border-bottom: var(--border-classic);
+            backdrop-filter: blur(5px); /* 毛玻璃效果 */
         }
 
         .logo {
             font-family: var(--font-title);
-            font-size: 1.8rem;
-            font-weight: 800;
+            font-size: 2rem;
+            font-weight: 900;
             color: #fff;
-            letter-spacing: 1px;
+            letter-spacing: -1px;
         }
 
         .logo span {
-            color: var(--primary-red);
+            color: var(--accent-gold);
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 35px;
             font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
         }
 
         .nav-links a:hover {
-            color: var(--primary-red);
+            color: var(--accent-gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-booking {
             background-color: transparent;
-            border: 2px solid var(--primary-red);
-            color: var(--primary-red);
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 10px 25px;
         }
 
         .nav-booking:hover {
-            background-color: var(--primary-red);
-            color: #fff;
+            background-color: var(--accent-gold);
+            color: var(--bg-walnut);
         }
 
-        /* --- 3. 首頁英雄區 (Hero Section) --- */
+        /* --- 2. 首頁英雄區 (Acoustic Hero) --- */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), 
+            background: linear-gradient(rgba(42, 30, 23, 0.6), rgba(42, 30, 23, 0.9)), 
                         url('https://api.solas.ai/api/v1/image-file/image_7.png') center/cover no-repeat;
             display: flex;
             flex-direction: column;
@@ -147,52 +180,54 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            margin-top: 80px; /* Offset for fixed navbar */
+            margin-top: 0; /* No offset needed with transparent nav */
         }
 
         .hero h1 {
             font-family: var(--font-title);
-            font-size: 4rem;
+            font-size: 5rem;
             color: #fff;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            margin-bottom: 25px;
+            font-weight: 900;
+            line-height: 1.1;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--text-dim);
-            margin-bottom: 40px;
-            max-width: 700px;
+            margin-bottom: 50px;
+            max-width: 800px;
         }
 
-        /* --- 4. 空間介紹 (Spaces Section) --- */
+        /* --- 3. 空間介紹 (Spaces Section) --- */
         .spaces {
-            padding: 100px 0;
+            background-color: var(--bg-walnut);
         }
 
         .spaces-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 50px;
         }
 
         .space-card {
-            background-color: var(--bg-card);
-            border-radius: 10px;
+            background-color: var(--bg-warm-brown);
+            border-radius: 15px;
             overflow: hidden;
             transition: var(--transition);
-            border: 1px solid #333;
+            border: var(--border-classic);
         }
 
         .space-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-red);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border-color: var(--accent-gold);
         }
 
         .space-img-wrapper {
-            height: 250px;
+            height: 280px;
             overflow: hidden;
+            border-bottom: var(--border-classic);
         }
 
         .space-img {
@@ -202,74 +237,76 @@
             transition: var(--transition);
         }
 
-        .space-card:hover .space-img {
-            transform: scale(1.1);
-        }
-
         .space-info {
-            padding: 30px;
+            padding: 35px;
         }
 
         .space-info h3 {
             font-family: var(--font-title);
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #fff;
             margin-bottom: 15px;
+            font-weight: 700;
         }
 
         .space-info p {
             color: var(--text-dim);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
+            margin-bottom: 25px;
+            font-size: 1rem;
         }
 
         .space-features {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 25px;
         }
 
         .feature-tag {
-            background-color: #333;
-            color: var(--warm-wood);
-            padding: 5px 12px;
+            background-color: rgba(193, 154, 107, 0.1);
+            color: var(--accent-gold);
+            padding: 6px 15px;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
+            border: 1px solid rgba(193, 154, 107, 0.2);
         }
 
-        /* --- 5. 器材網格 (Gear Section) --- */
+        /* --- 4. 專業器材 (Gear Section) --- */
         .gear {
-            padding: 100px 0;
-            background-color: #111; /* Slightly darker background */
+            background-color: var(--bg-warm-brown); /* Contrast with walnut */
+            border-top: var(--border-classic);
+            border-bottom: var(--border-classic);
         }
+
+        .gear .section-title { color: var(--text-cream); }
 
         .gear-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
         }
 
         .gear-item {
-            background-color: var(--bg-card);
-            padding: 20px;
-            border-radius: 8px;
+            background-color: var(--bg-walnut);
+            padding: 30px;
+            border-radius: 12px;
             text-align: center;
-            border: 1px solid #333;
+            border: var(--border-classic);
             transition: var(--transition);
         }
 
         .gear-item:hover {
-            border-color: var(--warm-wood);
-            transform: scale(1.03);
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
         }
 
         .gear-img-wrapper {
-            height: 180px;
+            height: 200px;
             overflow: hidden;
-            margin-bottom: 15px;
-            border-radius: 5px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: var(--border-classic);
         }
 
         .gear-img {
@@ -280,19 +317,19 @@
 
         .gear-item h4 {
             font-family: var(--font-title);
-            color: #fff;
-            margin-bottom: 5px;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
         }
 
         .gear-item p {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-dim);
         }
 
-        /* --- 6. 錄音室/混音 (Studio Section) --- */
+        /* --- 5. 錄音室/混音 (Studio Section) --- */
         .studio {
-            padding: 100px 0;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
+            background: linear-gradient(rgba(42, 30, 23, 0.8), rgba(42, 30, 23, 0.95)), 
                         url('https://api.solas.ai/api/v1/image-file/image_3.png') center/cover no-repeat fixed;
             text-align: center;
         }
@@ -303,101 +340,114 @@
         }
 
         .studio h2 { color: #fff; }
-        .studio p { color: var(--text-dim); margin-bottom: 40px; font-size: 1.1rem; }
+        .studio p { color: var(--text-dim); margin-bottom: 50px; font-size: 1.2rem; }
 
-        /* --- 7. 聯絡與地圖 (Contact Section) --- */
+        /* --- 6. 聯絡與地圖 (Contact Section) --- */
         .contact {
-            padding: 100px 0;
+            background-color: var(--bg-walnut);
         }
 
         .contact-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 60px;
             align-items: center;
         }
 
         .contact-info h3 {
             font-family: var(--font-title);
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #fff;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-weight: 700;
         }
 
         .contact-details {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .contact-details p {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-size: 1.05rem;
         }
 
         .contact-details span {
-            color: var(--warm-wood);
+            color: var(--accent-gold);
             font-weight: 700;
         }
 
         .map-container {
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            border: 2px solid #333;
-            height: 400px;
+            border: var(--border-classic);
+            height: 450px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
-        /* --- 8. 頁尾 (Footer) --- */
+        /* --- 7. Footer (Classic Footer) --- */
         footer {
-            background-color: #080808;
-            padding: 60px 0;
+            background-color: #1A1310; /* Darker walnut */
+            padding: 80px 0;
             text-align: center;
-            border-top: 1px solid #222;
+            border-top: var(--border-classic);
         }
 
         .footer-logo {
             font-family: var(--font-title);
-            font-size: 2rem;
-            font-weight: 800;
+            font-size: 2.5rem;
+            font-weight: 900;
             color: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
         }
 
         .footer-logo span {
-            color: var(--primary-red);
+            color: var(--accent-gold);
         }
 
         .social-links {
-            margin: 30px 0;
+            margin: 40px 0;
             display: flex;
             justify-content: center;
-            gap: 25px;
-            font-size: 1.2rem;
+            gap: 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .social-links a {
+            color: var(--text-dim);
         }
 
         .social-links a:hover {
-            color: var(--primary-red);
+            color: var(--accent-gold);
             transform: scale(1.1);
         }
 
         .copyright {
-            font-size: 0.8rem;
-            color: #555;
-            margin-top: 30px;
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 40px;
         }
 
-        /* --- 9. 響應式媒體查詢 (Responsive Media Queries) --- */
-        @media (max-width: 992px) {
-            .hero h1 { font-size: 3rem; }
-            .section-title { font-size: 2rem; }
-            .contact-wrapper { grid-template-columns: 1fr; }
+        /* --- 8. 響應式媒體查詢 (Responsive Media Queries) --- */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 4rem; }
+            .spaces-grid { grid-template-columns: 1fr; gap: 40px; }
+            .space-img-wrapper { height: 350px; }
         }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* TODO: 製作漢堡選單 */
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1rem; }
-            .spaces-grid { grid-template-columns: 1fr; }
+            nav { padding: 15px 5%; }
+            .logo { font-size: 1.6rem; }
+            .nav-links { display: none; } /* TODO: Implement hamburger menu */
+            .hero h1 { font-size: 3rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-title { font-size: 2.5rem; }
+            .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
+            .map-container { height: 350px; }
         }
     </style>
 </head>
@@ -416,15 +466,16 @@
 
     <header class="hero">
         <div class="container">
-            <h1>讓靈魂在此共鳴</h1>
-            <p>橘譜立 Jeeplee 彩排室，為追求極致音色的樂團打造。頂級專業隔音， Marshall & Fender 經典背板器材，你的音樂，值得最好的空間。</p>
+            <h1>讓原音再次重現</h1>
+            <p>橘譜立 Jeeplee 彩排室，深沉胡桃木打造的經典錄音空間。專業隔音與 Marshall、Fender 等頂級器材，為追求卓越音色的樂團，提供最溫暖、最真實的共鳴場域。</p>
             <a href="#spaces" class="btn btn-primary">探索空間</a>
         </div>
     </header>
 
     <section class="section spaces" id="spaces">
         <div class="container">
-            <h2 class="section-title">我們的空間</h2>
+            <h2 class="section-title">經典錄音空間</h2>
+            <p class="section-subtitle">每一間彩排室皆採用專業級隔音工程，搭配溫暖的木質地板與吸音設計，讓練習成為一種享受。</p>
             <div class="spaces-grid">
                 <div class="space-card">
                     <div class="space-img-wrapper">
@@ -432,7 +483,7 @@
                     </div>
                     <div class="space-info">
                         <h3>Studio A (大練)</h3>
-                        <p>專為 5-8 人編制樂團設計，空間寬敞，視聽效果絕佳。</p>
+                        <p>專為 5-8 人大編制樂團設計，空間寬敞，擁有絕佳的自然混響效果。</p>
                         <div class="space-features">
                             <span class="feature-tag">超大空間</span>
                             <span class="feature-tag">透視窗鼓組</span>
@@ -448,7 +499,7 @@
                     </div>
                     <div class="space-info">
                         <h3>Studio B (中練)</h3>
-                        <p>適合 3-5 人標準編制，平衡的吸音設計，讓練習更精準。</p>
+                        <p>適合 3-5 人標準編制，平衡的吸音與擴散設計，讓每一個細節都清晰可見。</p>
                         <div class="space-features">
                             <span class="feature-tag">標準編制</span>
                             <span class="feature-tag">Roland 鍵盤</span>
@@ -463,7 +514,8 @@
 
     <section class="section gear" id="gear">
         <div class="container">
-            <h2 class="section-title">專業背板器材</h2>
+            <h2 class="section-title">頂級專業背板</h2>
+            <p class="section-subtitle">我們深知器材對音色的影響，因此堅持提供樂手公認的經典型號，滿足你對聲音的挑剔需求。</p>
             <div class="gear-grid">
                 <div class="gear-item">
                     <div class="gear-img-wrapper">
@@ -500,8 +552,8 @@
     <section class="section studio" id="studio">
         <div class="container">
             <div class="studio-content">
-                <h2 class="section-title">專業錄音 & 混音</h2>
-                <p>不只是彩排，我們提供專業錄音室 (`image_3.png` 中的混音空間) 和全套錄音服務。從分軌錄音到後期混音，讓你的作品達到發行等級。</p>
+                <h2 class="section-title">專業錄音 & 混音服務</h2>
+                <p>除了彩排，我們更提供發行等級的專業錄音與後期混音。利用 `image_3.png` 中的專業混音空間，讓你的作品達到前所未有的高度。</p>
                 <a href="#contact" class="btn btn-primary">諮詢錄音服務</a>
             </div>
         </div>
@@ -513,8 +565,8 @@
                 <div class="contact-info">
                     <h3>聯絡我們</h3>
                     <div class="contact-details">
-                        <p><span>地址：</span>台北市 [區名] [路名] [號碼] [樓層]</p>
-                        <p><span>電話：</span>(02) xxxx-xxxx</p>
+                        <p><span>地址：</span>台北市信義區音樂路 101 號 B1</p>
+                        <p><span>電話：</span>(02) 2345-6789</p>
                         <p><span>營業時間：</span>10:00 - 24:00 (週一至週日)</p>
                         <p><span>Instagram：</span><a href="https://www.instagram.com/jeeplee_official/" target="_blank">@jeeplee_official</a></p>
                     </div>
@@ -532,7 +584,7 @@
     <footer>
         <div class="container">
             <div class="footer-logo"><span>橘譜立</span> Jeeplee</div>
-            <p>音樂，是我們共同的語言。</p>
+            <p>經典音色，由此開啟。</p>
             <div class="social-links">
                 <a href="https://www.instagram.com/jeeplee_official/" target="_blank">IG</a> |
                 <a href="#" target="_blank">FB</a> |
@@ -543,18 +595,17 @@
     </footer>
 
     <script>
-        // 1. 平滑滾動效果 (已經在 CSS html { scroll-behavior: smooth; } 中實現，
-        // 但如果需要更精細控制，可以使用 JS)
-
-        // 2. 導覽列滾動變色效果
+        // 1. 導覽列滾動效果
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
-                nav.style.padding = '10px 5%';
+                nav.style.padding = '15px 8%';
                 nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+                nav.style.backgroundColor = 'rgba(42, 30, 23, 0.98)'; /* 更不透明 */
             } else {
-                nav.style.padding = '20px 5%';
+                nav.style.padding = '25px 8%';
                 nav.style.boxShadow = 'none';
+                nav.style.backgroundColor = 'rgba(42, 30, 23, 0.9)'; /* 更透明 */
             }
         });
     </script>
