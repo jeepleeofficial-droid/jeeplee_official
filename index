@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>橘譜立 Jeeplee 彩排室 | 專業音樂空間</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- 1. 全域變數與重置 (CSS Variables & Reset) --- */
+        :root {
+            --primary-red: #E63946;    /* 取自吸音板的激情紅 */
+            --bg-dark: #1A1A1A;       /* 取自隔音牆的深邃灰 */
+            --bg-card: #252525;       /* 卡片背景 */
+            --text-light: #F1FAEE;    /* 暖白文字 */
+            --text-dim: #A8DADC;      /* 淡青文字，用於次要資訊 */
+            --warm-wood: #D4A373;     /* 木地板的暖色調，用於點綴 */
+            --transition: all 0.3s ease;
+            --font-title: 'Montserrat', sans-serif;
+            --font-body: 'Noto Sans TC', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* 平滑滾動 */
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* 通用樣式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            text-align: center;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-red);
+            margin: 15px auto 0;
+        }
+
+        .btn {
+            display: inline-block;
+            font-family: var(--font-title);
+            font-weight: 700;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-red);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #BF2A37;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+        }
+
+        /* --- 2. 導覽列 (Navbar) --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(26, 26, 26, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-booking {
+            background-color: transparent;
+            border: 2px solid var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .nav-booking:hover {
+            background-color: var(--primary-red);
+            color: #fff;
+        }
+
+        /* --- 3. 首頁英雄區 (Hero Section) --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), 
+                        url('https://api.solas.ai/api/v1/image-file/image_7.png') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 80px; /* Offset for fixed navbar */
+        }
+
+        .hero h1 {
+            font-family: var(--font-title);
+            font-size: 4rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        /* --- 4. 空間介紹 (Spaces Section) --- */
+        .spaces {
+            padding: 100px 0;
+        }
+
+        .spaces-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .space-card {
+            background-color: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid #333;
+        }
+
+        .space-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-red);
+        }
+
+        .space-img-wrapper {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .space-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .space-card:hover .space-img {
+            transform: scale(1.1);
+        }
+
+        .space-info {
+            padding: 30px;
+        }
+
+        .space-info h3 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .space-info p {
+            color: var(--text-dim);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .space-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .feature-tag {
+            background-color: #333;
+            color: var(--warm-wood);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* --- 5. 器材網格 (Gear Section) --- */
+        .gear {
+            padding: 100px 0;
+            background-color: #111; /* Slightly darker background */
+        }
+
+        .gear-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .gear-item {
+            background-color: var(--bg-card);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: var(--transition);
+        }
+
+        .gear-item:hover {
+            border-color: var(--warm-wood);
+            transform: scale(1.03);
+        }
+
+        .gear-img-wrapper {
+            height: 180px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .gear-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gear-item h4 {
+            font-family: var(--font-title);
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .gear-item p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        /* --- 6. 錄音室/混音 (Studio Section) --- */
+        .studio {
+            padding: 100px 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
+                        url('https://api.solas.ai/api/v1/image-file/image_3.png') center/cover no-repeat fixed;
+            text-align: center;
+        }
+
+        .studio-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .studio h2 { color: #fff; }
+        .studio p { color: var(--text-dim); margin-bottom: 40px; font-size: 1.1rem; }
+
+        /* --- 7. 聯絡與地圖 (Contact Section) --- */
+        .contact {
+            padding: 100px 0;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .contact-details {
+            margin-bottom: 40px;
+        }
+
+        .contact-details p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-details span {
+            color: var(--warm-wood);
+            font-weight: 700;
+        }
+
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #333;
+            height: 400px;
+        }
+
+        /* --- 8. 頁尾 (Footer) --- */
+        footer {
+            background-color: #080808;
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .footer-logo {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--primary-red);
+        }
+
+        .social-links {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-red);
+            transform: scale(1.1);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 30px;
+        }
+
+        /* --- 9. 響應式媒體查詢 (Responsive Media Queries) --- */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3rem; }
+            .section-title { font-size: 2rem; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* TODO: 製作漢堡選單 */
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .spaces-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo"><span>橘譜立</span> Jeeplee</a>
+        <ul class="nav-links">
+            <li><a href="#spaces">空間介紹</a></li>
+            <li><a href="#gear">專業器材</a></li>
+            <li><a href="#studio">專業錄音</a></li>
+            <li><a href="#contact">聯絡我們</a></li>
+        </ul>
+        <a href="#booking" class="btn btn-booking nav-booking">立即預約</a>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>讓靈魂在此共鳴</h1>
+            <p>橘譜立 Jeeplee 彩排室，為追求極致音色的樂團打造。頂級專業隔音， Marshall & Fender 經典背板器材，你的音樂，值得最好的空間。</p>
+            <a href="#spaces" class="btn btn-primary">探索空間</a>
+        </div>
+    </header>
+
+    <section class="section spaces" id="spaces">
+        <div class="container">
+            <h2 class="section-title">我們的空間</h2>
+            <div class="spaces-grid">
+                <div class="space-card">
+                    <div class="space-img-wrapper">
+                        <img src="https://api.solas.ai/api/v1/image-file/image_4.png" alt="Studio A 大彩排室" class="space-img">
+                    </div>
+                    <div class="space-info">
+                        <h3>Studio A (大練)</h3>
+                        <p>專為 5-8 人編制樂團設計，空間寬敞，視聽效果絕佳。</p>
+                        <div class="space-features">
+                            <span class="feature-tag">超大空間</span>
+                            <span class="feature-tag">透視窗鼓組</span>
+                            <span class="feature-tag">經典音箱壁</span>
+                        </div>
+                        <a href="#booking" class="btn btn-primary">查看詳情 & 預約</a>
+                    </div>
+                </div>
+                
+                <div class="space-card">
+                    <div class="space-img-wrapper">
+                        <img src="https://api.solas.ai/api/v1/image-file/image_1.png" alt="Studio B 中彩排室" class="space-img">
+                    </div>
+                    <div class="space-info">
+                        <h3>Studio B (中練)</h3>
+                        <p>適合 3-5 人標準編制，平衡的吸音設計，讓練習更精準。</p>
+                        <div class="space-features">
+                            <span class="feature-tag">標準編制</span>
+                            <span class="feature-tag">Roland 鍵盤</span>
+                            <span class="feature-tag">舒適環境</span>
+                        </div>
+                        <a href="#booking" class="btn btn-primary">查看詳情 & 預約</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section gear" id="gear">
+        <div class="container">
+            <h2 class="section-title">專業背板器材</h2>
+            <div class="gear-grid">
+                <div class="gear-item">
+                    <div class="gear-img-wrapper">
+                        <img src="https://api.solas.ai/api/v1/image-file/image_8.png" alt="Marshall Amp" class="gear-img">
+                    </div>
+                    <h4>Marshall</h4>
+                    <p>經典搖滾音色 JCM 系列</p>
+                </div>
+                <div class="gear-item">
+                    <div class="gear-img-wrapper">
+                        <img src="https://api.solas.ai/api/v1/image-file/image_8.png" alt="Fender Amp" class="gear-img" style="object-position: right;">
+                    </div>
+                    <h4>Fender</h4>
+                    <p>復古清音 Twin Reverb</p>
+                </div>
+                <div class="gear-item">
+                    <div class="gear-img-wrapper">
+                        <img src="https://api.solas.ai/api/v1/image-file/image_9.png" alt="Roland JUNO-DS" class="gear-img">
+                    </div>
+                    <h4>Roland</h4>
+                    <p>JUNO-DS 專業合成器</p>
+                </div>
+                <div class="gear-item">
+                    <div class="gear-img-wrapper">
+                        <img src="https://api.solas.ai/api/v1/image-file/image_0.png" alt="Drum Kit" class="gear-img">
+                    </div>
+                    <h4>專業鼓組</h4>
+                    <p>Pearl/Yamaha 搭配 Zildjian 鈸</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section studio" id="studio">
+        <div class="container">
+            <div class="studio-content">
+                <h2 class="section-title">專業錄音 & 混音</h2>
+                <p>不只是彩排，我們提供專業錄音室 (`image_3.png` 中的混音空間) 和全套錄音服務。從分軌錄音到後期混音，讓你的作品達到發行等級。</p>
+                <a href="#contact" class="btn btn-primary">諮詢錄音服務</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>聯絡我們</h3>
+                    <div class="contact-details">
+                        <p><span>地址：</span>台北市 [區名] [路名] [號碼] [樓層]</p>
+                        <p><span>電話：</span>(02) xxxx-xxxx</p>
+                        <p><span>營業時間：</span>10:00 - 24:00 (週一至週日)</p>
+                        <p><span>Instagram：</span><a href="https://www.instagram.com/jeeplee_official/" target="_blank">@jeeplee_official</a></p>
+                    </div>
+                    <a href="https://line.me/ti/p/[你的LINE ID]" target="_blank" class="btn btn-primary">LINE 立即預約</a>
+                </div>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m4!1m3!1m2!1m1!1z5Y-w5YyX5biC5L-h576p5Y2A!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abb6da80a7ad%3A0x6a0a09e0a8e0!2zMTEx5Y-w5YyX5biC5L-h576p5Y2A!5e0!3m2!1szh-TW!2stw!4v1716000000000!5m2!1szh-TW!2stw" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo"><span>橘譜立</span> Jeeplee</div>
+            <p>音樂，是我們共同的語言。</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/jeeplee_official/" target="_blank">IG</a> |
+                <a href="#" target="_blank">FB</a> |
+                <a href="#" target="_blank">LINE</a>
+            </div>
+            <p class="copyright">&copy; 2024 Jeeplee Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. 平滑滾動效果 (已經在 CSS html { scroll-behavior: smooth; } 中實現，
+        // 但如果需要更精細控制，可以使用 JS)
+
+        // 2. 導覽列滾動變色效果
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.padding = '10px 5%';
+                nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+            } else {
+                nav.style.padding = '20px 5%';
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
