@@ -1,1024 +1,563 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>橘譜立 Jeeplee | 專業彩排與錄音空間</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title"></title>
+<style>
+  :root {
+    --almond: #DE9151;
+    --brandy: #881E06;
+    --granite: #3B5249;
+    --ink: #111;
+    --mute: #888;
+    --line: #ccc;
+  }
 
-  <style>
-    /* ============================================================
-       DESIGN TOKENS — Warm Studio Palette
-       From the photos: honey wood floors, deep red acoustic panels,
-       warm tungsten lighting, dark pro gear.
-    ============================================================ */
-    :root {
-      --c-bg:         #0e0b07;   /* near-black warm */
-      --c-surface:    #1a1208;   /* dark warm brown */
-      --c-card:       #221609;   /* card background */
-      --c-border:     #3a2810;   /* subtle border */
-      --c-amber:      #c8911e;   /* warm amber – main accent */
-      --c-gold:       #e8b84a;   /* bright gold – hover/highlight */
-      --c-red:        #7a1c1c;   /* burgundy – from acoustic panels */
-      --c-cream:      #f5e8d2;   /* primary text */
-      --c-muted:      #9a826a;   /* secondary text */
-      --c-dim:        #5a4030;   /* very muted text / dividers */
-      --f-display:    'Playfair Display', Georgia, serif;
-      --f-body:       'Inter', system-ui, sans-serif;
-      --ease:         cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      --radius:       6px;
-    }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
 
-    /* ============================================================ RESET */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    background: #fff;
+    color: var(--ink);
+    /* Ivakota-style: Georgia serif for body, system sans for UI */
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.8;
+  }
 
-    body {
-      font-family: var(--f-body);
-      background-color: var(--c-bg);
-      color: var(--c-cream);
-      line-height: 1.7;
-      /* subtle film-grain noise texture */
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
 
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
-    ul { list-style: none; }
+  /* ── NAV ── */
+  nav {
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
 
-    /* ============================================================ UTILITIES */
-    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 6%; }
-    .gold-line {
-      display: inline-block; width: 40px; height: 2px;
-      background: var(--c-amber); border-radius: 2px;
-      vertical-align: middle; margin-right: 12px;
-    }
+  nav a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color .15s;
+  }
 
-    /* ============================================================ NAVIGATION */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 6%; height: 70px;
-      background: rgba(14, 11, 7, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(200, 145, 30, 0.15);
-      transition: all 0.3s var(--ease);
-    }
-    nav.scrolled {
-      height: 58px;
-      background: rgba(14, 11, 7, 0.95);
-      border-bottom-color: rgba(200, 145, 30, 0.25);
-    }
-    .nav-logo {
-      font-family: var(--f-display);
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--c-cream);
-      letter-spacing: 0.02em;
-    }
-    .nav-logo span { color: var(--c-amber); }
-    .nav-links {
-      display: flex; gap: 36px;
-      font-size: 0.82rem; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--c-muted);
-    }
-    .nav-links a { transition: color 0.2s; }
-    .nav-links a:hover { color: var(--c-amber); }
-    .btn-book {
-      font-size: 0.8rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--c-bg);
-      background: var(--c-amber);
-      padding: 9px 20px; border-radius: var(--radius);
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-book:hover { background: var(--c-gold); transform: translateY(-1px); }
+  nav a:hover { color: var(--almond); }
 
-    /* ============================================================ HERO */
-    .hero {
-      position: relative;
-      height: 100vh; min-height: 620px;
-      display: flex; flex-direction: column;
-      justify-content: flex-end; align-items: flex-start;
-      padding: 0 6% 100px;
-      overflow: hidden;
-    }
-    /* Photo background — replace this src with your actual rehearsal room photo */
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(
-          160deg,
-          rgba(14,11,7,0.10) 0%,
-          rgba(14,11,7,0.55) 50%,
-          rgba(14,11,7,0.92) 100%
-        ),
-        /* ↓ REPLACE with your photo: e.g. url('photos/rehearsal-main.jpg') */
-        linear-gradient(135deg, #3d2008 0%, #7a4010 30%, #c87820 55%, #3d2008 100%);
-      background-size: cover;
-      background-position: center;
-      transform: scale(1.03);
-      transition: transform 8s var(--ease);
-    }
-    .hero:hover .hero-bg { transform: scale(1.0); }
+  .nav-book {
+    color: var(--brandy) !important;
+    border-bottom: 1px solid var(--brandy);
+    padding-bottom: 1px;
+  }
 
-    /* Vignette overlay */
-    .hero::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, transparent 30%, rgba(14,11,7,0.7) 100%);
-      pointer-events: none;
-    }
+  .nav-book:hover { opacity: .7; }
 
-    .hero-content { position: relative; z-index: 2; max-width: 700px; }
-    .hero-eyebrow {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--c-amber);
-      margin-bottom: 22px;
-    }
-    .hero-eyebrow::before {
-      content: ''; display: inline-block;
-      width: 30px; height: 1px; background: var(--c-amber);
-    }
-    .hero h1 {
-      font-family: var(--f-display);
-      font-size: clamp(3.2rem, 7vw, 5.5rem);
-      font-weight: 900; line-height: 1.05;
-      letter-spacing: -0.01em;
-      color: var(--c-cream);
-      margin-bottom: 24px;
-    }
-    .hero h1 em { font-style: normal; color: var(--c-amber); }
-    .hero p {
-      font-size: 1.05rem; color: var(--c-muted);
-      max-width: 520px; margin-bottom: 40px;
-      font-weight: 300; line-height: 1.8;
-    }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-primary {
-      padding: 13px 28px; border-radius: var(--radius);
-      font-size: 0.85rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      background: var(--c-amber); color: var(--c-bg);
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 4px 20px rgba(200,145,30,0.3);
-    }
-    .btn-primary:hover {
-      background: var(--c-gold); transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(200,145,30,0.45);
-    }
-    .btn-ghost {
-      padding: 12px 28px; border-radius: var(--radius);
-      font-size: 0.85rem; font-weight: 500;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--c-cream);
-      border: 1px solid rgba(245,232,210,0.25);
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-ghost:hover { border-color: var(--c-amber); color: var(--c-amber); }
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 88vh;
+    overflow: hidden;
+  }
 
-    /* Scroll indicator */
-    .scroll-hint {
-      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
-      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
-      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--c-dim); opacity: 0.8;
-    }
-    .scroll-hint-line {
-      width: 1px; height: 36px;
-      background: linear-gradient(to bottom, var(--c-amber), transparent);
-      animation: scroll-pulse 2s ease-in-out infinite;
-    }
-    @keyframes scroll-pulse {
-      0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
-      50%       { opacity: 1;   transform: scaleY(1); }
-    }
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.65);
+  }
 
-    /* ============================================================ SECTIONS */
-    section { padding: 110px 0; }
-    section:nth-child(even) { background: var(--c-surface); }
+  .hero-ph {
+    width: 100%;
+    height: 100%;
+    background: #1a1008;
+  }
 
-    .section-label {
-      display: flex; align-items: center; gap: 0;
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--c-amber); margin-bottom: 18px;
-    }
-    .section-label::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--c-amber); margin-right: 12px; }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 14px;
+    padding: 40px;
+  }
 
-    .section-heading {
-      font-family: var(--f-display);
-      font-size: clamp(1.9rem, 3.5vw, 2.7rem);
-      font-weight: 700; line-height: 1.2;
-      color: var(--c-cream); margin-bottom: 20px;
-    }
-    .section-sub {
-      font-size: 0.95rem; color: var(--c-muted);
-      max-width: 540px; line-height: 1.9; font-weight: 300;
-      margin-bottom: 60px;
-    }
+  .hero-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: clamp(28px, 5vw, 64px);
+    letter-spacing: 0.32em;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1;
+    padding-right: 0.32em;
+  }
 
-    /* ============================================================ SPACES CARDS */
-    .spaces-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .space-card {
-      border-radius: 10px;
-      overflow: hidden;
-      background: var(--c-card);
-      border: 1px solid var(--c-border);
-      transition: transform 0.35s var(--ease), border-color 0.3s, box-shadow 0.35s;
-      cursor: default;
-    }
-    .space-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(200,145,30,0.45);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,145,30,0.15);
-    }
-    /* Photo placeholder — replace background-image with actual photo */
-    .card-photo {
-      position: relative;
-      height: 230px;
-      overflow: hidden;
-      background-color: #2a1a08;
-    }
-    /* Each card has its own photo class for easy replacement */
-    .card-photo.main-studio {
-      /* REPLACE: url('photos/rehearsal-main.jpg') */
-      background-image: linear-gradient(135deg, #2d1505 0%, #7a4010 40%, #c87820 70%, #4a2008 100%);
-      background-size: cover; background-position: center;
-    }
-    .card-photo.control-room {
-      /* REPLACE: url('photos/control-room.jpg') */
-      background-image: linear-gradient(135deg, #1a1205 0%, #3d2a10 40%, #8a6030 65%, #2a1a08 100%);
-      background-size: cover; background-position: center;
-    }
-    .card-photo.drum-booth {
-      /* REPLACE: url('photos/drum-booth.jpg') */
-      background-image: linear-gradient(135deg, #1a0a0a 0%, #5a2015 45%, #9a4020 65%, #2a1005 100%);
-      background-size: cover; background-position: center;
-    }
-    /* warm vignette over card photo */
-    .card-photo::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, transparent 45%, rgba(34,22,9,0.85) 100%);
-    }
-    .card-photo-label {
-      position: absolute; bottom: 16px; left: 20px; z-index: 1;
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--c-amber);
-    }
-    .card-body { padding: 26px 26px 30px; }
-    .card-body h3 {
-      font-family: var(--f-display);
-      font-size: 1.2rem; font-weight: 700;
-      color: var(--c-cream); margin-bottom: 12px;
-    }
-    .card-body p {
-      font-size: 0.88rem; color: var(--c-muted);
-      line-height: 1.75; font-weight: 300;
-    }
-    .card-tags {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;
-    }
-    .tag {
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em;
-      padding: 4px 10px; border-radius: 3px;
-      background: rgba(200,145,30,0.12);
-      color: var(--c-amber);
-      border: 1px solid rgba(200,145,30,0.2);
-    }
+  .hero-sub {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.72);
+    text-transform: uppercase;
+  }
 
-    /* ============================================================ PHOTO GALLERY STRIP */
-    .gallery-strip {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: 280px 280px;
-      gap: 6px;
-    }
-    .gallery-item {
-      overflow: hidden; border-radius: 4px;
-      background-color: #2a1a08;
-      position: relative;
-      cursor: pointer;
-    }
-    .gallery-item:first-child { grid-row: span 2; }
-    .gallery-photo {
-      width: 100%; height: 100%;
-      background-size: cover; background-position: center;
-      transition: transform 0.5s var(--ease);
-    }
-    .gallery-item:hover .gallery-photo { transform: scale(1.04); }
+  .hero-links {
+    display: flex;
+    gap: 20px;
+    margin-top: 6px;
+  }
 
-    /* Gallery photo placeholders — replace gradient with url('photos/...') */
-    .gallery-photo.g1 {
-      /* REPLACE: url('photos/wide-rehearsal.jpg') */
-      background-image: linear-gradient(160deg, #3d2008 0%, #8a5015 35%, #d08030 60%, #3d2008 100%);
-    }
-    .gallery-photo.g2 {
-      /* REPLACE: url('photos/marshall-amp.jpg') */
-      background-image: linear-gradient(135deg, #1a0a0a 0%, #6a2010 50%, #3a1008 100%);
-    }
-    .gallery-photo.g3 {
-      /* REPLACE: url('photos/keyboard-corner.jpg') */
-      background-image: linear-gradient(135deg, #1a1208 0%, #4a3015 50%, #2a1a08 100%);
-    }
-    .gallery-photo.g4 {
-      /* REPLACE: url('photos/acoustic-panels.jpg') */
-      background-image: linear-gradient(135deg, #3a1010 0%, #8a2020 45%, #1a0808 100%);
-    }
-    .gallery-photo.g5 {
-      /* REPLACE: url('photos/drum-window.jpg') */
-      background-image: linear-gradient(135deg, #1a1208 0%, #5a4020 50%, #2a2008 100%);
-    }
+  .hero-links a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    text-transform: uppercase;
+    border-bottom: 0.5px solid rgba(255,255,255,0.3);
+    padding-bottom: 1px;
+    transition: color .15s;
+  }
 
-    /* ============================================================ GEAR TABLE */
-    .gear-table {
-      width: 100%;
-      border: 1px solid var(--c-border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .gear-table-head {
-      display: grid;
-      grid-template-columns: 130px 1fr 140px;
-      padding: 14px 24px;
-      background: rgba(200,145,30,0.08);
-      border-bottom: 1px solid var(--c-border);
-      font-size: 0.7rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--c-amber);
-    }
-    .gear-row {
-      display: grid;
-      grid-template-columns: 130px 1fr 140px;
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--c-border);
-      align-items: center;
-      transition: background 0.2s;
-    }
-    .gear-row:last-child { border-bottom: none; }
-    .gear-row:hover { background: rgba(200,145,30,0.04); }
-    .gear-type {
-      font-size: 0.78rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--c-dim);
-    }
-    .gear-name {
-      font-size: 0.92rem; font-weight: 400;
-      color: var(--c-cream);
-    }
-    .gear-badge {
-      font-size: 0.7rem; font-weight: 500;
-      padding: 3px 10px; border-radius: 3px;
-      display: inline-block;
-    }
-    .badge-amber {
-      background: rgba(200,145,30,0.15);
-      color: var(--c-amber);
-      border: 1px solid rgba(200,145,30,0.3);
-    }
-    .badge-red {
-      background: rgba(122,28,28,0.2);
-      color: #d45050;
-      border: 1px solid rgba(122,28,28,0.35);
-    }
-    .badge-cream {
-      background: rgba(245,232,210,0.08);
-      color: var(--c-muted);
-      border: 1px solid rgba(245,232,210,0.12);
-    }
+  .hero-links a:hover { color: var(--almond); }
 
-    /* ============================================================ FEATURE ROW (alternating text/photo) */
-    .feature-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .feature-row.reverse { direction: rtl; }
-    .feature-row.reverse > * { direction: ltr; }
+  /* ── CONTENT WRAPPER ── */
+  .content {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
 
-    .feature-photo {
-      border-radius: 10px;
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      background-color: #2a1a08;
-      position: relative;
-    }
-    .feature-photo-img {
-      width: 100%; height: 100%;
-      background-size: cover; background-position: center;
-      transition: transform 0.6s var(--ease);
-    }
-    .feature-photo:hover .feature-photo-img { transform: scale(1.03); }
-    .feature-photo-img.control {
-      /* REPLACE: url('photos/control-room-full.jpg') */
-      background-image: linear-gradient(145deg, #1a1205 0%, #4a3010 35%, #9a7030 60%, #1a1205 100%);
-    }
-    .feature-photo-img.rehearsal {
-      /* REPLACE: url('photos/rehearsal-angle.jpg') */
-      background-image: linear-gradient(145deg, #2a1508 0%, #7a4020 40%, #c88030 65%, #2a1508 100%);
-    }
-    /* Gold frame accent */
-    .feature-photo::before {
-      content: '';
-      position: absolute; inset: 0;
-      border: 1px solid rgba(200,145,30,0.2);
-      border-radius: 10px; z-index: 1;
-      pointer-events: none;
-    }
+  /* ── SECTION ── */
+  .sec {
+    padding: 68px 0;
+    border-top: 1px solid var(--line);
+  }
 
-    .feature-text { }
-    .feature-text .section-label { margin-bottom: 16px; }
-    .feature-text .section-heading { margin-bottom: 18px; font-size: 2rem; }
-    .feature-text p {
-      font-size: 0.93rem; color: var(--c-muted);
-      line-height: 1.9; font-weight: 300;
-      margin-bottom: 14px;
-    }
-    .feature-list {
-      margin: 24px 0;
-      display: flex; flex-direction: column; gap: 12px;
-    }
-    .feature-list li {
-      display: flex; align-items: flex-start; gap: 12px;
-      font-size: 0.88rem; color: var(--c-muted);
-    }
-    .feature-list li::before {
-      content: '';
-      display: inline-block;
-      width: 18px; height: 1px;
-      background: var(--c-amber);
-      margin-top: 11px; flex-shrink: 0;
-    }
+  .sec-label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--almond);
+    margin-bottom: 28px;
+  }
 
-    /* ============================================================ STAT BAR */
-    .stat-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--c-border);
-      border: 1px solid var(--c-border);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-top: 80px;
-    }
-    .stat-item {
-      padding: 36px 30px;
-      background: var(--c-card);
-      text-align: center;
-      transition: background 0.2s;
-    }
-    .stat-item:hover { background: rgba(200,145,30,0.06); }
-    .stat-num {
-      font-family: var(--f-display);
-      font-size: 2.5rem; font-weight: 700;
-      color: var(--c-amber); line-height: 1;
-      margin-bottom: 8px;
-    }
-    .stat-label {
-      font-size: 0.78rem; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--c-muted);
-    }
+  h2 {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: 18px;
+    line-height: 1.3;
+  }
 
-    /* ============================================================ CONTACT */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    .contact-info h3 {
-      font-family: var(--f-display);
-      font-size: 1.05rem; font-weight: 600;
-      color: var(--c-cream); margin-bottom: 6px;
-    }
-    .contact-item {
-      display: flex; align-items: flex-start; gap: 14px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--c-border);
-    }
-    .contact-item:last-child { border-bottom: none; }
-    .contact-icon {
-      width: 36px; height: 36px;
-      border-radius: 6px;
-      background: rgba(200,145,30,0.1);
-      border: 1px solid rgba(200,145,30,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0; margin-top: 2px;
-    }
-    .contact-detail {
-      font-size: 0.88rem; color: var(--c-muted);
-      font-weight: 300; line-height: 1.7;
-      margin-top: 4px;
-    }
-    .map-placeholder {
-      aspect-ratio: 4/3;
-      background: var(--c-card);
-      border: 1px solid var(--c-border);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 10px;
-      color: var(--c-dim); font-size: 0.85rem;
-      /* REPLACE: embed Google Maps iframe here */
-    }
-    .map-pin { font-size: 2rem; opacity: 0.5; }
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 36px 0 10px;
+  }
 
-    /* ============================================================ FOOTER */
-    footer {
-      background: var(--c-surface);
-      border-top: 1px solid var(--c-border);
-      padding: 70px 0 40px;
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 2.2fr 1fr 1fr 1fr;
-      gap: 40px;
-      padding-bottom: 50px;
-      border-bottom: 1px solid var(--c-border);
-    }
-    .footer-brand-name {
-      font-family: var(--f-display);
-      font-size: 1.3rem; font-weight: 700;
-      color: var(--c-cream); margin-bottom: 14px;
-    }
-    .footer-brand-name span { color: var(--c-amber); }
-    .footer-tagline {
-      font-size: 0.85rem; color: var(--c-muted);
-      font-weight: 300; line-height: 1.8; max-width: 280px;
-    }
-    .footer-social {
-      display: flex; gap: 12px; margin-top: 24px;
-    }
-    .social-btn {
-      width: 36px; height: 36px;
-      border-radius: 6px;
-      background: rgba(200,145,30,0.1);
-      border: 1px solid rgba(200,145,30,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; color: var(--c-amber);
-      transition: background 0.2s, transform 0.15s;
-    }
-    .social-btn:hover { background: rgba(200,145,30,0.22); transform: translateY(-2px); }
-    .footer-col h4 {
-      font-size: 0.7rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--c-amber); margin-bottom: 22px;
-    }
-    .footer-col li {
-      font-size: 0.86rem; color: var(--c-muted);
-      margin-bottom: 12px; transition: color 0.2s;
-      cursor: pointer;
-    }
-    .footer-col li:hover { color: var(--c-cream); }
-    .footer-col a { color: var(--c-muted); transition: color 0.2s; }
-    .footer-col a:hover { color: var(--c-cream); }
-    .footer-bottom {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-top: 30px;
-      font-size: 0.78rem; color: var(--c-dim);
-    }
-    .footer-bottom a { color: var(--c-dim); transition: color 0.2s; }
-    .footer-bottom a:hover { color: var(--c-amber); }
+  p {
+    margin-bottom: 1em;
+    color: var(--ink);
+  }
 
-    /* ============================================================ RESPONSIVE */
-    @media (max-width: 1024px) {
-      .spaces-grid { grid-template-columns: repeat(2, 1fr); }
-      .feature-row { grid-template-columns: 1fr; gap: 40px; }
-      .feature-row.reverse { direction: ltr; }
-      .stat-bar { grid-template-columns: repeat(2, 1fr); }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .spaces-grid { grid-template-columns: 1fr; }
-      .gallery-strip {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: repeat(3, 200px);
-      }
-      .gallery-item:first-child { grid-row: span 1; grid-column: span 2; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .stat-bar { grid-template-columns: repeat(2, 1fr); }
-      .footer-top { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-    }
-  </style>
+  p:last-child { margin-bottom: 0; }
+
+  .sig {
+    margin-top: 24px;
+    font-style: italic;
+    color: var(--mute);
+  }
+
+  /* ── GEAR LIST ── */
+  .gear-block {
+    margin-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+
+  .gear-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    gap: 24px;
+  }
+
+  .gear-name {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .gear-note {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--mute);
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── RATES ── */
+  .rate-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .rate-item:first-child { border-top: 1px solid var(--line); }
+
+  .rate-label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin-bottom: 4px;
+  }
+
+  .rate-price {
+    font-family: Georgia, serif;
+    font-size: 17px;
+    color: var(--ink);
+  }
+
+  .rate-note {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--mute);
+    margin-top: 2px;
+  }
+
+  /* ── PHOTOS ── */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    margin: 28px 0;
+  }
+
+  .photo-ph {
+    aspect-ratio: 4/3;
+    background: #e8e4e0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-ph img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .photo-ph-label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  .photo-full {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    margin: 20px 0;
+    display: block;
+  }
+
+  .photo-full-ph {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #e8e4e0;
+    margin: 20px 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-full-ph img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .photo-full-ph .photo-ph-label { display: block; }
+
+  /* ── CTA ── */
+  .cta-wrap { margin-top: 32px; }
+
+  .cta {
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: var(--brandy);
+    color: #fff;
+    padding: 12px 24px;
+    transition: opacity .15s;
+  }
+
+  .cta:hover { opacity: .82; }
+
+  /* ── CONTACT ── */
+  .contact-line {
+    margin-bottom: 6px;
+  }
+
+  .contact-link {
+    color: var(--granite);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--granite);
+    padding-bottom: 1px;
+    transition: color .15s;
+  }
+
+  .contact-link:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 40px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .footer-meta {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--mute);
+    line-height: 2.0;
+  }
+
+  .footer-meta a {
+    color: var(--almond);
+    text-decoration: none;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    nav { padding: 14px 20px; gap: 14px; }
+    .content { padding: 0 20px; }
+    .sec { padding: 48px 0; }
+    .photo-grid { grid-template-columns: 1fr; }
+    footer { padding: 32px 20px; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- ========== NAVIGATION ========== -->
-  <nav id="main-nav">
-    <div class="nav-logo">橘譜立 <span>Jeeplee</span></div>
-    <div class="nav-links">
-      <a href="#spaces">空間介紹</a>
-      <a href="#features">設備特色</a>
-      <a href="#gear">器材規格</a>
-      <a href="#contact">聯絡我們</a>
-    </div>
-    <a href="#contact" class="btn-book">立即預約</a>
-  </nav>
+<nav id="nav-links"></nav>
 
-  <!-- ========== HERO ========== -->
-  <header class="hero">
-    <div class="hero-bg" id="hero-bg"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">台北 · 專業音樂空間</div>
-      <h1>橘譜立<br /><em>Jeeplee</em></h1>
-      <p>木質溫暖，聲學純粹。結合頂級 Tama Starclassic 鼓組、Marshall 經典音箱，打造屬於你的音樂聖地。</p>
-      <div class="hero-actions">
-        <a href="#spaces" class="btn-primary">探索空間</a>
-        <a href="#contact" class="btn-ghost">預約場地</a>
-      </div>
-    </div>
-    <div class="scroll-hint">
-      <div class="scroll-hint-line"></div>
-      Scroll
-    </div>
-  </header>
+<div class="hero" id="hero">
+  <div class="hero-ph" id="hero-ph"></div>
+  <div class="hero-overlay">
+    <div class="hero-title" id="hero-title"></div>
+    <div class="hero-sub"   id="hero-sub"></div>
+    <div class="hero-links" id="hero-links"></div>
+  </div>
+</div>
 
-  <main>
+<div class="content">
 
-    <!-- ========== SPACES ========== -->
-    <section id="spaces">
-      <div class="container">
-        <div class="section-label">空間配置</div>
-        <h2 class="section-heading">每個角落都為音樂而生</h2>
-        <p class="section-sub">橘木地板、深紅聲學板、溫暖鎢絲燈光——橘譜立的每一個細節，都是為了讓你沉浸在最純粹的聲音之中。</p>
+  <!-- ABOUT -->
+  <div class="sec" id="about">
+    <div class="sec-label">About</div>
+    <div id="about-content"></div>
+  </div>
 
-        <div class="spaces-grid">
+  <!-- SPACES -->
+  <div class="sec" id="spaces">
+    <div class="sec-label">Spaces</div>
+    <div id="spaces-content"></div>
+  </div>
 
-          <div class="space-card">
-            <div class="card-photo main-studio">
-              <!--
-                PHOTO: 請將此 div 換成你的彩排室大圖
-                方法一：加入 style="background-image: url('photos/rehearsal-main.jpg')"
-                方法二：在此 div 內放 <img src="photos/rehearsal-main.jpg" style="width:100%;height:100%;object-fit:cover">
-              -->
-              <div class="card-photo-label">Main Studio</div>
-            </div>
-            <div class="card-body">
-              <h3>旗艦彩排室</h3>
-              <p>約 80 坪的寬敞空間，橡木拼接地板搭配頂部棋盤式吸音天花，提供極佳的低頻擴散與中高頻控制。</p>
-              <div class="card-tags">
-                <span class="tag">約 80 坪</span>
-                <span class="tag">聲學處理</span>
-                <span class="tag">透視玻璃窗</span>
-              </div>
-            </div>
-          </div>
+  <!-- GEAR -->
+  <div class="sec" id="gear">
+    <div class="sec-label">Gear</div>
+    <div id="gear-content"></div>
+  </div>
 
-          <div class="space-card">
-            <div class="card-photo control-room">
-              <!--
-                PHOTO: 控制室照片
-                style="background-image: url('photos/control-room.jpg')"
-              -->
-              <div class="card-photo-label">Control Room</div>
-            </div>
-            <div class="card-body">
-              <h3>專業控制室</h3>
-              <p>胡桃木錄音桌、Studio Monitor 環繞，與彩排室直通透視窗同步監聽，適合分軌錄音與即時混音。</p>
-              <div class="card-tags">
-                <span class="tag">分軌錄音</span>
-                <span class="tag">Studio Monitor</span>
-                <span class="tag">DAW 工作站</span>
-              </div>
-            </div>
-          </div>
+  <!-- RATES -->
+  <div class="sec" id="rates">
+    <div class="sec-label">Rates</div>
+    <div id="rates-content"></div>
+  </div>
 
-          <div class="space-card">
-            <div class="card-photo drum-booth">
-              <!--
-                PHOTO: 鼓室/隔音室照片
-                style="background-image: url('photos/drum-booth.jpg')"
-              -->
-              <div class="card-photo-label">Drum Booth</div>
-            </div>
-            <div class="card-body">
-              <h3>鼓組錄音室</h3>
-              <p>獨立隔音空間，Tama Starclassic 常設進駐，Overhead 收音麥克風常設架設，隨時就位，隨時錄音。</p>
-              <div class="card-tags">
-                <span class="tag">隔音設計</span>
-                <span class="tag">Tama Starclassic</span>
-                <span class="tag">麥克風架設</span>
-              </div>
-            </div>
-          </div>
+  <!-- CONTACT -->
+  <div class="sec" id="contact">
+    <div class="sec-label">Contact</div>
+    <div id="contact-content"></div>
+  </div>
 
-        </div>
+</div>
 
-        <!-- STAT BAR -->
-        <div class="stat-bar">
-          <div class="stat-item">
-            <div class="stat-num">80<span style="font-size:1.4rem">坪</span></div>
-            <div class="stat-label">彩排室面積</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">2</div>
-            <div class="stat-label">獨立空間</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">24H</div>
-            <div class="stat-label">預約時段</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">IEM</div>
-            <div class="stat-label">耳返系統</div>
-          </div>
-        </div>
-      </div>
-    </section>
+<footer id="footer"></footer>
 
-    <!-- ========== PHOTO GALLERY ========== -->
-    <section style="padding: 0; background: var(--c-bg);">
-      <div class="container" style="padding: 0; max-width: 100%;">
-        <div class="gallery-strip">
-          <div class="gallery-item">
-            <div class="gallery-photo g1">
-              <!-- PHOTO: url('photos/wide-shot.jpg') -->
-            </div>
-          </div>
-          <div class="gallery-item">
-            <div class="gallery-photo g2">
-              <!-- PHOTO: url('photos/marshall.jpg') -->
-            </div>
-          </div>
-          <div class="gallery-item">
-            <div class="gallery-photo g3">
-              <!-- PHOTO: url('photos/keyboard.jpg') -->
-            </div>
-          </div>
-          <div class="gallery-item">
-            <div class="gallery-photo g4">
-              <!-- PHOTO: url('photos/acoustic-panels.jpg') -->
-            </div>
-          </div>
-          <div class="gallery-item">
-            <div class="gallery-photo g5">
-              <!-- PHOTO: url('photos/drum-window.jpg') -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<script>
+fetch('content.json')
+  .then(r => r.json())
+  .then(c => render(c))
+  .catch(e => console.error('content.json 載入失敗:', e));
 
-    <!-- ========== FEATURES ========== -->
-    <section id="features">
-      <div class="container">
+function esc(s) {
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
 
-        <!-- Feature 1: Control Room -->
-        <div class="feature-row" style="margin-bottom: 100px;">
-          <div class="feature-photo">
-            <div class="feature-photo-img control">
-              <!-- PHOTO: url('photos/control-room-full.jpg') -->
-            </div>
-          </div>
-          <div class="feature-text">
-            <div class="section-label">控制室</div>
-            <h2 class="section-heading">作品成形的<br/>核心地帶</h2>
-            <p>胡桃木桌面搭配黑鐵桌腳，Studio Monitor 左右對稱擺放，視線正前方是 DAW 工作站螢幕，右側是數位混音器——這裡是聲音被塑形的地方。</p>
-            <ul class="feature-list">
-              <li>與彩排室透視玻璃直連，即時溝通零落差</li>
-              <li>Pro Tools / Logic Pro 工作站環境</li>
-              <li>數位混音器 + 大型 Studio Monitor 配置</li>
-              <li>支援多軌同步錄音</li>
-            </ul>
-          </div>
-        </div>
+function paras(arr) {
+  return arr.map(t => `<p>${esc(t)}</p>`).join('');
+}
 
-        <!-- Feature 2: Rehearsal Room -->
-        <div class="feature-row reverse">
-          <div class="feature-photo">
-            <div class="feature-photo-img rehearsal">
-              <!-- PHOTO: url('photos/rehearsal-angle.jpg') -->
-            </div>
-          </div>
-          <div class="feature-text">
-            <div class="section-label">彩排室</div>
-            <h2 class="section-heading">聲學設計，<br/>不只是隔音</h2>
-            <p>天花板棋盤式矽酸鈣板吸音塊、四面深紅布面聲學板，搭配圓弧牆角散射設計，低頻共鳴與中高頻殘響都在精確的控制之內。</p>
-            <ul class="feature-list">
-              <li>深紅布面寬頻吸音板，覆蓋 125Hz–8kHz</li>
-              <li>棋盤式天花板吸音設計，消除梳狀濾波</li>
-              <li>橡木拼接地板，自然反射不刺耳</li>
-              <li>IEM 耳返系統，8 路獨立混音</li>
-            </ul>
-          </div>
-        </div>
+function render(c) {
+  /* title */
+  document.getElementById('page-title').textContent = c.site.title;
 
-      </div>
-    </section>
+  /* nav */
+  const navLinks = c.nav.map(n =>
+    `<a href="${esc(n.href)}">${esc(n.label)}</a>`
+  ).join('');
+  document.getElementById('nav-links').innerHTML =
+    navLinks + `<a href="${esc(c.booking_url)}" target="_blank" class="nav-book">預約 →</a>`;
 
-    <!-- ========== GEAR ========== -->
-    <section id="gear">
-      <div class="container">
-        <div class="section-label">器材規格</div>
-        <h2 class="section-heading">每一件樂器都是經典</h2>
-        <p class="section-sub">從 Tama Starclassic 到 Marshall JCM2000，每件設備都針對現場演出與錄音需求精心選配。</p>
+  /* hero */
+  const ph = document.getElementById('hero-ph');
+  if (c.hero.image) {
+    const img = document.createElement('img');
+    img.src = c.hero.image;
+    img.alt = c.hero.title;
+    img.className = 'hero-img';
+    img.onerror = function() { this.style.display = 'none'; };
+    ph.appendChild(img);
+  }
+  document.getElementById('hero-title').textContent = c.hero.title;
+  document.getElementById('hero-sub').textContent   = c.hero.sub;
+  document.getElementById('hero-links').innerHTML =
+    `<a href="${esc(c.instagram_url)}" target="_blank">Instagram</a>` +
+    `<a href="${esc(c.booking_url)}"   target="_blank">立即預約</a>`;
 
-        <div class="gear-table">
-          <div class="gear-table-head">
-            <div>類別</div>
-            <div>型號</div>
-            <div>備註</div>
-          </div>
-          <div class="gear-row">
-            <div class="gear-type">Drums</div>
-            <div class="gear-name">Tama Starclassic Performer</div>
-            <div><span class="gear-badge badge-amber">Flagship</span></div>
-          </div>
-          <div class="gear-row">
-            <div class="gear-type">Snare</div>
-            <div class="gear-name">Sonor Kompressor</div>
-            <div><span class="gear-badge badge-amber">Top Tier</span></div>
-          </div>
-          <div class="gear-row">
-            <div class="gear-type">Guitar Amp</div>
-            <div class="gear-name">Marshall JCM2000 DSL100 + 4×12 Cabinet</div>
-            <div><span class="gear-badge badge-red">Classic</span></div>
-          </div>
-          <div class="gear-row">
-            <div class="gear-type">Guitar Amp</div>
-            <div class="gear-name">Fender Twin Reverb</div>
-            <div><span class="gear-badge badge-red">Classic</span></div>
-          </div>
-          <div class="gear-row">
-            <div class="gear-type">Bass Amp</div>
-            <div class="gear-name">Ampeg SVT-15E</div>
-            <div><span class="gear-badge badge-cream">Solid Bass</span></div>
-          </div>
-          <div class="gear-row">
-            <div class="gear-type">Keyboard</div>
-            <div class="gear-name">Roland JUNO-DS88（88 鍵）</div>
-            <div><span class="gear-badge badge-cream">88-Key</span></div>
-          </div>
-          <div class="gear-row">
-            <div class="gear-type">IEM</div>
-            <div class="gear-name">DB48 耳返系統（8 路獨立）</div>
-            <div><span class="gear-badge badge-amber">Professional</span></div>
-          </div>
-          <div class="gear-row">
-            <div class="gear-type">Monitor</div>
-            <div class="gear-name">Studio Monitor（控制室）</div>
-            <div><span class="gear-badge badge-amber">Nearfield</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
+  /* about */
+  let about = `<h2>${esc(c.about.heading)}</h2>` + paras(c.about.paragraphs);
+  about += `<h2>${esc(c.about.founders_heading)}</h2>` + paras(c.about.founders_paragraphs);
+  about += `<p class="sig">${esc(c.about.sig)}</p>`;
+  document.getElementById('about-content').innerHTML = about;
 
-    <!-- ========== CONTACT ========== -->
-    <section id="contact" style="background: var(--c-bg);">
-      <div class="container">
-        <div class="section-label">聯絡我們</div>
-        <h2 class="section-heading">預約你的專屬時段</h2>
-        <p class="section-sub">無論是日常練團、錄音製作、還是影片拍攝，歡迎透過 LINE 或 Instagram 與我們洽談。</p>
+  /* photo grid after about paragraphs */
+  const grid = document.createElement('div');
+  grid.className = 'photo-grid';
+  const gridItems = [
+    { src: 'room_main.jpg',    label: '彩排大廳' },
+    { src: 'room_drum.jpg',    label: '鼓房'     },
+    { src: 'room_control.jpg', label: '控制室'   },
+    { src: null,               label: '客廳 · 即將更新' },
+  ];
+  gridItems.forEach(item => {
+    const cell = document.createElement('div');
+    cell.className = 'photo-ph';
+    if (item.src) {
+      cell.innerHTML = `<img src="${esc(item.src)}" alt="${esc(item.label)}" onerror="this.parentElement.innerHTML='<span class=photo-ph-label>${esc(item.label)}</span>'">`;
+    } else {
+      cell.innerHTML = `<span class="photo-ph-label">${esc(item.label)}</span>`;
+    }
+    grid.appendChild(cell);
+  });
+  /* insert grid after first h2 */
+  const aboutEl = document.getElementById('about-content');
+  const firstH2 = aboutEl.querySelector('h2 + p:last-of-type');
+  aboutEl.insertBefore(grid, aboutEl.querySelector('h2:nth-of-type(2)'));
 
-        <div class="contact-grid">
-          <div class="contact-info">
-            <div class="contact-item">
-              <div class="contact-icon">📍</div>
-              <div>
-                <h3>地址</h3>
-                <div class="contact-detail">
-                  台北市 __ 區 __ 路 __ 號 B1<br/>
-                  （請替換為實際地址）
-                </div>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">📱</div>
-              <div>
-                <h3>LINE 預約</h3>
-                <div class="contact-detail">
-                  請加入官方 LINE ID 洽詢檔期<br/>
-                  <a href="https://line.me/ti/p/[YOUR_LINE_ID]" style="color: var(--c-amber); margin-top: 6px; display: inline-block;">+ 加入 LINE</a>
-                </div>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">📸</div>
-              <div>
-                <h3>Instagram</h3>
-                <div class="contact-detail">
-                  <a href="https://www.instagram.com/jeeplee_official/" target="_blank" style="color: var(--c-amber);">@jeeplee_official</a>
-                </div>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">🕐</div>
-              <div>
-                <h3>開放時間</h3>
-                <div class="contact-detail">
-                  平日 10:00 – 22:00<br/>
-                  假日 09:00 – 22:00
-                </div>
-              </div>
-            </div>
-          </div>
+  /* spaces */
+  let spaces = '';
+  c.spaces.forEach(s => {
+    spaces += `<h2>${esc(s.name)}<span style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-left:14px;">${esc(s.en)}</span></h2>`;
+    spaces += paras(s.paragraphs);
+    if (s.image) {
+      spaces += `<div class="photo-full-ph"><img src="${esc(s.image)}" alt="${esc(s.name)}" onerror="this.parentElement.innerHTML='<span class=photo-ph-label>${esc(s.name)}</span>'"></div>`;
+    } else {
+      spaces += `<div class="photo-full-ph"><span class="photo-ph-label">即將更新</span></div>`;
+    }
+  });
+  document.getElementById('spaces-content').innerHTML = spaces;
 
-          <!-- Google Map placeholder -->
-          <div class="map-placeholder">
-            <div class="map-pin">🗺️</div>
-            <div style="font-size: 0.8rem; text-align: center; line-height: 1.8;">
-              Google Map 預留區<br/>
-              請替換為實際 Google Maps iframe<br/>
-              <span style="font-size: 0.72rem; opacity: 0.6;">（嵌入方式：Google Maps → 分享 → 嵌入地圖）</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  /* gear */
+  let gear = paras(c.gear.intro);
+  gear += '<div class="gear-block">';
+  c.gear.list.forEach(g => {
+    gear += `<div class="gear-row"><span class="gear-name">${esc(g.name)}</span><span class="gear-note">${esc(g.note)}</span></div>`;
+  });
+  gear += '</div>';
+  document.getElementById('gear-content').innerHTML = gear;
 
-  </main>
+  /* rates */
+  let rates = c.rates.items.map(r => `
+    <div class="rate-item">
+      <div class="rate-label">${esc(r.label)}</div>
+      <div class="rate-price">${esc(r.price)}</div>
+      <div class="rate-note">${esc(r.note)}</div>
+    </div>`).join('');
+  rates += '<h3 style="margin-top:36px;">預約方式</h3>';
+  rates += paras(c.rates.notes);
+  rates += `<div class="cta-wrap"><a href="${esc(c.booking_url)}" target="_blank" class="cta">查看可預約時段</a></div>`;
+  document.getElementById('rates-content').innerHTML = rates;
 
-  <!-- ========== FOOTER ========== -->
-  <footer>
-    <div class="container">
-      <div class="footer-top">
-        <div>
-          <div class="footer-brand-name">橘譜立 <span>Jeeplee</span></div>
-          <p class="footer-tagline">木質溫暖，聲學純粹。打造讓聲音回歸本質的專業創作空間。</p>
-          <div class="footer-social">
-            <a href="https://www.instagram.com/jeeplee_official/" target="_blank" class="social-btn">📸</a>
-            <a href="https://line.me/ti/p/[YOUR_LINE_ID]" class="social-btn">💬</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>空間</h4>
-          <ul>
-            <li><a href="#spaces">旗艦彩排室</a></li>
-            <li><a href="#spaces">專業控制室</a></li>
-            <li><a href="#spaces">鼓組錄音室</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>器材</h4>
-          <ul>
-            <li><a href="#gear">Tama Starclassic</a></li>
-            <li><a href="#gear">Marshall JCM2000</a></li>
-            <li><a href="#gear">Roland JUNO-DS88</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>服務</h4>
-          <ul>
-            <li>樂團彩排</li>
-            <li>分軌錄音</li>
-            <li>影片拍攝</li>
-            <li>長期租借優惠</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 橘譜立 Jeeplee Studio. All rights reserved.</span>
-        <a href="https://www.instagram.com/jeeplee_official/" target="_blank">Instagram</a>
-      </div>
-    </div>
-  </footer>
+  /* contact */
+  let contact = c.contact.address.map(l => `<div class="contact-line">${esc(l)}</div>`).join('');
+  contact += `<div class="contact-line" style="margin-top:16px;">Instagram：<a href="${esc(c.instagram_url)}" target="_blank" class="contact-link">${esc(c.instagram_handle)}</a></div>`;
+  contact += `<div class="contact-line">開放時間：${esc(c.contact.hours)}</div>`;
+  contact += `<div class="cta-wrap"><a href="${esc(c.booking_url)}" target="_blank" class="cta">立即預約</a></div>`;
+  document.getElementById('contact-content').innerHTML = contact;
 
-  <script>
-    // Navbar shrink on scroll
-    const nav = document.getElementById('main-nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-    // Subtle parallax on hero background
-    const heroBg = document.getElementById('hero-bg');
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (y < window.innerHeight) {
-        heroBg.style.transform = `scale(1.03) translateY(${y * 0.25}px)`;
-      }
-    });
-
-    // Fade-in on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.space-card, .gear-row, .stat-item, .feature-photo, .feature-text, .contact-item').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(24px)';
-      el.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
-      observer.observe(el);
-    });
-  </script>
+  /* footer */
+  document.getElementById('footer').innerHTML = `
+    <div class="footer-logo">${esc(c.site.logo)}</div>
+    <div class="footer-meta">
+      ${esc(c.footer.tagline)}<br>
+      新北市中和區 · 景安站斜對面 · ${esc(c.contact.hours)}<br>
+      <a href="${esc(c.instagram_url)}" target="_blank">${esc(c.instagram_handle)}</a>
+      &nbsp;·&nbsp;
+      <a href="${esc(c.booking_url)}" target="_blank">立即預約</a><br><br>
+      © 2026 橘譜立彩排室 JeepLee
+    </div>`;
+}
+</script>
 
 </body>
 </html>
