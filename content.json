@@ -19,7 +19,7 @@
   "hero": {
     "title": "橘譜立．JeepLee",
     "sub": "景安站 · 彩排室 · 新北市中和區",
-    "image": "image/room_main.jpg"
+    "image": "images/room_main.jpg"
   },
 
   "about": {
@@ -38,7 +38,7 @@
     {
       "en": "Main Hall",
       "name": "彩排室",
-      "image": "image/room_main.jpg",
+      "image": "images/room_main.jpg",
       "paragraphs": [
         "—"
       ]
@@ -46,7 +46,7 @@
     {
       "en": "Control Room",
       "name": "控制室",
-      "image": "image/room_control.jpg",
+      "image": "images/room_control.jpg",
       "paragraphs": [
         "—"
       ]
@@ -68,6 +68,7 @@
     ],
     "list": [
       { "name": "Midas DP48",      "note": "個人監聽混音 · 多組" },
+      { "name": "Midas DP48",      "note": "個人監聽混音 · 多組" }
     ]
   },
 
