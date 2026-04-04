@@ -435,8 +435,15 @@ fetch('content.json')
   .then(c => render(c))
   .catch(e => console.error('content.json 載入失敗:', e));
 
+function get(obj, path, fallback) {
+  if (fallback === undefined) fallback = '';
+  return path.split('.').reduce(function(o, k) { return o != null ? o[k] : undefined; }, obj) != null
+    ? path.split('.').reduce(function(o, k) { return o != null ? o[k] : undefined; }, obj)
+    : fallback;
+}
+
 function esc(s) {
-  return String(s)
+  return String(s != null ? s : '')
     .replace(/&/g,'&amp;')
     .replace(/</g,'&lt;')
     .replace(/>/g,'&gt;')
@@ -444,118 +451,168 @@ function esc(s) {
 }
 
 function paras(arr) {
-  return arr.map(t => `<p>${esc(t)}</p>`).join('');
+  if (!Array.isArray(arr) || arr.length === 0) return '';
+  return arr.map(function(t) { return '<p>' + esc(t) + '</p>'; }).join('');
 }
 
 function render(c) {
   /* title */
-  document.getElementById('page-title').textContent = c.site.title;
+  var titleEl = document.getElementById('page-title');
+  if (titleEl && c.site && c.site.title) titleEl.textContent = c.site.title;
 
   /* nav */
-  const navLinks = c.nav.map(n =>
-    `<a href="${esc(n.href)}">${esc(n.label)}</a>`
-  ).join('');
-  document.getElementById('nav-links').innerHTML =
-    navLinks + `<a href="${esc(c.booking_url)}" target="_blank" class="nav-book">預約 →</a>`;
+  var navEl = document.getElementById('nav-links');
+  if (navEl) {
+    var links = Array.isArray(c.nav) ? c.nav : [];
+    var navHtml = links.map(function(n) {
+      return '<a href="' + esc(n.href) + '">' + esc(n.label) + '</a>';
+    }).join('');
+    var bookingUrl = get(c, 'booking_url');
+    if (bookingUrl) navHtml += '<a href="' + esc(bookingUrl) + '" target="_blank" class="nav-book">預約 →</a>';
+    navEl.innerHTML = navHtml;
+  }
 
   /* hero */
-  const ph = document.getElementById('hero-ph');
-  if (c.hero.image) {
-    const img = document.createElement('img');
+  var heroPh = document.getElementById('hero-ph');
+  if (heroPh && c.hero && c.hero.image) {
+    var img = document.createElement('img');
     img.src = c.hero.image;
-    img.alt = c.hero.title;
+    img.alt = get(c, 'hero.title');
     img.className = 'hero-img';
     img.onerror = function() { this.style.display = 'none'; };
-    ph.appendChild(img);
+    heroPh.appendChild(img);
   }
-  document.getElementById('hero-title').textContent = c.hero.title;
-  document.getElementById('hero-sub').textContent   = c.hero.sub;
-  document.getElementById('hero-links').innerHTML =
-    `<a href="${esc(c.instagram_url)}" target="_blank">Instagram</a>` +
-    `<a href="${esc(c.booking_url)}"   target="_blank">立即預約</a>`;
+  var heroTitleEl = document.getElementById('hero-title');
+  if (heroTitleEl) heroTitleEl.textContent = get(c, 'hero.title');
+  var heroSubEl = document.getElementById('hero-sub');
+  if (heroSubEl) heroSubEl.textContent = get(c, 'hero.sub');
+  var heroLinksEl = document.getElementById('hero-links');
+  if (heroLinksEl) {
+    var igUrl = get(c, 'instagram_url');
+    var bookUrl = get(c, 'booking_url');
+    var hl = '';
+    if (igUrl)   hl += '<a href="' + esc(igUrl) + '" target="_blank">Instagram</a>';
+    if (bookUrl) hl += '<a href="' + esc(bookUrl) + '" target="_blank">立即預約</a>';
+    heroLinksEl.innerHTML = hl;
+  }
 
   /* about */
-  let about = `<h2>${esc(c.about.heading)}</h2>` + paras(c.about.paragraphs);
-  about += `<h2>${esc(c.about.founders_heading)}</h2>` + paras(c.about.founders_paragraphs);
-  about += `<p class="sig">${esc(c.about.sig)}</p>`;
-  document.getElementById('about-content').innerHTML = about;
+  var aboutEl = document.getElementById('about-content');
+  if (aboutEl && c.about) {
+    var html = '';
+    if (c.about.heading)             html += '<h2>' + esc(c.about.heading) + '</h2>';
+    if (c.about.paragraphs)          html += paras(c.about.paragraphs);
 
-  /* photo grid after about paragraphs */
-  const grid = document.createElement('div');
-  grid.className = 'photo-grid';
-  const gridItems = [
-    { src: 'room_main.jpg',    label: '彩排大廳' },
-    { src: 'room_drum.jpg',    label: '鼓房'     },
-    { src: 'room_control.jpg', label: '控制室'   },
-    { src: null,               label: '客廳 · 即將更新' },
-  ];
-  gridItems.forEach(item => {
-    const cell = document.createElement('div');
-    cell.className = 'photo-ph';
-    if (item.src) {
-      cell.innerHTML = `<img src="${esc(item.src)}" alt="${esc(item.label)}" onerror="this.parentElement.innerHTML='<span class=photo-ph-label>${esc(item.label)}</span>'">`;
-    } else {
-      cell.innerHTML = `<span class="photo-ph-label">${esc(item.label)}</span>`;
+    /* photo grid — 從 spaces 抓有圖的，有幾張顯示幾張 */
+    var spaces = Array.isArray(c.spaces) ? c.spaces : [];
+    var gridImgs = spaces.filter(function(s) { return s.image; });
+    if (gridImgs.length > 0) {
+      html += '<div class="photo-grid">';
+      gridImgs.forEach(function(s) {
+        html += '<div class="photo-ph"><img src="' + esc(s.image) + '" alt="' + esc(s.name) + '" onerror="this.parentElement.innerHTML=\'<span class=photo-ph-label>' + esc(s.name) + '</span>\'"></div>';
+      });
+      if (gridImgs.length % 2 !== 0) html += '<div class="photo-ph"></div>';
+      html += '</div>';
     }
-    grid.appendChild(cell);
-  });
-  /* insert grid after first h2 */
-  const aboutEl = document.getElementById('about-content');
-  const firstH2 = aboutEl.querySelector('h2 + p:last-of-type');
-  aboutEl.insertBefore(grid, aboutEl.querySelector('h2:nth-of-type(2)'));
+
+    if (c.about.founders_heading)    html += '<h2>' + esc(c.about.founders_heading) + '</h2>';
+    if (c.about.founders_paragraphs) html += paras(c.about.founders_paragraphs);
+    if (c.about.sig)                 html += '<p class="sig">' + esc(c.about.sig) + '</p>';
+    aboutEl.innerHTML = html;
+  }
 
   /* spaces */
-  let spaces = '';
-  c.spaces.forEach(s => {
-    spaces += `<h2>${esc(s.name)}<span style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-left:14px;">${esc(s.en)}</span></h2>`;
-    spaces += paras(s.paragraphs);
-    if (s.image) {
-      spaces += `<div class="photo-full-ph"><img src="${esc(s.image)}" alt="${esc(s.name)}" onerror="this.parentElement.innerHTML='<span class=photo-ph-label>${esc(s.name)}</span>'"></div>`;
-    } else {
-      spaces += `<div class="photo-full-ph"><span class="photo-ph-label">即將更新</span></div>`;
-    }
-  });
-  document.getElementById('spaces-content').innerHTML = spaces;
+  var spacesEl = document.getElementById('spaces-content');
+  if (spacesEl) {
+    var spaceList = Array.isArray(c.spaces) ? c.spaces : [];
+    var sHtml = '';
+    spaceList.forEach(function(s) {
+      var heading = esc(s.name || '');
+      if (s.en) heading += '<span style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-left:14px;">' + esc(s.en) + '</span>';
+      sHtml += '<h2>' + heading + '</h2>';
+      sHtml += paras(s.paragraphs);
+      if (s.image) {
+        sHtml += '<div class="photo-full-ph"><img src="' + esc(s.image) + '" alt="' + esc(s.name || '') + '" onerror="this.parentElement.innerHTML=\'<span class=photo-ph-label>' + esc(s.name || '') + '</span>\'"></div>';
+      }
+    });
+    spacesEl.innerHTML = sHtml;
+  }
 
   /* gear */
-  let gear = paras(c.gear.intro);
-  gear += '<div class="gear-block">';
-  c.gear.list.forEach(g => {
-    gear += `<div class="gear-row"><span class="gear-name">${esc(g.name)}</span><span class="gear-note">${esc(g.note)}</span></div>`;
-  });
-  gear += '</div>';
-  document.getElementById('gear-content').innerHTML = gear;
+  var gearEl = document.getElementById('gear-content');
+  if (gearEl && c.gear) {
+    var gHtml = paras(c.gear.intro);
+    var gList = Array.isArray(c.gear.list) ? c.gear.list : [];
+    if (gList.length > 0) {
+      gHtml += '<div class="gear-block">';
+      gList.forEach(function(g) {
+        gHtml += '<div class="gear-row"><span class="gear-name">' + esc(g.name) + '</span>';
+        if (g.note) gHtml += '<span class="gear-note">' + esc(g.note) + '</span>';
+        gHtml += '</div>';
+      });
+      gHtml += '</div>';
+    }
+    gearEl.innerHTML = gHtml;
+  }
 
   /* rates */
-  let rates = c.rates.items.map(r => `
-    <div class="rate-item">
-      <div class="rate-label">${esc(r.label)}</div>
-      <div class="rate-price">${esc(r.price)}</div>
-      <div class="rate-note">${esc(r.note)}</div>
-    </div>`).join('');
-  rates += '<h3 style="margin-top:36px;">預約方式</h3>';
-  rates += paras(c.rates.notes);
-  rates += `<div class="cta-wrap"><a href="${esc(c.booking_url)}" target="_blank" class="cta">查看可預約時段</a></div>`;
-  document.getElementById('rates-content').innerHTML = rates;
+  var ratesEl = document.getElementById('rates-content');
+  if (ratesEl && c.rates) {
+    var items = Array.isArray(c.rates.items) ? c.rates.items : [];
+    var rHtml = items.map(function(r) {
+      var out = '<div class="rate-item">';
+      if (r.label) out += '<div class="rate-label">' + esc(r.label) + '</div>';
+      if (r.price) out += '<div class="rate-price">' + esc(r.price) + '</div>';
+      if (r.note)  out += '<div class="rate-note">'  + esc(r.note)  + '</div>';
+      out += '</div>';
+      return out;
+    }).join('');
+    var notes = Array.isArray(c.rates.notes) ? c.rates.notes : [];
+    if (notes.length > 0) {
+      rHtml += '<h3 style="margin-top:36px;">預約方式</h3>';
+      rHtml += paras(notes);
+    }
+    var bUrl = get(c, 'booking_url');
+    if (bUrl) rHtml += '<div class="cta-wrap"><a href="' + esc(bUrl) + '" target="_blank" class="cta">查看可預約時段</a></div>';
+    ratesEl.innerHTML = rHtml;
+  }
 
   /* contact */
-  let contact = c.contact.address.map(l => `<div class="contact-line">${esc(l)}</div>`).join('');
-  contact += `<div class="contact-line" style="margin-top:16px;">Instagram：<a href="${esc(c.instagram_url)}" target="_blank" class="contact-link">${esc(c.instagram_handle)}</a></div>`;
-  contact += `<div class="contact-line">開放時間：${esc(c.contact.hours)}</div>`;
-  contact += `<div class="cta-wrap"><a href="${esc(c.booking_url)}" target="_blank" class="cta">立即預約</a></div>`;
-  document.getElementById('contact-content').innerHTML = contact;
+  var contactEl = document.getElementById('contact-content');
+  if (contactEl && c.contact) {
+    var cHtml = '';
+    var addr = Array.isArray(c.contact.address) ? c.contact.address : [];
+    addr.forEach(function(l) { cHtml += '<div class="contact-line">' + esc(l) + '</div>'; });
+    var igUrl2    = get(c, 'instagram_url');
+    var igHandle  = get(c, 'instagram_handle');
+    var hours     = get(c, 'contact.hours');
+    if (igUrl2) cHtml += '<div class="contact-line" style="margin-top:16px;">Instagram：<a href="' + esc(igUrl2) + '" target="_blank" class="contact-link">' + esc(igHandle) + '</a></div>';
+    if (hours)  cHtml += '<div class="contact-line">開放時間：' + esc(hours) + '</div>';
+    var bUrl2 = get(c, 'booking_url');
+    if (bUrl2) cHtml += '<div class="cta-wrap"><a href="' + esc(bUrl2) + '" target="_blank" class="cta">立即預約</a></div>';
+    contactEl.innerHTML = cHtml;
+  }
 
   /* footer */
-  document.getElementById('footer').innerHTML = `
-    <div class="footer-logo">${esc(c.site.logo)}</div>
-    <div class="footer-meta">
-      ${esc(c.footer.tagline)}<br>
-      新北市中和區 · 景安站斜對面 · ${esc(c.contact.hours)}<br>
-      <a href="${esc(c.instagram_url)}" target="_blank">${esc(c.instagram_handle)}</a>
-      &nbsp;·&nbsp;
-      <a href="${esc(c.booking_url)}" target="_blank">立即預約</a><br><br>
-      © 2026 橘譜立彩排室 JeepLee
-    </div>`;
+  var footerEl = document.getElementById('footer');
+  if (footerEl) {
+    var logo    = get(c, 'site.logo');
+    var tagline = get(c, 'footer.tagline');
+    var hours2  = get(c, 'contact.hours');
+    var igUrl3  = get(c, 'instagram_url');
+    var igH     = get(c, 'instagram_handle');
+    var bUrl3   = get(c, 'booking_url');
+    var fHtml = '';
+    if (logo) fHtml += '<div class="footer-logo">' + esc(logo) + '</div>';
+    fHtml += '<div class="footer-meta">';
+    if (tagline) fHtml += esc(tagline) + '<br>';
+    if (hours2)  fHtml += '新北市中和區 · 景安站斜對面 · ' + esc(hours2) + '<br>';
+    if (igUrl3)  fHtml += '<a href="' + esc(igUrl3) + '" target="_blank">' + esc(igH) + '</a>';
+    if (igUrl3 && bUrl3) fHtml += ' &nbsp;·&nbsp; ';
+    if (bUrl3)   fHtml += '<a href="' + esc(bUrl3) + '" target="_blank">立即預約</a>';
+    fHtml += '<br><br>© 2026 橘譜立彩排室 JeepLee</div>';
+    footerEl.innerHTML = fHtml;
+  }
 }
 </script>
 
