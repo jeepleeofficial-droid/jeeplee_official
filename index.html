@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="page-title"></title>
+<title id="page-title">橘譜立 JeepLee 彩排室</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <style>
@@ -22,18 +22,17 @@
   body {
     background: #fff;
     color: var(--ink);
-    /* Ivakota-style: Georgia serif for body, system sans for UI */
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 16px;
     line-height: 1.8;
   }
 
   img { display: block; max-width: 100%; }
-  a { color: inherit; }
+  a { color: inherit; text-decoration: none; }
 
   /* ── NAV ── */
   nav {
-    padding: 18px 40px;
+    padding: 18px 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,7 +46,6 @@
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    text-decoration: none;
     color: var(--ink);
     transition: color .15s;
   }
@@ -60,40 +58,32 @@
     padding-bottom: 1px;
   }
 
-  .nav-book:hover { opacity: .7; }
-
   /* ── HERO ── */
   .hero {
     position: relative;
     width: 100%;
-    height: 88vh;
-    overflow: hidden;
+    height: 100vh;
     background-color: #1a1008;
-    background-image: none;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-  }
-
-  .hero-img { display: none; }
-
-  .hero-ph {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-  }
-
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 14px;
+    gap: 16px;
     padding: 40px;
   }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.42);
+  }
+
+  .hero > * { position: relative; z-index: 1; }
 
   .hero-title {
     font-family: Arial, Helvetica, sans-serif;
@@ -110,23 +100,25 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
     letter-spacing: 0.2em;
-    color: rgba(255,255,255,0.72);
+    color: rgba(255,255,255,0.7);
     text-transform: uppercase;
   }
 
   .hero-links {
     display: flex;
-    gap: 20px;
-    margin-top: 6px;
+    align-items: center;
+    gap: 24px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .hero-links a {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
     letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
     text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
     border-bottom: 0.5px solid rgba(255,255,255,0.3);
     padding-bottom: 1px;
     transition: color .15s;
@@ -134,7 +126,12 @@
 
   .hero-links a:hover { color: var(--almond); }
 
-  /* ── CONTENT WRAPPER ── */
+  .hero-links .hero-book {
+    color: #fff;
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  /* ── CONTENT ── */
   .content {
     max-width: 960px;
     margin: 0 auto;
@@ -143,7 +140,7 @@
 
   /* ── SECTION ── */
   .sec {
-    padding: 68px 0;
+    padding: 72px 0;
     border-top: 1px solid var(--line);
   }
 
@@ -178,6 +175,7 @@
   p {
     margin-bottom: 1em;
     color: var(--ink);
+    line-height: 1.85;
   }
 
   p:last-child { margin-bottom: 0; }
@@ -203,200 +201,38 @@
     gap: 24px;
   }
 
-  .gear-name {
-    font-family: Georgia, serif;
-    font-size: 15px;
-    color: var(--ink);
-  }
-
-  .gear-note {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: var(--mute);
-    text-align: right;
-    flex-shrink: 0;
-  }
+  .gear-name { font-family: Georgia, serif; font-size: 15px; color: var(--ink); }
+  .gear-note { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.06em; color: var(--mute); text-align: right; flex-shrink: 0; }
 
   /* ── RATES ── */
-  .rate-item {
-    padding: 16px 0;
-    border-bottom: 1px solid var(--line);
-  }
-
+  .rate-item { padding: 16px 0; border-bottom: 1px solid var(--line); }
   .rate-item:first-child { border-top: 1px solid var(--line); }
+  .rate-label { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-bottom: 4px; }
+  .rate-price { font-family: Georgia, serif; font-size: 17px; color: var(--ink); }
+  .rate-note  { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.05em; color: var(--mute); margin-top: 2px; }
 
-  .rate-label {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--mute);
-    margin-bottom: 4px;
-  }
-
-  .rate-price {
-    font-family: Georgia, serif;
-    font-size: 17px;
-    color: var(--ink);
-  }
-
-  .rate-note {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    color: var(--mute);
-    margin-top: 2px;
-  }
-
-  /* ── PHOTOS ── */
-  .photo-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3px;
-    margin: 28px 0;
-  }
-
-  .photo-ph {
-    aspect-ratio: 4/3;
-    background: #e8e4e0;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .photo-ph img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .photo-ph-label {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--mute);
-  }
-
-  .photo-full {
-    width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
-    margin: 20px 0;
-    display: block;
-  }
-
-  .photo-full-ph {
-    width: 100%;
-    height: 420px;
-    background: #e8e4e0;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    margin: 20px 0;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .photo-full-ph img { display: none; }
-
-  .photo-full-ph .photo-ph-label { display: block; }
+  /* ── CONTACT ── */
+  .contact-line { margin-bottom: 6px; font-family: Georgia, serif; }
+  .contact-link { color: var(--granite); border-bottom: 0.5px solid var(--granite); padding-bottom: 1px; transition: color .15s; }
+  .contact-link:hover { color: var(--ink); border-color: var(--ink); }
 
   /* ── CTA ── */
   .cta-wrap { margin-top: 32px; }
-
   .cta {
     display: inline-block;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
     font-weight: bold;
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    text-decoration: none;
     background: var(--brandy);
     color: #fff;
     padding: 12px 24px;
     transition: opacity .15s;
   }
-
   .cta:hover { opacity: .82; }
 
-  /* ── CONTACT ── */
-  .contact-line {
-    margin-bottom: 6px;
-  }
-
-  .contact-link {
-    color: var(--granite);
-    text-decoration: none;
-    border-bottom: 0.5px solid var(--granite);
-    padding-bottom: 1px;
-    transition: color .15s;
-  }
-
-  .contact-link:hover { color: var(--ink); border-color: var(--ink); }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 40px;
-    text-align: center;
-  }
-
-  .footer-logo {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-
-  .footer-meta {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: var(--mute);
-    line-height: 2.0;
-  }
-
-  .footer-meta a {
-    color: var(--almond);
-    text-decoration: none;
-  }
-
-  /* ── MOBILE ── */
-  @media (max-width: 600px) {
-    nav { padding: 14px 20px; gap: 14px; }
-    .content { padding: 0 20px; }
-    .sec { padding: 48px 0; }
-    .photo-grid { grid-template-columns: 1fr; }
-    footer { padding: 32px 20px; }
-  }
-
-  /* ── GALLERY ── */
-  .gallery-label {
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink);
-    margin-bottom: 20px;
-  }
-
-  .gallery-rule {
-    width: 32px;
-    height: 1px;
-    background: var(--ink);
-    margin: 0 auto 40px;
-  }
-
+  /* ── GALLERY (橫向捲動，空間區) ── */
   .gallery-scroll {
     display: flex;
     overflow-x: auto;
@@ -405,16 +241,17 @@
     cursor: grab;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    margin-top: 0;
   }
 
   .gallery-scroll::-webkit-scrollbar { display: none; }
-  .gallery-scroll.dragging { cursor: grabbing; }
+  .gallery-scroll.dragging { cursor: grabbing; user-select: none; }
 
   .gallery-item {
     flex: 0 0 auto;
     width: 45vw;
-    height: 62vw;
-    max-height: 85vh;
+    height: 60vw;
+    max-height: 88vh;
     overflow: hidden;
     background: #e8e4e0;
     position: relative;
@@ -427,85 +264,123 @@
     display: block;
     pointer-events: none;
     user-select: none;
+    -webkit-user-drag: none;
   }
 
+  .gallery-ph-label {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mute);
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 40px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .footer-meta {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--mute);
+    line-height: 2.0;
+  }
+
+  .footer-meta a { color: var(--almond); }
+
+  /* ── MOBILE ── */
   @media (max-width: 600px) {
-    .gallery-item {
-      width: 85vw;
-      height: 120vw;
-    }
+    nav { padding: 14px 20px; gap: 14px; }
+    .content { padding: 0 20px; }
+    .sec { padding: 52px 0; }
+    .gallery-item { width: 85vw; height: 110vw; max-height: none; }
+    footer { padding: 32px 20px; }
   }
-
 </style>
 </head>
 <body>
 
-<nav id="nav-links"></nav>
+<!-- NAV -->
+<nav id="nav-el"></nav>
 
-<div class="hero" id="hero">
-  <div class="hero-ph" id="hero-ph"></div>
-  <div class="hero-overlay">
-    <div class="hero-title" id="hero-title"></div>
-    <div class="hero-sub"   id="hero-sub"></div>
-    <div class="hero-links" id="hero-links"></div>
-  </div>
+<!-- HERO -->
+<div class="hero" id="hero-el">
+  <div class="hero-title" id="hero-title"></div>
+  <div class="hero-sub"   id="hero-sub"></div>
+  <div class="hero-links" id="hero-links"></div>
 </div>
 
 <div class="content">
 
-  <!-- ABOUT -->
+  <!-- 關於我們 -->
   <div class="sec" id="about">
-    <div class="sec-label">About</div>
+    <div class="sec-label">關於我們</div>
     <div id="about-content"></div>
   </div>
 
-  <!-- SPACES -->
-  <div class="sec" id="spaces">
-    <div class="sec-label">Spaces</div>
-    <div id="spaces-content"></div>
-  </div>
-
-  <!-- GEAR -->
+  <!-- 設備 -->
   <div class="sec" id="gear">
-    <div class="sec-label">Gear</div>
+    <div class="sec-label">設備</div>
     <div id="gear-content"></div>
   </div>
 
-  <!-- RATES -->
+  <!-- 費用 -->
   <div class="sec" id="rates">
-    <div class="sec-label">Rates</div>
+    <div class="sec-label">費用</div>
     <div id="rates-content"></div>
   </div>
 
-  <!-- CONTACT -->
+  <!-- 聯絡 -->
   <div class="sec" id="contact">
-    <div class="sec-label">Contact</div>
+    <div class="sec-label">聯絡</div>
     <div id="contact-content"></div>
   </div>
 
 </div>
 
-<footer id="footer"></footer>
+<!-- 空間：全幅橫向捲動，不放在 content 裡 -->
+<div style="border-top: 1px solid var(--line);" id="spaces">
+  <div class="content" style="padding-top: 72px; padding-bottom: 40px;">
+    <div class="sec-label">空間</div>
+  </div>
+  <div class="gallery-scroll" id="spaces-gallery"></div>
+  <div style="height: 72px;"></div>
+</div>
+
+<!-- FOOTER -->
+<footer id="footer-el"></footer>
 
 <script>
 fetch('content.json')
-  .then(r => r.json())
-  .then(c => render(c))
-  .catch(e => console.error('content.json 載入失敗:', e));
+  .then(function(r) { return r.json(); })
+  .then(function(c) { render(c); })
+  .catch(function(e) { console.error('content.json 載入失敗:', e); });
 
 function get(obj, path, fallback) {
   if (fallback === undefined) fallback = '';
-  return path.split('.').reduce(function(o, k) { return o != null ? o[k] : undefined; }, obj) != null
-    ? path.split('.').reduce(function(o, k) { return o != null ? o[k] : undefined; }, obj)
-    : fallback;
+  var val = path.split('.').reduce(function(o, k) { return o != null ? o[k] : undefined; }, obj);
+  return val != null ? val : fallback;
 }
 
 function esc(s) {
   return String(s != null ? s : '')
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function paras(arr) {
@@ -514,205 +389,171 @@ function paras(arr) {
 }
 
 function render(c) {
+
   /* title */
   var titleEl = document.getElementById('page-title');
-  if (titleEl && c.site && c.site.title) titleEl.textContent = c.site.title;
+  if (titleEl && get(c,'site.title')) titleEl.textContent = get(c,'site.title');
 
   /* nav */
-  var navEl = document.getElementById('nav-links');
+  var navEl = document.getElementById('nav-el');
   if (navEl) {
     var links = Array.isArray(c.nav) ? c.nav : [];
-    var navHtml = links.map(function(n) {
+    var html = links.map(function(n) {
       return '<a href="' + esc(n.href) + '">' + esc(n.label) + '</a>';
     }).join('');
-    var bookingUrl = get(c, 'booking_url');
-    if (bookingUrl) navHtml += '<a href="' + esc(bookingUrl) + '" target="_blank" class="nav-book">預約 →</a>';
-    navEl.innerHTML = navHtml;
+    var bu = get(c,'booking_url');
+    if (bu) html += '<a href="' + esc(bu) + '" target="_blank" class="nav-book">預約 →</a>';
+    navEl.innerHTML = html;
   }
 
-  /* hero — parallax via background-attachment: fixed */
-  var heroEl = document.querySelector('.hero');
-  if (heroEl && c.hero && c.hero.image) {
-    heroEl.style.backgroundImage = 'linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url(' + c.hero.image + ')';
+  /* hero — parallax bg */
+  var heroEl = document.getElementById('hero-el');
+  if (heroEl && get(c,'hero.image')) {
+    heroEl.style.backgroundImage = 'url(' + get(c,'hero.image') + ')';
   }
-  var heroTitleEl = document.getElementById('hero-title');
-  if (heroTitleEl) heroTitleEl.textContent = get(c, 'hero.title');
-  var heroSubEl = document.getElementById('hero-sub');
-  if (heroSubEl) heroSubEl.textContent = get(c, 'hero.sub');
-  var heroLinksEl = document.getElementById('hero-links');
-  if (heroLinksEl) {
-    var igUrl = get(c, 'instagram_url');
-    var bookUrl = get(c, 'booking_url');
+  var htEl = document.getElementById('hero-title');
+  if (htEl) htEl.textContent = get(c,'hero.title');
+  var hsEl = document.getElementById('hero-sub');
+  if (hsEl) hsEl.textContent = get(c,'hero.sub');
+
+  /* hero links: IG, LINE, 預約 */
+  var hlEl = document.getElementById('hero-links');
+  if (hlEl) {
     var hl = '';
-    if (igUrl)   hl += '<a href="' + esc(igUrl) + '" target="_blank">Instagram</a>';
-    if (bookUrl) hl += '<a href="' + esc(bookUrl) + '" target="_blank">立即預約</a>';
-    heroLinksEl.innerHTML = hl;
+    var igUrl = get(c,'instagram_url'), igH = get(c,'instagram_handle');
+    var lineId = get(c,'line_id');
+    var bu2 = get(c,'booking_url');
+    if (igUrl)  hl += '<a href="' + esc(igUrl) + '" target="_blank">' + esc(igH || 'Instagram') + '</a>';
+    if (lineId) hl += '<a href="https://line.me/R/ti/p/' + esc(lineId) + '" target="_blank">LINE ' + esc(lineId) + '</a>';
+    if (bu2)    hl += '<a href="' + esc(bu2) + '" target="_blank" class="hero-book">立即預約 →</a>';
+    hlEl.innerHTML = hl;
   }
 
-  /* about */
+  /* 關於我們 */
   var aboutEl = document.getElementById('about-content');
   if (aboutEl && c.about) {
-    var html = '';
-    if (c.about.heading)             html += '<h2>' + esc(c.about.heading) + '</h2>';
-    if (c.about.paragraphs)          html += paras(c.about.paragraphs);
+    var ah = '';
+    if (c.about.heading)             ah += '<h2>' + esc(c.about.heading) + '</h2>';
+    if (c.about.paragraphs)          ah += paras(c.about.paragraphs);
+    if (c.about.founders_heading)    ah += '<h2>' + esc(c.about.founders_heading) + '</h2>';
+    if (c.about.founders_paragraphs) ah += paras(c.about.founders_paragraphs);
+    if (c.about.sig)                 ah += '<p class="sig">' + esc(c.about.sig) + '</p>';
+    aboutEl.innerHTML = ah;
+  }
 
-    /* photo grid — 從 spaces 抓有圖的，有幾張顯示幾張 */
+  /* 空間：全幅橫向捲動，只有圖片 */
+  var sgEl = document.getElementById('spaces-gallery');
+  if (sgEl) {
     var spaces = Array.isArray(c.spaces) ? c.spaces : [];
-    var gridImgs = spaces.filter(function(s) { return s.image; });
-    if (gridImgs.length > 0) {
-      html += '<div class="photo-grid">';
-      gridImgs.forEach(function(s) {
-        html += '<div class="photo-ph"><img src="' + esc(s.image) + '" alt="' + esc(s.name) + '" onerror="this.parentElement.innerHTML=\'<span class=photo-ph-label>' + esc(s.name) + '</span>\'"></div>';
-      });
-      if (gridImgs.length % 2 !== 0) html += '<div class="photo-ph"></div>';
-      html += '</div>';
-    }
-
-    if (c.about.founders_heading)    html += '<h2>' + esc(c.about.founders_heading) + '</h2>';
-    if (c.about.founders_paragraphs) html += paras(c.about.founders_paragraphs);
-    if (c.about.sig)                 html += '<p class="sig">' + esc(c.about.sig) + '</p>';
-    aboutEl.innerHTML = html;
-  }
-
-  /* spaces */
-  var spacesEl = document.getElementById('spaces-content');
-  if (spacesEl) {
-    var spaceList = Array.isArray(c.spaces) ? c.spaces : [];
-    var sHtml = '';
-    spaceList.forEach(function(s) {
-      var heading = esc(s.name || '');
-      if (s.en) heading += '<span style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-left:14px;">' + esc(s.en) + '</span>';
-      sHtml += '<h2>' + heading + '</h2>';
-      sHtml += paras(s.paragraphs);
-      if (s.image) {
-        sHtml += '<div class="photo-full-ph" style="background-image:url(' + esc(s.image) + ');"></div>';
-      }
-    });
-    spacesEl.innerHTML = sHtml;
-  }
-
-  /* gear */
-  var gearEl = document.getElementById('gear-content');
-  if (gearEl && c.gear) {
-    var gHtml = paras(c.gear.intro);
-    var gList = Array.isArray(c.gear.list) ? c.gear.list : [];
-    if (gList.length > 0) {
-      gHtml += '<div class="gear-block">';
-      gList.forEach(function(g) {
-        gHtml += '<div class="gear-row"><span class="gear-name">' + esc(g.name) + '</span>';
-        if (g.note) gHtml += '<span class="gear-note">' + esc(g.note) + '</span>';
-        gHtml += '</div>';
-      });
-      gHtml += '</div>';
-    }
-    gearEl.innerHTML = gHtml;
-  }
-
-  /* rates */
-  var ratesEl = document.getElementById('rates-content');
-  if (ratesEl && c.rates) {
-    var items = Array.isArray(c.rates.items) ? c.rates.items : [];
-    var rHtml = items.map(function(r) {
-      var out = '<div class="rate-item">';
-      if (r.label) out += '<div class="rate-label">' + esc(r.label) + '</div>';
-      if (r.price) out += '<div class="rate-price">' + esc(r.price) + '</div>';
-      if (r.note)  out += '<div class="rate-note">'  + esc(r.note)  + '</div>';
-      out += '</div>';
-      return out;
-    }).join('');
-    var notes = Array.isArray(c.rates.notes) ? c.rates.notes : [];
-    if (notes.length > 0) {
-      rHtml += '<h3 style="margin-top:36px;">預約方式</h3>';
-      rHtml += paras(notes);
-    }
-    var bUrl = get(c, 'booking_url');
-    if (bUrl) rHtml += '<div class="cta-wrap"><a href="' + esc(bUrl) + '" target="_blank" class="cta">查看可預約時段</a></div>';
-    ratesEl.innerHTML = rHtml;
-  }
-
-  /* contact */
-  var contactEl = document.getElementById('contact-content');
-  if (contactEl && c.contact) {
-    var cHtml = '';
-    var addr = Array.isArray(c.contact.address) ? c.contact.address : [];
-    addr.forEach(function(l) { cHtml += '<div class="contact-line">' + esc(l) + '</div>'; });
-    var igUrl2    = get(c, 'instagram_url');
-    var igHandle  = get(c, 'instagram_handle');
-    var hours     = get(c, 'contact.hours');
-    if (igUrl2) cHtml += '<div class="contact-line" style="margin-top:16px;">Instagram：<a href="' + esc(igUrl2) + '" target="_blank" class="contact-link">' + esc(igHandle) + '</a></div>';
-    if (hours)  cHtml += '<div class="contact-line">開放時間：' + esc(hours) + '</div>';
-    var bUrl2 = get(c, 'booking_url');
-    if (bUrl2) cHtml += '<div class="cta-wrap"><a href="' + esc(bUrl2) + '" target="_blank" class="cta">立即預約</a></div>';
-    contactEl.innerHTML = cHtml;
-  }
-
-  /* footer */
-  var footerEl = document.getElementById('footer');
-  if (footerEl) {
-    var logo    = get(c, 'site.logo');
-    var tagline = get(c, 'footer.tagline');
-    var hours2  = get(c, 'contact.hours');
-    var igUrl3  = get(c, 'instagram_url');
-    var igH     = get(c, 'instagram_handle');
-    var bUrl3   = get(c, 'booking_url');
-    var fHtml = '';
-    if (logo) fHtml += '<div class="footer-logo">' + esc(logo) + '</div>';
-    fHtml += '<div class="footer-meta">';
-    if (tagline) fHtml += esc(tagline) + '<br>';
-    if (hours2)  fHtml += '新北市中和區 · 景安站斜對面 · ' + esc(hours2) + '<br>';
-    if (igUrl3)  fHtml += '<a href="' + esc(igUrl3) + '" target="_blank">' + esc(igH) + '</a>';
-    if (igUrl3 && bUrl3) fHtml += ' &nbsp;·&nbsp; ';
-    if (bUrl3)   fHtml += '<a href="' + esc(bUrl3) + '" target="_blank">立即預約</a>';
-    fHtml += '<br><br>© 2026 橘譜立彩排室 JeepLee</div>';
-    footerEl.innerHTML = fHtml;
-  }
-}
-
-  /* gallery */
-  var galleryEl = document.getElementById('gallery-scroll');
-  var galleryLabelEl = document.getElementById('gallery-label');
-  if (galleryEl && c.gallery) {
-    if (galleryLabelEl && c.gallery.label) galleryLabelEl.textContent = c.gallery.label;
-    var imgs = Array.isArray(c.gallery.images) ? c.gallery.images : [];
-    imgs.forEach(function(g) {
+    spaces.forEach(function(s) {
       var item = document.createElement('div');
       item.className = 'gallery-item';
-      if (g.src) {
+      if (s.image) {
         var img = document.createElement('img');
-        img.src = g.src;
-        img.alt = g.alt || '';
+        img.src = s.image;
+        img.alt = s.name || '';
         img.draggable = false;
         item.appendChild(img);
       }
-      galleryEl.appendChild(item);
+      if (s.name) {
+        var lbl = document.createElement('span');
+        lbl.className = 'gallery-ph-label';
+        lbl.textContent = s.name;
+        item.appendChild(lbl);
+      }
+      sgEl.appendChild(item);
     });
 
     /* drag to scroll */
-    var isDown = false;
-    var startX, scrollLeft;
-    galleryEl.addEventListener('mousedown', function(e) {
-      isDown = true;
-      galleryEl.classList.add('dragging');
-      startX = e.pageX - galleryEl.offsetLeft;
-      scrollLeft = galleryEl.scrollLeft;
+    var isDown = false, startX, scrollLeft;
+    sgEl.addEventListener('mousedown', function(e) {
+      isDown = true; sgEl.classList.add('dragging');
+      startX = e.pageX - sgEl.offsetLeft; scrollLeft = sgEl.scrollLeft;
     });
-    galleryEl.addEventListener('mouseleave', function() {
-      isDown = false;
-      galleryEl.classList.remove('dragging');
+    ['mouseleave','mouseup'].forEach(function(ev) {
+      sgEl.addEventListener(ev, function() { isDown = false; sgEl.classList.remove('dragging'); });
     });
-    galleryEl.addEventListener('mouseup', function() {
-      isDown = false;
-      galleryEl.classList.remove('dragging');
-    });
-    galleryEl.addEventListener('mousemove', function(e) {
+    sgEl.addEventListener('mousemove', function(e) {
       if (!isDown) return;
       e.preventDefault();
-      var x = e.pageX - galleryEl.offsetLeft;
-      var walk = (x - startX) * 1.5;
-      galleryEl.scrollLeft = scrollLeft - walk;
+      sgEl.scrollLeft = scrollLeft - (e.pageX - sgEl.offsetLeft - startX) * 1.4;
     });
   }
 
+  /* 設備 */
+  var gearEl = document.getElementById('gear-content');
+  if (gearEl && c.gear) {
+    var gh = paras(c.gear.intro);
+    var gl = Array.isArray(c.gear.list) ? c.gear.list : [];
+    if (gl.length > 0) {
+      gh += '<div class="gear-block">';
+      gl.forEach(function(g) {
+        gh += '<div class="gear-row"><span class="gear-name">' + esc(g.name) + '</span>';
+        if (g.note) gh += '<span class="gear-note">' + esc(g.note) + '</span>';
+        gh += '</div>';
+      });
+      gh += '</div>';
+    }
+    gearEl.innerHTML = gh;
+  }
+
+  /* 費用 */
+  var ratesEl = document.getElementById('rates-content');
+  if (ratesEl && c.rates) {
+    var ri = Array.isArray(c.rates.items) ? c.rates.items : [];
+    var rh = ri.map(function(r) {
+      var o = '<div class="rate-item">';
+      if (r.label) o += '<div class="rate-label">' + esc(r.label) + '</div>';
+      if (r.price) o += '<div class="rate-price">' + esc(r.price) + '</div>';
+      if (r.note)  o += '<div class="rate-note">'  + esc(r.note)  + '</div>';
+      return o + '</div>';
+    }).join('');
+    var rn = Array.isArray(c.rates.notes) ? c.rates.notes : [];
+    if (rn.length > 0) {
+      rh += '<h3 style="margin-top:36px;">預約方式</h3>';
+      rh += paras(rn);
+    }
+    var bu3 = get(c,'booking_url');
+    if (bu3) rh += '<div class="cta-wrap"><a href="' + esc(bu3) + '" target="_blank" class="cta">查看可預約時段</a></div>';
+    ratesEl.innerHTML = rh;
+  }
+
+  /* 聯絡 */
+  var contactEl = document.getElementById('contact-content');
+  if (contactEl && c.contact) {
+    var ch = '';
+    var addr = Array.isArray(c.contact.address) ? c.contact.address : [];
+    addr.forEach(function(l) { ch += '<div class="contact-line">' + esc(l) + '</div>'; });
+    var igUrl2 = get(c,'instagram_url'), igH2 = get(c,'instagram_handle');
+    var lineId2 = get(c,'line_id');
+    var hrs = get(c,'contact.hours');
+    if (hrs)     ch += '<div class="contact-line" style="margin-top:16px;">開放時間：' + esc(hrs) + '</div>';
+    if (igUrl2)  ch += '<div class="contact-line">Instagram：<a href="' + esc(igUrl2) + '" target="_blank" class="contact-link">' + esc(igH2) + '</a></div>';
+    if (lineId2) ch += '<div class="contact-line">LINE：<a href="https://line.me/R/ti/p/' + esc(lineId2) + '" target="_blank" class="contact-link">' + esc(lineId2) + '</a></div>';
+    var bu4 = get(c,'booking_url');
+    if (bu4) ch += '<div class="cta-wrap"><a href="' + esc(bu4) + '" target="_blank" class="cta">立即預約</a></div>';
+    contactEl.innerHTML = ch;
+  }
+
+  /* footer */
+  var footerEl = document.getElementById('footer-el');
+  if (footerEl) {
+    var logo = get(c,'site.logo'), tag = get(c,'footer.tagline');
+    var hrs2 = get(c,'contact.hours');
+    var igUrl3 = get(c,'instagram_url'), igH3 = get(c,'instagram_handle');
+    var bu5 = get(c,'booking_url');
+    var fh = '';
+    if (logo) fh += '<div class="footer-logo">' + esc(logo) + '</div>';
+    fh += '<div class="footer-meta">';
+    if (tag)  fh += esc(tag) + '<br>';
+    if (hrs2) fh += '新北市中和區 · 景安站斜對面 · ' + esc(hrs2) + '<br>';
+    if (igUrl3) fh += '<a href="' + esc(igUrl3) + '" target="_blank">' + esc(igH3) + '</a>';
+    if (igUrl3 && bu5) fh += ' &nbsp;·&nbsp; ';
+    if (bu5) fh += '<a href="' + esc(bu5) + '" target="_blank">立即預約</a>';
+    fh += '<br><br>© 2026 橘譜立彩排室 JeepLee</div>';
+    footerEl.innerHTML = fh;
+  }
+}
 </script>
 
 </body>
