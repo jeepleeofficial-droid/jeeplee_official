@@ -3,25 +3,21 @@
     "title": "橘譜立 · JeepLee · 彩排室 · 景安站",
     "logo": "橘譜立 · JeepLee · 彩排室"
   },
-
   "nav": [
-    { "label": "關於",   "href": "#about"  },
-    { "label": "空間",   "href": "#spaces" },
-    { "label": "設備",   "href": "#gear"   },
-    { "label": "費率",   "href": "#rates"  },
-    { "label": "聯絡",   "href": "#contact"}
+    { "label": "關於",   "href": "#about"   },
+    { "label": "空間",   "href": "#spaces"  },
+    { "label": "設備",   "href": "#gear"    },
+    { "label": "費率",   "href": "#rates"   },
+    { "label": "聯絡",   "href": "#contact" }
   ],
-
   "booking_url": "https://jeeplee-booking.vercel.app/",
   "instagram_url": "https://www.instagram.com/jeeplee_official/",
   "instagram_handle": "@jeeplee_official",
-
   "hero": {
     "title": "橘譜立．JeepLee",
     "sub": "景安站 · 彩排室 · 新北市中和區",
     "image": "images/room_main.jpg"
   },
-
   "about": {
     "heading": "橘譜立彩排室",
     "paragraphs": [
@@ -33,52 +29,39 @@
     ],
     "sig": "—"
   },
-
   "spaces": [
     {
       "en": "Main Hall",
       "name": "彩排室",
       "image": "images/room_main.jpg",
-      "paragraphs": [
-        "—"
-      ]
+      "paragraphs": ["—"]
     },
     {
       "en": "Control Room",
       "name": "控制室",
       "image": "images/room_control.jpg",
-      "paragraphs": [
-        "—"
-      ]
+      "paragraphs": ["—"]
     },
     {
       "en": "Lounge",
       "name": "客廳",
       "image": null,
-      "paragraphs": [
-        "—"
-      ]
+      "paragraphs": ["—"]
     }
   ],
-
   "gear": {
-    "intro": [
-      "—",
-      "—"
-    ],
+    "intro": ["—", "—"],
     "list": [
-      { "name": "Midas DP48",      "note": "個人監聽混音 · 多組" },
-      { "name": "Midas DP48",      "note": "個人監聽混音 · 多組" }
+      { "name": "Midas DP48", "note": "個人監聽混音 · 多組" }
     ]
   },
-
   "rates": {
     "items": [
       {
         "label": "平日（週一至週五）",
         "price": "NT$ 1,400 / hr",
         "note": "10:00 — 22:00"
-      },
+      }
     ],
     "notes": [
       "費率含全套設備使用。有特殊需求——例如需要工程師協助、或有額外器材——請事先告知。",
@@ -86,7 +69,6 @@
       "如果需要洽談包場或有任何問題，直接傳 IG 或來信都可以。"
     ]
   },
-
   "contact": {
     "address": [
       "新北市中和區",
@@ -95,7 +77,6 @@
     ],
     "hours": "每日 10:00 — 24:00"
   },
-
   "footer": {
     "tagline": "—"
   }
