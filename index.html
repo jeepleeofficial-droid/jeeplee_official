@@ -508,70 +508,162 @@ function render(c) {
     aboutEl.innerHTML = ah;
   }
 
-  /* 空間 slider：中間主圖清晰，左右半透明，點擊換張 */
+  /* =====================================================
+     空間照片輪播 slider
+     -------------------------------------------------------
+     操作方式：
+       - 點右側箭頭 → 下一張
+       - 點左側箭頭 → 上一張
+       - 點任何一張半透明的照片 → 直接跳到那張
+     
+     照片來源：
+       content.json 裡的 "spaces" 陣列
+       有幾張就顯示幾張，不限數量
+       image 是 null 的會自動跳過
+     
+     視覺邏輯：
+       - 中間一張：完全清晰
+       - 左右各露出半張：半透明
+       - 無限循環：最後一張的右邊接回第一張
+     ===================================================== */
   var track = document.getElementById('slider-track');
   var wrap  = document.getElementById('slider-wrap');
   if (track && wrap) {
-    var spaces = Array.isArray(c.spaces) ? c.spaces.filter(function(s){ return s.image; }) : [];
+
+    /* 過濾掉沒有圖片的項目 */
+    var spaces = Array.isArray(c.spaces)
+      ? c.spaces.filter(function(s) { return s.image; })
+      : [];
+
+    var total = spaces.length;
+    if (total === 0) return;
+
+    /* 目前顯示的是第幾張（0 開始）*/
     var current = 0;
 
+    /* 是否正在跑動畫（防止連點） */
+    var animating = false;
+
+    /* ── 建立 slide 元素 ──
+       頭尾各複製一張，讓循環接縫無縫：
+       [最後一張的複製] [第0張] [第1張] ... [最後一張] [第0張的複製]
+       實際顯示從 index 1 開始（對應 spaces[0]）
+    */
     function buildSlides() {
       track.innerHTML = '';
-      spaces.forEach(function(s, i) {
+
+      /* 建立一張 slide 的 DOM */
+      function makeSlide(s, isClone) {
         var slide = document.createElement('div');
-        slide.className = 'slider-slide' + (i === current ? ' active' : '');
+        slide.className = 'slider-slide' + (isClone ? ' clone' : '');
         var img = document.createElement('img');
         img.src = s.image;
         img.alt = s.name || '';
         img.draggable = false;
         slide.appendChild(img);
-        if (s.name) {
+        if (s.name && !isClone) {
           var lbl = document.createElement('span');
           lbl.className = 'slide-label';
           lbl.textContent = s.name;
           slide.appendChild(lbl);
         }
+        return slide;
+      }
+
+      /* 最後一張複製放在最前面 */
+      track.appendChild(makeSlide(spaces[total - 1], true));
+
+      /* 真正的所有照片 */
+      spaces.forEach(function(s, i) {
+        var slide = makeSlide(s, false);
+        /* 點非主圖的照片可以直接跳 */
         (function(idx) {
           slide.addEventListener('click', function() {
-            if (idx !== current) { goTo(idx); }
+            if (!animating && idx !== current) { goTo(idx); }
           });
         })(i);
         track.appendChild(slide);
       });
+
+      /* 第一張複製放在最後面 */
+      track.appendChild(makeSlide(spaces[0], true));
     }
 
-    function goTo(idx) {
-      if (spaces.length === 0) return;
-      current = (idx + spaces.length) % spaces.length;
-      updateSlider();
-    }
-
-    function updateSlider() {
-      var slides = track.querySelectorAll('.slider-slide');
-      slides.forEach(function(s, i) {
-        s.classList.toggle('active', i === current);
-      });
-      if (!slides.length) return;
-
-      /* 用 CSS vw 計算寬度，避免 offsetWidth 為 0 的問題 */
+    /* ── 計算每張寬度（用 vw 避免 offsetWidth 為 0）── */
+    function getSlideW() {
       var vw = window.innerWidth;
-      var isMobile = vw <= 600;
-      var slideVw = isMobile ? 0.80 : 0.58;
-      var slideW = vw * slideVw;
-      var gap = isMobile ? 8 : 12;
-      var wrapW = wrap.offsetWidth || vw;
-      var offset = (wrapW / 2) - (slideW / 2) - current * (slideW + gap);
-      track.style.transform = 'translateX(' + offset + 'px)';
+      return vw * (vw <= 600 ? 0.80 : 0.58);
     }
 
-    buildSlides();
-    /* 多給幾次機會確保 layout 穩定 */
-    setTimeout(updateSlider, 50);
-    setTimeout(updateSlider, 200);
-    setTimeout(updateSlider, 500);
-    window.addEventListener('load', updateSlider);
-    window.addEventListener('resize', updateSlider);
+    function getGap() {
+      return window.innerWidth <= 600 ? 8 : 12;
+    }
 
+    /* ── 更新位置與 active 狀態 ──
+       slides 的真實 index：
+         0           → 複製的最後一張
+         1 ~ total   → 真正的照片（current + 1 = 真實位置）
+         total + 1   → 複製的第一張
+    */
+    function updateSlider(animate) {
+      var slides = track.querySelectorAll('.slider-slide');
+      /* active 標記給真實照片（index = current + 1）*/
+      slides.forEach(function(s, i) {
+        s.classList.toggle('active', i === current + 1);
+      });
+
+      var slideW = getSlideW();
+      var gap    = getGap();
+      var wrapW  = wrap.offsetWidth || window.innerWidth;
+      /* current + 1 是 track 裡真實的位置（因為前面插了一張複製）*/
+      var offset = (wrapW / 2) - (slideW / 2) - (current + 1) * (slideW + gap);
+
+      if (animate === false) {
+        /* 瞬間跳，不要動畫（用於循環接縫）*/
+        track.style.transition = 'none';
+        track.style.transform  = 'translateX(' + offset + 'px)';
+        /* 強制 reflow，讓 transition: none 生效 */
+        track.offsetHeight;
+        /* 恢復動畫 */
+        track.style.transition = '';
+      } else {
+        track.style.transform = 'translateX(' + offset + 'px)';
+      }
+    }
+
+    /* ── 換張邏輯 ── */
+    function goTo(idx) {
+      if (animating) return;
+      animating = true;
+      current = idx;
+      updateSlider(true);
+
+      /* 動畫結束後檢查是否需要無縫跳回 */
+      setTimeout(function() {
+        if (current === total) {
+          /* 超過最後一張 → 瞬間跳回第 0 張 */
+          current = 0;
+          updateSlider(false);
+        } else if (current === -1) {
+          /* 在第 0 張往前 → 瞬間跳到最後一張 */
+          current = total - 1;
+          updateSlider(false);
+        }
+        animating = false;
+      }, 520); /* 比 CSS transition 的 0.5s 多一點 */
+    }
+
+    /* ── 初始化 ── */
+    buildSlides();
+
+    /* 多次嘗試確保 layout 穩定後再算位置 */
+    updateSlider(false);
+    setTimeout(function() { updateSlider(false); }, 100);
+    setTimeout(function() { updateSlider(false); }, 400);
+    window.addEventListener('load',   function() { updateSlider(false); });
+    window.addEventListener('resize', function() { updateSlider(false); });
+
+    /* ── 箭頭按鈕 ── */
     var prevEl = document.getElementById('slider-prev');
     var nextEl = document.getElementById('slider-next');
     if (prevEl) prevEl.addEventListener('click', function() { goTo(current - 1); });
