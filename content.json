@@ -39,10 +39,12 @@
   },
 
   "spaces": [
-    { "name": "彩排大廳", "image": "images/room_main.jpg"    },
-    { "name": "鼓房",     "image": "images/room_drum.jpg"    },
-    { "name": "控制室",   "image": "images/room_control.jpg" },
-    { "name": "客廳",     "image": null                      }
+    { "name": "_", "image": "images/room_main.jpg"    },
+    { "name": "_",     "image": "images/room_drum.jpg"    },
+    { "name": "_",   "image": "images/room_control.jpg" },
+    { "name": "_",   "image": "images/room_laft.jpg" },
+    { "name": "_",   "image": "images/room_right.jpg" },
+    { "name": "_",     "image": "images/room_back.jpg"}
   ],
 
   "gear": {
