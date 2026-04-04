@@ -53,22 +53,22 @@
       "介紹8"
     ],
     "list": [
-      { "name": "Interface",  "note": "Digiface Dante"          },
-      { "name": "IEM System",      "note": "Midas DP48" },
-      { "name": "IEM System",         "note": "Sennheiser / EW-IEM-G4"            },
-      { "name": "Guitar AMP",   "note": "Fender Twin Reverb"              },
-      { "name": "Guitar AMP",   "note": "Marshall JCM2000"         },
-      { "name": "Bass AMP",   "note": "Ampeg BA-115HP"           },
-      { "name": "Drum",   "note": "Tama Starclassic Starclassic Performers"           },
-      { "name": "Drum",   "note": "Sonor Kompressor 150th Steel 14x6.5”"           },
-      { "name": "Drum",   "note": "Zildjian A Custom Cymbal Pack"           },
-      { "name": "Mic",   "note": "Sennheiser MD421"           },
-      { "name": "Mic",   "note": "SM57"           },
-      { "name": "Mic",   "note": "DPA 4099"           },
-      { "name": "Mic",   "note": "BETA 91A"           },
-      { "name": "Mic",   "note": "Soundtide GV-01"           },
-      { "name": "Mic",   "note": "Soundtide ST-09"           },
-      { "name": "KB",         "note": "Roland JUNO-DS88" }
+      { "name": "Digiface Dante",  "note": "Interface"          },
+      { "name": "Midas DP48",      "note": "IEM System" },
+      { "name": "Sennheiser / EW-IEM-G4",         "note": "IEM System"            },
+      { "name": "Fender Twin Reverb",   "note": "Guitar AMP"              },
+      { "name": "Marshall JCM2000",   "note": "Guitar AMP"         },
+      { "name": "Ampeg BA-115HP",   "note": "Bass AMP"           },
+      { "name": "Tama Starclassic Starclassic Performers",   "note": "Drum set"           },
+      { "name": "Sonor Kompressor 150th Steel 14x6.5",   "note": "Drum set”"           },
+      { "name": "Zildjian A Custom Cymbal Pack",   "note": "Drum set"           },
+      { "name": "Sennheiser MD421",   "note": "Microphone"           },
+      { "name": "Shure SM57",   "note": "Microphone"           },
+      { "name": "DPA 4099",   "note": "Microphone"           },
+      { "name": "BETA 91A",   "note": "Microphone"           },
+      { "name": "Soundtide GV-01",   "note": "Microphone"           },
+      { "name": "Soundtide ST-09",   "note": "Microphone"           },
+      { "name": "Roland JUNO-DS88",         "note": "Keyboard" }
     ]
   },
 
