@@ -5,16 +5,17 @@
   },
 
   "nav": [
-    { "label": "關於",   "href": "#about"  },
-    { "label": "空間",   "href": "#spaces" },
-    { "label": "設備",   "href": "#gear"   },
-    { "label": "費率",   "href": "#rates"  },
-    { "label": "聯絡",   "href": "#contact"}
+    { "label": "關於",   "href": "#about"   },
+    { "label": "空間",   "href": "#spaces"  },
+    { "label": "設備",   "href": "#gear"    },
+    { "label": "費用",   "href": "#rates"   },
+    { "label": "聯絡",   "href": "#contact" }
   ],
 
   "booking_url": "https://jeeplee-booking.vercel.app/",
   "instagram_url": "https://www.instagram.com/jeeplee_official/",
   "instagram_handle": "@jeeplee_official",
+  "line_id": "@你的LINE@帳號",
 
   "hero": {
     "title": "橘譜立．JeepLee",
@@ -29,7 +30,7 @@
       "空間裡裝了個人監聽系統。每個樂手有自己的耳機 mix，自己管自己的聲音。這件事在大部分的彩排場所沒有，但我們覺得很重要。",
       "樂團、歌手、show band、製作人——都歡迎。旁邊有停車場，鼓手搬器材不用走遠。"
     ],
-    "founders_heading": "我們是誰",
+    "founders_heading": "關於我們",
     "founders_paragraphs": [
       "橘譜立是我們兩個名字的諧音梗。一個做了多年現場音響，一個帶過練團室。認識很多在台灣玩團、唱歌的朋友，每次演出季前大家都在問有沒有地方彩排——這個問題問了太多次，我們就決定自己來做一間。",
       "我們不是最豪華的，但我們知道做音樂的人需要什麼：一個夠大、夠安靜、設備能用、待起來不趕人走的地方。就這樣。"
@@ -38,10 +39,10 @@
   },
 
   "spaces": [
-    { "en": "Main Hall",    "name": "彩排大廳", "image": "images/room_main.jpg",    "paragraphs": ["寬敞的彩排主空間。木地板、紅色吸音板、軌道燈。整個團站進來，每個人都找得到位置。最多可容納 8 位樂手加歌手。平台鋼琴在側面，後方透窗望進鼓房。不是那種讓人緊張的地方——是一個你會想好好準備的地方。"] },
-    { "en": "Drum Room",    "name": "鼓房",    "image": "images/room_drum.jpg",    "paragraphs": ["房中房結構，完整隔音。鼓手可以盡情打，其他人完全不受影響。鈸組、麥克風架都已就位，進來就可以開始。個人監聽在裡面，鼓手自己管自己的耳機 mix。"] },
-    { "en": "Control Room", "name": "控制室",  "image": "images/room_control.jpg", "paragraphs": ["Behringer Wing 數位混音台、監聽喇叭、大螢幕。工程師或 MD 的工作位置。透窗望向彩排大廳，整個彩排的動態一目了然。有錄音需求的場次也可以在這裡處理。"] },
-    { "en": "Lounge",       "name": "客廳",    "image": null,                      "paragraphs": ["彩排中間可以喘口氣的地方。喝水、討論、發呆都可以。不是所有事都要在大廳裡發生。"] }
+    { "name": "彩排大廳", "image": "images/room_main.jpg"    },
+    { "name": "鼓房",     "image": "images/room_drum.jpg"    },
+    { "name": "控制室",   "image": "images/room_control.jpg" },
+    { "name": "客廳",     "image": null                      }
   ],
 
   "gear": {
@@ -96,14 +97,5 @@
 
   "footer": {
     "tagline": "在這裡先唱一遍。"
-  },
-
-  "gallery": {
-    "label": "空間照片",
-    "images": [
-      { "src": "images/room_main.jpg",    "alt": "彩排大廳" },
-      { "src": "images/room_drum.jpg",    "alt": "鼓房"     },
-      { "src": "images/room_control.jpg", "alt": "控制室"   }
-    ]
   }
 }
