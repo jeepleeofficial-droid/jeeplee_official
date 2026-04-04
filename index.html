@@ -3,23 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 網頁標題：會被 content.json 的 site.title 覆蓋 -->
 <title id="page-title">橘譜立 JeepLee 彩排室</title>
+
+<!-- 網址列旁的小圖示（favicon）
+     把 favicon.ico 和 favicon.png 放在根目錄就會顯示 -->
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+
 <style>
+  /* =====================================================
+     色票系統
+     想改顏色只需要改這裡，全站會一起變
+     ===================================================== */
   :root {
-    --almond: #DE9151;
-    --brandy: #881E06;
-    --granite: #3B5249;
-    --ink: #111;
-    --mute: #888;
-    --line: #ccc;
+    --almond: #DE9151;   /* 橘色：小標題、強調用 */
+    --brandy: #C57D59;   /* 磚紅色：預約按鈕、重點連結 */
+    --granite: #3B5249;  /* 深綠色：次要連結 */
+    --ink: #111;         /* 主要文字色（近黑） */
+    --mute: #888;        /* 次要文字色（灰） */
+    --line: #ccc;        /* 分隔線顏色 */
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
+  /* 全站字型：Georgia serif 做內文，Arial 做標籤
+     改 font-size 可以調整全站文字大小 */
   body {
     background: #fff;
     color: var(--ink);
@@ -31,15 +43,18 @@
   img { display: block; max-width: 100%; }
   a { color: inherit; text-decoration: none; }
 
-  /* ── NAV ── */
+  /* =====================================================
+     導覽列（NAV）
+     連結來自 content.json 的 nav 陣列
+     ===================================================== */
   nav {
     padding: 18px 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 28px;
+    gap: 28px;               /* 連結之間的間距 */
     border-bottom: 1px solid var(--line);
-    flex-wrap: wrap;
+    flex-wrap: wrap;         /* 手機版自動換行 */
   }
 
   nav a {
@@ -53,21 +68,26 @@
 
   nav a:hover { color: var(--almond); }
 
+  /* 預約按鈕：紅色帶底線 */
   .nav-book {
     color: var(--brandy) !important;
     border-bottom: 1px solid var(--brandy);
     padding-bottom: 1px;
   }
 
-  /* ── HERO ── */
+  /* =====================================================
+     Hero 大圖區（首頁全屏照片）
+     照片來自 content.json → hero.image
+     background-attachment: fixed 產生 parallax 滾輪錯位效果
+     ===================================================== */
   .hero {
     position: relative;
     width: 100%;
-    height: 100vh;
-    background-color: #1a1008;
+    height: 100vh;               /* 全螢幕高度 */
+    background-color: #1a1008;   /* 圖片載入前的底色 */
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: fixed; /* parallax 效果：圖片滾動比頁面慢 */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,6 +97,8 @@
     padding: 40px;
   }
 
+  /* 半透明黑色遮罩，讓文字更清楚
+     調整 0.42 可以改深淺（0=透明，1=全黑）*/
   .hero::before {
     content: '';
     position: absolute;
@@ -86,6 +108,8 @@
 
   .hero > * { position: relative; z-index: 1; }
 
+  /* 大標題
+     clamp(最小值, 理想值, 最大值)：自動響應式字體大小 */
   .hero-title {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -97,6 +121,7 @@
     padding-right: 0.32em;
   }
 
+  /* 副標題（景安站 · 彩排室 · 新北市中和區）*/
   .hero-sub {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
@@ -105,6 +130,7 @@
     text-transform: uppercase;
   }
 
+  /* IG、LINE、預約 連結列 */
   .hero-links {
     display: flex;
     align-items: center;
@@ -127,341 +153,284 @@
 
   .hero-links a:hover { color: var(--almond); }
 
+  /* 預約連結特別亮 */
   .hero-links .hero-book {
     color: #fff;
     border-color: rgba(255,255,255,0.6);
   }
 
-  /* ── CONTENT ── */
+  /* =====================================================
+     內容區塊容器
+     max-width 控制文字最大寬度
+     想讓文字更寬就增加這個數字
+     ===================================================== */
   .content {
     max-width: 960px;
     margin: 0 auto;
     padding: 0 48px;
   }
 
-  /* ── SECTION ── */
+  /* =====================================================
+     通用 section 樣式
+     ===================================================== */
   .sec {
-    padding: 72px 0;
+    padding: 72px 0;           /* 上下留白 */
     border-top: 1px solid var(--line);
   }
 
+  /* 橘色小標籤（關於我們、空間、設備等）*/
   .sec-label {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
+    font-size: 14px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--almond);
     margin-bottom: 28px;
   }
 
-  h2 {
-    font-family: Georgia, serif;
-    font-weight: normal;
-    font-size: 22px;
-    color: var(--ink);
-    margin-bottom: 18px;
-    line-height: 1.3;
-  }
+  h2 { font-family: Georgia, serif; font-weight: normal; font-size: 22px; color: var(--ink); margin-bottom: 18px; line-height: 1.3; }
+  h3 { font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); margin: 36px 0 10px; }
 
-  h3 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink);
-    margin: 36px 0 10px;
-  }
-
-  p {
-    margin-bottom: 1em;
-    color: var(--ink);
-    line-height: 1.85;
-  }
-
+  p { margin-bottom: 1em; color: var(--ink); line-height: 1.85; }
   p:last-child { margin-bottom: 0; }
 
-  .sig {
-    margin-top: 24px;
-    font-style: italic;
-    color: var(--mute);
-  }
+  /* 署名（斜體灰色）*/
+  .sig { margin-top: 24px; font-style: italic; color: var(--mute); }
 
-  /* ── GEAR LIST ── */
-  .gear-block {
-    margin-top: 28px;
-    border-top: 1px solid var(--line);
-  }
-
-  .gear-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 11px 0;
-    border-bottom: 1px solid var(--line);
-    gap: 24px;
-  }
-
+  /* =====================================================
+     設備清單
+     左邊設備名稱，右邊說明
+     ===================================================== */
+  .gear-block { margin-top: 28px; border-top: 1px solid var(--line); }
+  .gear-row { display: flex; justify-content: space-between; align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--line); gap: 24px; }
   .gear-name { font-family: Georgia, serif; font-size: 15px; color: var(--ink); }
   .gear-note { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.06em; color: var(--mute); text-align: right; flex-shrink: 0; }
 
-  /* ── RATES ── */
+  /* =====================================================
+     費率清單
+     ===================================================== */
   .rate-item { padding: 16px 0; border-bottom: 1px solid var(--line); }
   .rate-item:first-child { border-top: 1px solid var(--line); }
   .rate-label { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-bottom: 4px; }
   .rate-price { font-family: Georgia, serif; font-size: 17px; color: var(--ink); }
   .rate-note  { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.05em; color: var(--mute); margin-top: 2px; }
 
-  /* ── CONTACT ── */
+  /* =====================================================
+     聯絡資訊
+     ===================================================== */
   .contact-line { margin-bottom: 6px; font-family: Georgia, serif; }
   .contact-link { color: var(--granite); border-bottom: 0.5px solid var(--granite); padding-bottom: 1px; transition: color .15s; }
   .contact-link:hover { color: var(--ink); border-color: var(--ink); }
 
-  /* ── CTA ── */
+  /* =====================================================
+     預約按鈕
+     ===================================================== */
   .cta-wrap { margin-top: 32px; }
-  .cta {
-    display: inline-block;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    background: var(--brandy);
-    color: #fff;
-    padding: 12px 24px;
-    transition: opacity .15s;
-  }
+  .cta { display: inline-block; font-family: Arial, sans-serif; font-weight: bold; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; background: var(--brandy); color: #fff; padding: 12px 24px; transition: opacity .15s; }
   .cta:hover { opacity: .82; }
 
-  /* ── SLIDER (Ivakota 風格：中間主圖，左右半透明，點擊換張) ── */
+  /* =====================================================
+     空間照片輪播（Slider）
+
+     結構：
+       .slider-wrap  → 外框，overflow:hidden 裁切超出的部分
+         .slider-track → 所有照片排成一排的軌道，靠 translateX 移動
+         .slider-arrows → 左右箭頭，疊在最上層
+
+     想改照片大小：
+       width: 58vw → 照片寬度（佔螢幕 58%）
+       aspect-ratio: 76/50 → 照片比例（76:50 ≈ 760×500）
+     
+     想改縫隙：
+       .slider-track 的 gap: 12px
+     
+     想改動畫速度：
+       .slider-track 的 transition: transform 0.5s
+       JS 裡的 setTimeout 520ms 也要一起改
+     ===================================================== */
   .slider-wrap {
     position: relative;
     width: 100%;
-    overflow: hidden;
+    overflow: hidden;    /* 裁切，只露出左右邊緣 */
     background: #fff;
-    padding: 0;
     user-select: none;
   }
 
   .slider-track {
     display: flex;
     align-items: center;
-    gap: 12px;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 48px 0;
+    gap: 12px;           /* 照片間縫隙，可以自己調整 */
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* 換張動畫 */
+    padding: 48px 0;     /* 上下留白 */
   }
 
   .slider-slide {
     flex: 0 0 auto;
-    width: 58vw;
-    aspect-ratio: 76 / 50;
+    width: 58vw;         /* 照片寬度：佔螢幕 58% */
+    aspect-ratio: 76 / 50; /* 照片比例：約等於 760×500 */
     overflow: hidden;
     background: #e8e4e0;
-    opacity: 0.38;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0.38;       /* 非主圖半透明，0=全透明 1=不透明 */
+    transition: opacity 0.5s ease;
     cursor: pointer;
     position: relative;
   }
 
-  .slider-slide.active {
-    opacity: 1;
-    cursor: default;
-  }
+  /* 主圖（當前顯示的那張）：完全不透明 */
+  .slider-slide.active { opacity: 1; cursor: default; }
 
-  .slider-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    pointer-events: none;
-  }
+  .slider-slide img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
 
+  /* 照片左下角的空間名稱，只有主圖才顯示 */
   .slider-slide .slide-label {
     position: absolute;
-    bottom: 14px;
-    left: 16px;
+    bottom: 14px; left: 16px;
     font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
     color: rgba(255,255,255,0.85);
-    opacity: 0;
-    transition: opacity 0.3s;
+    opacity: 0; transition: opacity 0.3s;
   }
-
   .slider-slide.active .slide-label { opacity: 1; }
 
-  .slider-arrows {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    pointer-events: none;
-  }
-
-  .slider-arrow {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    pointer-events: all;
-    cursor: pointer;
-    padding: 0 28px;
-  }
-
+  /* 箭頭容器，pointer-events:none 讓點擊穿透到照片 */
+  .slider-arrows { position: absolute; inset: 0; display: flex; pointer-events: none; }
+  .slider-arrow { flex: 1; display: flex; align-items: center; pointer-events: all; cursor: pointer; padding: 0 28px; }
   .slider-arrow.right { justify-content: flex-end; }
 
-  .slider-arrow svg {
-    width: 36px;
-    height: 36px;
-    stroke: rgba(255,255,255,0);
-    transition: stroke 0.2s;
-  }
-
-  .slider-wrap:hover .slider-arrow svg {
-    stroke: rgba(255,255,255,0.7);
-  }
-
+  /* 箭頭預設透明，滑鼠移進去才出現 */
+  .slider-arrow svg { width: 36px; height: 36px; stroke: rgba(255,255,255,0); transition: stroke 0.2s; }
+  .slider-wrap:hover .slider-arrow svg { stroke: rgba(255,255,255,0.7); }
   .slider-arrow:hover svg { stroke: #fff !important; }
 
-  @media (max-width: 600px) {
-    .slider-slide { width: 80vw; }
-    .slider-track { gap: 8px; padding: 32px 0; }
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 40px;
-    text-align: center;
-  }
-
-  .footer-logo {
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-
-  .footer-meta {
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: var(--mute);
-    line-height: 2.0;
-  }
-
+  /* =====================================================
+     Footer
+     ===================================================== */
+  footer { border-top: 1px solid var(--line); padding: 40px; text-align: center; }
+  .footer-logo { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); margin-bottom: 10px; }
+  .footer-meta { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.06em; color: var(--mute); line-height: 2.0; }
   .footer-meta a { color: var(--almond); }
 
-  /* ── MOBILE ── */
+  /* =====================================================
+     手機版（螢幕寬度 600px 以下）
+     ===================================================== */
   @media (max-width: 600px) {
     nav { padding: 14px 20px; gap: 14px; }
     .content { padding: 0 20px; }
     .sec { padding: 52px 0; }
-    .gallery-item { width: 85vw; height: 110vw; max-height: none; }
+    .slider-slide { width: 80vw; } /* 手機版照片更寬 */
+    .slider-track { gap: 8px; padding: 32px 0; }
     footer { padding: 32px 20px; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- 導覽列：連結由 JS 從 content.json 動態產生 -->
 <nav id="nav-el"></nav>
 
-<!-- HERO -->
+<!-- Hero 大圖區：背景圖、標題、連結都從 content.json 讀取 -->
 <div class="hero" id="hero-el">
   <div class="hero-title" id="hero-title"></div>
   <div class="hero-sub"   id="hero-sub"></div>
   <div class="hero-links" id="hero-links"></div>
 </div>
 
+<!-- 關於我們（在 content 容器內，有最大寬度限制）-->
 <div class="content">
-
-  <!-- 關於我們 -->
   <div class="sec" id="about">
     <div class="sec-label">關於我們</div>
     <div id="about-content"></div>
   </div>
-
 </div>
 
-<!-- 空間：全幅橫向捲動，不放在 content 裡 -->
+<!-- 空間照片輪播：故意放在 content 容器外面，才能撐滿全螢幕寬度 -->
 <div style="border-top: 1px solid var(--line);" id="spaces">
+  <!-- "空間" 小標籤放在 content 裡，有寬度限制 -->
   <div class="content" style="padding-top: 72px; padding-bottom: 40px;">
     <div class="sec-label">空間</div>
   </div>
+  <!-- 照片軌道放在 content 外面，可以撐滿全寬 -->
   <div class="slider-wrap" id="slider-wrap">
-  <div class="slider-track" id="slider-track"></div>
-  <div class="slider-arrows">
-    <div class="slider-arrow left" id="slider-prev">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="15 18 9 12 15 6"/>
-      </svg>
-    </div>
-    <div class="slider-arrow right" id="slider-next">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="9 18 15 12 9 6"/>
-      </svg>
+    <div class="slider-track" id="slider-track"></div>
+    <div class="slider-arrows">
+      <div class="slider-arrow left" id="slider-prev">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </div>
+      <div class="slider-arrow right" id="slider-next">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </div>
     </div>
   </div>
 </div>
-  
-</div>
 
+<!-- 設備、費用、聯絡（在 content 容器內）-->
 <div class="content">
-
-  <!-- 設備 -->
   <div class="sec" id="gear">
     <div class="sec-label">設備</div>
     <div id="gear-content"></div>
   </div>
-
-  <!-- 費用 -->
   <div class="sec" id="rates">
     <div class="sec-label">費用</div>
     <div id="rates-content"></div>
   </div>
-
-  <!-- 聯絡 -->
   <div class="sec" id="contact">
     <div class="sec-label">聯絡</div>
     <div id="contact-content"></div>
   </div>
-
 </div>
 
-<!-- FOOTER -->
 <footer id="footer-el"></footer>
 
 <script>
+/* =====================================================
+   讀取 content.json
+   成功 → 呼叫 render() 把所有內容放進頁面
+   失敗 → console 顯示錯誤（通常是直接點兩下 HTML 打開，
+          需要透過 server 才能讀 JSON）
+   ===================================================== */
 fetch('content.json')
   .then(function(r) { return r.json(); })
   .then(function(c) { render(c); })
   .catch(function(e) { console.error('content.json 載入失敗:', e); });
 
+/* 安全讀取巢狀物件值
+   get(c, 'hero.image') 等於 c.hero.image
+   路徑不存在時不報錯，回傳 fallback（預設空字串）*/
 function get(obj, path, fallback) {
   if (fallback === undefined) fallback = '';
   var val = path.split('.').reduce(function(o, k) { return o != null ? o[k] : undefined; }, obj);
   return val != null ? val : fallback;
 }
 
+/* 字串安全跳脫，防止 HTML 注入攻擊
+   所有從 JSON 讀來的文字都要過這個才能用在 innerHTML */
 function esc(s) {
   return String(s != null ? s : '')
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+/* 把字串陣列轉成 <p> 段落
+   陣列是空的就回傳空字串 */
 function paras(arr) {
   if (!Array.isArray(arr) || arr.length === 0) return '';
   return arr.map(function(t) { return '<p>' + esc(t) + '</p>'; }).join('');
 }
 
+/* =====================================================
+   主要渲染函式：把 content.json 的內容放進頁面
+   c = content.json 解析後的物件
+   ===================================================== */
 function render(c) {
 
-  /* title */
+  /* 網頁標題（分頁上那個）← content.json → site.title */
   var titleEl = document.getElementById('page-title');
   if (titleEl && get(c,'site.title')) titleEl.textContent = get(c,'site.title');
 
-  /* nav */
+  /* 導覽列連結 ← content.json → nav 陣列 + booking_url */
   var navEl = document.getElementById('nav-el');
   if (navEl) {
     var links = Array.isArray(c.nav) ? c.nav : [];
@@ -473,17 +442,20 @@ function render(c) {
     navEl.innerHTML = html;
   }
 
-  /* hero — parallax bg */
+  /* Hero 背景圖 ← content.json → hero.image */
   var heroEl = document.getElementById('hero-el');
   if (heroEl && get(c,'hero.image')) {
     heroEl.style.backgroundImage = 'url(' + get(c,'hero.image') + ')';
   }
+  /* Hero 標題 ← content.json → hero.title */
   var htEl = document.getElementById('hero-title');
   if (htEl) htEl.textContent = get(c,'hero.title');
+  /* Hero 副標 ← content.json → hero.sub */
   var hsEl = document.getElementById('hero-sub');
   if (hsEl) hsEl.textContent = get(c,'hero.sub');
 
-  /* hero links: IG, LINE, 預約 */
+  /* Hero 底部連結（IG、LINE、預約）
+     任何一個欄位沒填就不顯示那個連結 */
   var hlEl = document.getElementById('hero-links');
   if (hlEl) {
     var hl = '';
@@ -496,7 +468,7 @@ function render(c) {
     hlEl.innerHTML = hl;
   }
 
-  /* 關於我們 */
+  /* 關於我們 ← content.json → about 物件 */
   var aboutEl = document.getElementById('about-content');
   if (aboutEl && c.about) {
     var ah = '';
@@ -509,28 +481,22 @@ function render(c) {
   }
 
   /* =====================================================
-     空間照片輪播 slider
-     -------------------------------------------------------
-     操作方式：
-       - 點右側箭頭 → 下一張
-       - 點左側箭頭 → 上一張
-       - 點任何一張半透明的照片 → 直接跳到那張
-     
-     照片來源：
-       content.json 裡的 "spaces" 陣列
-       有幾張就顯示幾張，不限數量
-       image 是 null 的會自動跳過
-     
-     視覺邏輯：
-       - 中間一張：完全清晰
-       - 左右各露出半張：半透明
-       - 無限循環：最後一張的右邊接回第一張
+     空間照片輪播
+     照片來源：content.json → spaces 陣列
+     有幾筆就顯示幾張，image 是 null 的自動跳過
+
+     循環原理（Clone 技法）：
+       真實照片：[A, B, C, D]
+       Track：  [D複製, A, B, C, D, A複製]
+       初始顯示 A，左邊已有 D 複製，不會是空白
+       滑到 A 複製 → 瞬間無縫跳回真正的 A
+       滑到 D 複製 → 瞬間無縫跳回真正的 D
      ===================================================== */
   var track = document.getElementById('slider-track');
   var wrap  = document.getElementById('slider-wrap');
   if (track && wrap) {
 
-    /* 過濾掉沒有圖片的項目 */
+    /* 過濾掉沒有 image 的項目 */
     var spaces = Array.isArray(c.spaces)
       ? c.spaces.filter(function(s) { return s.image; })
       : [];
@@ -538,45 +504,38 @@ function render(c) {
     var total = spaces.length;
     if (total === 0) return;
 
-    /* 目前顯示的是第幾張（0 開始）*/
-    var current = 0;
+    var current   = 0;     /* 目前顯示第幾張（0 = 第一張）*/
+    var animating = false; /* 動畫進行中時，防止連點 */
 
-    /* 是否正在跑動畫（防止連點） */
-    var animating = false;
+    /* 建立單一 slide 的 DOM
+       isClone = true：複製用，不加點擊事件和名稱標籤 */
+    function makeSlide(s, isClone) {
+      var slide = document.createElement('div');
+      slide.className = 'slider-slide' + (isClone ? ' clone' : '');
+      var img = document.createElement('img');
+      img.src = s.image;
+      img.alt = s.name || '';
+      img.draggable = false;
+      slide.appendChild(img);
+      if (s.name && !isClone) {
+        var lbl = document.createElement('span');
+        lbl.className = 'slide-label';
+        lbl.textContent = s.name;
+        slide.appendChild(lbl);
+      }
+      return slide;
+    }
 
-    /* ── 建立 slide 元素 ──
-       頭尾各複製一張，讓循環接縫無縫：
-       [最後一張的複製] [第0張] [第1張] ... [最後一張] [第0張的複製]
-       實際顯示從 index 1 開始（對應 spaces[0]）
-    */
+    /* 建立整個 track 的所有 slide
+       順序：[最後一張複製] + [所有真實照片] + [第一張複製] */
     function buildSlides() {
       track.innerHTML = '';
-
-      /* 建立一張 slide 的 DOM */
-      function makeSlide(s, isClone) {
-        var slide = document.createElement('div');
-        slide.className = 'slider-slide' + (isClone ? ' clone' : '');
-        var img = document.createElement('img');
-        img.src = s.image;
-        img.alt = s.name || '';
-        img.draggable = false;
-        slide.appendChild(img);
-        if (s.name && !isClone) {
-          var lbl = document.createElement('span');
-          lbl.className = 'slide-label';
-          lbl.textContent = s.name;
-          slide.appendChild(lbl);
-        }
-        return slide;
-      }
-
-      /* 最後一張複製放在最前面 */
+      /* 最前面放最後一張的複製（讓初始畫面左邊有照片，不是空白）*/
       track.appendChild(makeSlide(spaces[total - 1], true));
-
-      /* 真正的所有照片 */
+      /* 放入所有真實照片，並綁定點擊跳轉 */
       spaces.forEach(function(s, i) {
         var slide = makeSlide(s, false);
-        /* 點非主圖的照片可以直接跳 */
+        /* 用立即執行函式鎖住 i 的值，避免 closure 問題 */
         (function(idx) {
           slide.addEventListener('click', function() {
             if (!animating && idx !== current) { goTo(idx); }
@@ -584,93 +543,85 @@ function render(c) {
         })(i);
         track.appendChild(slide);
       });
-
-      /* 第一張複製放在最後面 */
+      /* 最後面放第一張的複製 */
       track.appendChild(makeSlide(spaces[0], true));
     }
 
-    /* ── 計算每張寬度（用 vw 避免 offsetWidth 為 0）── */
+    /* 計算每張照片的寬度
+       用 vw 比例算，避免頁面剛載入時 offsetWidth 為 0
+       ★ 這個數字要跟 CSS 的 width: 58vw 一致 ★ */
     function getSlideW() {
       var vw = window.innerWidth;
       return vw * (vw <= 600 ? 0.80 : 0.58);
     }
 
+    /* 照片間縫隙
+       ★ 這個數字要跟 CSS 的 gap: 12px 一致 ★ */
     function getGap() {
       return window.innerWidth <= 600 ? 8 : 12;
     }
 
-    /* ── 更新位置與 active 狀態 ──
-       slides 的真實 index：
-         0           → 複製的最後一張
-         1 ~ total   → 真正的照片（current + 1 = 真實位置）
-         total + 1   → 複製的第一張
-    */
+    /* 更新 track 位置與 active 狀態
+       animate = false → 瞬間跳（無動畫，用於循環接縫）
+       animate = true  → 正常動畫 */
     function updateSlider(animate) {
       var slides = track.querySelectorAll('.slider-slide');
-      /* active 標記給真實照片（index = current + 1）*/
+      /* track 裡的真實 index = current + 1（因為最前面插了一張複製）*/
       slides.forEach(function(s, i) {
         s.classList.toggle('active', i === current + 1);
       });
-
+      /* 計算讓主圖置中的偏移量 */
       var slideW = getSlideW();
       var gap    = getGap();
       var wrapW  = wrap.offsetWidth || window.innerWidth;
-      /* current + 1 是 track 裡真實的位置（因為前面插了一張複製）*/
       var offset = (wrapW / 2) - (slideW / 2) - (current + 1) * (slideW + gap);
-
       if (animate === false) {
-        /* 瞬間跳，不要動畫（用於循環接縫）*/
+        /* 瞬間跳：暫時關掉 CSS transition */
         track.style.transition = 'none';
         track.style.transform  = 'translateX(' + offset + 'px)';
-        /* 強制 reflow，讓 transition: none 生效 */
-        track.offsetHeight;
-        /* 恢復動畫 */
-        track.style.transition = '';
+        track.offsetHeight; /* 強制瀏覽器重算，確保 transition:none 生效 */
+        track.style.transition = ''; /* 恢復動畫 */
       } else {
         track.style.transform = 'translateX(' + offset + 'px)';
       }
     }
 
-    /* ── 換張邏輯 ── */
+    /* 換到指定張
+       idx 可以是 -1（往前循環）或 total（往後循環）*/
     function goTo(idx) {
       if (animating) return;
       animating = true;
       current = idx;
       updateSlider(true);
-
-      /* 動畫結束後檢查是否需要無縫跳回 */
+      /* 動畫結束後，無縫跳回真實位置 */
       setTimeout(function() {
         if (current === total) {
-          /* 超過最後一張 → 瞬間跳回第 0 張 */
-          current = 0;
+          current = 0;          /* 超過最後一張 → 跳回第 0 張 */
           updateSlider(false);
         } else if (current === -1) {
-          /* 在第 0 張往前 → 瞬間跳到最後一張 */
-          current = total - 1;
+          current = total - 1;  /* 在第 0 張往前 → 跳到最後一張 */
           updateSlider(false);
         }
         animating = false;
-      }, 520); /* 比 CSS transition 的 0.5s 多一點 */
+      }, 520); /* 比 CSS 的 0.5s 多一點，確保動畫完成 */
     }
 
-    /* ── 初始化 ── */
+    /* 初始化 */
     buildSlides();
-
-    /* 多次嘗試確保 layout 穩定後再算位置 */
     updateSlider(false);
     setTimeout(function() { updateSlider(false); }, 100);
     setTimeout(function() { updateSlider(false); }, 400);
     window.addEventListener('load',   function() { updateSlider(false); });
-    window.addEventListener('resize', function() { updateSlider(false); });
+    window.addEventListener('resize', function() { updateSlider(false); }); /* 視窗改變時重算 */
 
-    /* ── 箭頭按鈕 ── */
+    /* 左右箭頭 */
     var prevEl = document.getElementById('slider-prev');
     var nextEl = document.getElementById('slider-next');
     if (prevEl) prevEl.addEventListener('click', function() { goTo(current - 1); });
     if (nextEl) nextEl.addEventListener('click', function() { goTo(current + 1); });
   }
 
-  /* 設備 */
+  /* 設備 ← content.json → gear.intro（前言）+ gear.list（清單）*/
   var gearEl = document.getElementById('gear-content');
   if (gearEl && c.gear) {
     var gh = paras(c.gear.intro);
@@ -687,7 +638,7 @@ function render(c) {
     gearEl.innerHTML = gh;
   }
 
-  /* 費用 */
+  /* 費用 ← content.json → rates.items（費率）+ rates.notes（說明）*/
   var ratesEl = document.getElementById('rates-content');
   if (ratesEl && c.rates) {
     var ri = Array.isArray(c.rates.items) ? c.rates.items : [];
@@ -708,7 +659,7 @@ function render(c) {
     ratesEl.innerHTML = rh;
   }
 
-  /* 聯絡 */
+  /* 聯絡 ← content.json → contact.address + hours + IG + LINE + booking */
   var contactEl = document.getElementById('contact-content');
   if (contactEl && c.contact) {
     var ch = '';
@@ -725,7 +676,7 @@ function render(c) {
     contactEl.innerHTML = ch;
   }
 
-  /* footer */
+  /* Footer ← content.json → site.logo + footer.tagline + 其他聯絡資訊 */
   var footerEl = document.getElementById('footer-el');
   if (footerEl) {
     var logo = get(c,'site.logo'), tag = get(c,'footer.tagline');
