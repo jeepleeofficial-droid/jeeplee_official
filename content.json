@@ -37,7 +37,7 @@
     ],
     "sig": "— "
   },
-{ "src": "images/room_lounge.jpg", "alt": "客廳" }
+
   "spaces": [
     { "name": "彩排大廳", "image": "images/room_main.jpg"    },
     { "name": "鼓房",     "image": "images/room_drum.jpg"    },
