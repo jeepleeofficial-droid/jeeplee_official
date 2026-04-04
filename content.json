@@ -19,7 +19,7 @@
   "hero": {
     "title": "橘譜立．JeepLee",
     "sub": "景安站 · 彩排室 · 新北市中和區",
-    "image": "room_main.jpg"
+    "image": "image/room_main.jpg"
   },
 
   "about": {
@@ -38,7 +38,7 @@
     {
       "en": "Main Hall",
       "name": "彩排室",
-      "image": "room_main.jpg",
+      "image": "image/room_main.jpg",
       "paragraphs": [
         "—"
       ]
@@ -46,7 +46,7 @@
     {
       "en": "Control Room",
       "name": "控制室",
-      "image": "room_control.jpg",
+      "image": "image/room_control.jpg",
       "paragraphs": [
         "—"
       ]
