@@ -507,30 +507,65 @@ function render(c) {
     aboutEl.innerHTML = ah;
   }
 
-  /* 空間：全幅橫向捲動，只有圖片 */
-  var sgEl = document.getElementById('spaces-gallery');
-  if (sgEl) {
-    var spaces = Array.isArray(c.spaces) ? c.spaces : [];
-    spaces.forEach(function(s) {
-      var item = document.createElement('div');
-      item.className = 'gallery-item';
-      if (s.image) {
+  /* 空間 slider：中間主圖清晰，左右半透明，點擊換張 */
+  var track = document.getElementById('slider-track');
+  var wrap  = document.getElementById('slider-wrap');
+  if (track && wrap) {
+    var spaces = Array.isArray(c.spaces) ? c.spaces.filter(function(s){ return s.image; }) : [];
+    var current = 0;
+
+    function buildSlides() {
+      track.innerHTML = '';
+      spaces.forEach(function(s, i) {
+        var slide = document.createElement('div');
+        slide.className = 'slider-slide' + (i === current ? ' active' : '');
         var img = document.createElement('img');
         img.src = s.image;
         img.alt = s.name || '';
         img.draggable = false;
-        item.appendChild(img);
-      }
-      if (s.name) {
-        var lbl = document.createElement('span');
-        lbl.className = 'gallery-ph-label';
-        lbl.textContent = s.name;
-        item.appendChild(lbl);
-      }
-      sgEl.appendChild(item);
-    });
+        slide.appendChild(img);
+        if (s.name) {
+          var lbl = document.createElement('span');
+          lbl.className = 'slide-label';
+          lbl.textContent = s.name;
+          slide.appendChild(lbl);
+        }
+        (function(idx) {
+          slide.addEventListener('click', function() {
+            if (idx !== current) { goTo(idx); }
+          });
+        })(i);
+        track.appendChild(slide);
+      });
+    }
 
+    function goTo(idx) {
+      if (spaces.length === 0) return;
+      current = (idx + spaces.length) % spaces.length;
+      updateSlider();
+    }
 
+    function updateSlider() {
+      var slides = track.querySelectorAll('.slider-slide');
+      slides.forEach(function(s, i) {
+        s.classList.toggle('active', i === current);
+      });
+      var slideW = slides[0] ? slides[0].offsetWidth : 0;
+      var gap = 12;
+      var wrapW = wrap.offsetWidth;
+      var offset = (wrapW / 2) - (slideW / 2) - current * (slideW + gap);
+      track.style.transform = 'translateX(' + offset + 'px)';
+    }
+
+    buildSlides();
+    setTimeout(updateSlider, 100);
+    window.addEventListener('load', updateSlider);
+    window.addEventListener('resize', updateSlider);
+
+    var prevEl = document.getElementById('slider-prev');
+    var nextEl = document.getElementById('slider-next');
+    if (prevEl) prevEl.addEventListener('click', function() { goTo(current - 1); });
+    if (nextEl) nextEl.addEventListener('click', function() { goTo(current + 1); });
   }
 
   /* 設備 */
