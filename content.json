@@ -15,7 +15,7 @@
   "booking_url": "https://jeeplee-booking.vercel.app/",
   "instagram_url": "https://www.instagram.com/jeeplee_official/",
   "instagram_handle": "@jeeplee_official",
-  "line_id": "@你的LINE@帳號",
+  "line_id": "@jeeplee",
 
   "hero": {
     "title": "橘譜立．JeepLee",
@@ -26,18 +26,18 @@
   "about": {
     "heading": "橘譜立彩排室",
     "paragraphs": [
-      "橘譜立是一個位在新北市中和區、景安捷運站斜對面的彩排空間。一個平台鋼琴、一間房中房鼓房、一間控制室、一個客廳——足夠一個完整的樂團或 show band 好好準備一場演出。",
-      "空間裡裝了個人監聽系統。每個樂手有自己的耳機 mix，自己管自己的聲音。這件事在大部分的彩排場所沒有，但我們覺得很重要。",
-      "樂團、歌手、show band、製作人——都歡迎。旁邊有停車場，鼓手搬器材不用走遠。"
+      "0",
+      "0",
+      "0"
     ],
     "founders_heading": "關於我們",
     "founders_paragraphs": [
-      "橘譜立是我們兩個名字的諧音梗。一個做了多年現場音響，一個帶過練團室。認識很多在台灣玩團、唱歌的朋友，每次演出季前大家都在問有沒有地方彩排——這個問題問了太多次，我們就決定自己來做一間。",
-      "我們不是最豪華的，但我們知道做音樂的人需要什麼：一個夠大、夠安靜、設備能用、待起來不趕人走的地方。就這樣。"
+      "_",
+      "_"
     ],
-    "sig": "— Jeep & Lee"
+    "sig": "— "
   },
-
+{ "src": "images/room_lounge.jpg", "alt": "客廳" }
   "spaces": [
     { "name": "彩排大廳", "image": "images/room_main.jpg"    },
     { "name": "鼓房",     "image": "images/room_drum.jpg"    },
@@ -47,17 +47,17 @@
 
   "gear": {
     "intro": [
-      "我們的設備不是最頂尖的，但每樣都夠用、都在狀態。",
-      "比較值得說的是監聽系統。每個樂手有自己的 Midas DP48 個人監聽混音器，自己調自己的耳機 mix——鼓手聽得到貝斯，歌手不用跟吉他音箱搶音量，大家都活在自己最舒服的耳機世界裡。彩排效率高很多。"
+      "0",
+      "0"
     ],
     "list": [
-      { "name": "Behringer Wing",  "note": "數位混音台"          },
-      { "name": "Midas DP48",      "note": "個人監聽混音 · 多組" },
-      { "name": "平台鋼琴",         "note": "彩排大廳"            },
-      { "name": "Marshall 音箱",   "note": "吉他用"              },
-      { "name": "Zildjian 鈸組",   "note": "鼓房 · 全套"         },
-      { "name": "麥克風 × 多支",   "note": "含架已就位"           },
-      { "name": "監聽喇叭",         "note": "控制室"              }
+      { "name": "0",  "note": "0"          },
+      { "name": "0",      "note": "0" },
+      { "name": "0",         "note": "0"            },
+      { "name": "0",   "note": "0"              },
+      { "name": "0",   "note": "0"         },
+      { "name": "0",   "note": "0"           },
+      { "name": "0",         "note": "0"              }
     ]
   },
 
@@ -82,7 +82,7 @@
     "notes": [
       "費率含全套設備使用。有特殊需求——例如需要工程師協助、或有額外器材——請事先告知。",
       "預約以線上系統為主。確認後請依指示完成訂金，訂金繳清後場次才正式成立。",
-      "如果需要洽談包場或有任何問題，直接傳 IG 或來信都可以。我們不複雜。"
+      "如果需要洽談包場或有任何問題，歡迎來信。"
     ]
   },
 
@@ -96,6 +96,6 @@
   },
 
   "footer": {
-    "tagline": "在這裡先唱一遍。"
+    "tagline": "橘譜立 · JeepLee · 彩排室"
   }
 }
