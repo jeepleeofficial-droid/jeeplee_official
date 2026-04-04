@@ -232,48 +232,98 @@
   }
   .cta:hover { opacity: .82; }
 
-  /* ── GALLERY (Ivakota 風格 grid) ── */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
+  /* ── SLIDER (Ivakota 風格：中間主圖，左右半透明，點擊換張) ── */
+  .slider-wrap {
+    position: relative;
     width: 100%;
+    overflow: hidden;
+    background: #fff;
+    padding: 0;
+    user-select: none;
   }
 
-  .gallery-item {
-    width: 100%;
-    aspect-ratio: 1 / 1;
+  .slider-track {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 48px 0;
+  }
+
+  .slider-slide {
+    flex: 0 0 auto;
+    width: 58vw;
+    aspect-ratio: 3 / 2;
     overflow: hidden;
     background: #e8e4e0;
+    opacity: 0.38;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    cursor: pointer;
     position: relative;
   }
 
-  .gallery-item img {
+  .slider-slide.active {
+    opacity: 1;
+    cursor: default;
+  }
+
+  .slider-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease;
+    pointer-events: none;
   }
 
-  .gallery-item:hover img {
-    transform: scale(1.03);
-  }
-
-  .gallery-ph-label {
+  .slider-slide .slide-label {
+    position: absolute;
+    bottom: 14px;
+    left: 16px;
     font-family: Arial, sans-serif;
     font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.8);
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
+    color: rgba(255,255,255,0.85);
+    opacity: 0;
+    transition: opacity 0.3s;
   }
 
+  .slider-slide.active .slide-label { opacity: 1; }
+
+  .slider-arrows {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    pointer-events: none;
+  }
+
+  .slider-arrow {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    pointer-events: all;
+    cursor: pointer;
+    padding: 0 28px;
+  }
+
+  .slider-arrow.right { justify-content: flex-end; }
+
+  .slider-arrow svg {
+    width: 36px;
+    height: 36px;
+    stroke: rgba(255,255,255,0);
+    transition: stroke 0.2s;
+  }
+
+  .slider-wrap:hover .slider-arrow svg {
+    stroke: rgba(255,255,255,0.7);
+  }
+
+  .slider-arrow:hover svg { stroke: #fff !important; }
+
   @media (max-width: 600px) {
-    .gallery-grid { grid-template-columns: 1fr; }
-    .gallery-item { aspect-ratio: 4 / 3; }
+    .slider-slide { width: 80vw; }
+    .slider-track { gap: 8px; padding: 32px 0; }
   }
 
   /* ── FOOTER ── */
@@ -339,7 +389,21 @@
   <div class="content" style="padding-top: 72px; padding-bottom: 40px;">
     <div class="sec-label">空間</div>
   </div>
-  <div class="gallery-grid" id="spaces-gallery"></div>
+  <div class="slider-wrap" id="slider-wrap">
+  <div class="slider-track" id="slider-track"></div>
+  <div class="slider-arrows">
+    <div class="slider-arrow left" id="slider-prev">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </div>
+    <div class="slider-arrow right" id="slider-next">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </div>
+  </div>
+</div>
   
 </div>
 
