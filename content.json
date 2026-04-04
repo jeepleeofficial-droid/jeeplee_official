@@ -26,16 +26,16 @@
   "about": {
     "heading": "橘譜立彩排室",
     "paragraphs": [
-      "0",
-      "0",
-      "0"
+      "介紹1",
+      "介紹2",
+      "介紹3"
     ],
     "founders_heading": "關於我們",
     "founders_paragraphs": [
-      "_",
-      "_"
+      "介紹4",
+      "介紹5"
     ],
-    "sig": "— "
+    "sig": "介紹6 "
   },
 
   "spaces": [
@@ -49,17 +49,26 @@
 
   "gear": {
     "intro": [
-      "0",
-      "0"
+      "介紹7",
+      "介紹8"
     ],
     "list": [
-      { "name": "0",  "note": "0"          },
-      { "name": "0",      "note": "0" },
-      { "name": "0",         "note": "0"            },
-      { "name": "0",   "note": "0"              },
-      { "name": "0",   "note": "0"         },
-      { "name": "0",   "note": "0"           },
-      { "name": "0",         "note": "0"              }
+      { "name": "Interface",  "note": "Digiface Dante"          },
+      { "name": "IEM System",      "note": "Midas DP48" },
+      { "name": "IEM System",         "note": "Sennheiser / EW-IEM-G4"            },
+      { "name": "Guitar AMP",   "note": "Fender Twin Reverb"              },
+      { "name": "Guitar AMP",   "note": "Marshall JCM2000"         },
+      { "name": "Bass AMP",   "note": "Ampeg BA-115HP"           },
+      { "name": "Drum",   "note": "Tama Starclassic Starclassic Performers"           },
+      { "name": "Drum",   "note": "Sonor Kompressor 150th Steel 14x6.5”"           },
+      { "name": "Drum",   "note": "Zildjian A Custom Cymbal Pack"           },
+      { "name": "Mic",   "note": "Sennheiser MD421"           },
+      { "name": "Mic",   "note": "SM57"           },
+      { "name": "Mic",   "note": "DPA 4099"           },
+      { "name": "Mic",   "note": "BETA 91A"           },
+      { "name": "Mic",   "note": "Soundtide GV-01"           },
+      { "name": "Mic",   "note": "Soundtide ST-09"           },
+      { "name": "KB",         "note": "Roland JUNO-DS88" }
     ]
   },
 
@@ -82,8 +91,8 @@
       }
     ],
     "notes": [
-      "費率含全套設備使用。有特殊需求——例如需要工程師協助、或有額外器材——請事先告知。",
-      "預約以線上系統為主。確認後請依指示完成訂金，訂金繳清後場次才正式成立。",
+      "費率含全套設備使用。需要工程師協助、或有額外器材——請事先告知。",
+      "預約以線上系統為主。",
       "如果需要洽談包場或有任何問題，歡迎來信。"
     ]
   },
