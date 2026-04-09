@@ -105,7 +105,6 @@
   .hero-logo {
     width: clamp(120px, 16vw, 200px);
     height: auto;
-    filter: invert(1);   /* 黑字白底 → 反轉成白字，黑底在深色背景消失 */
     opacity: 0.92;
     margin-bottom: 4px;
     transition: opacity 0.3s, transform 0.4s ease;
@@ -353,7 +352,6 @@
     class="hero-logo"
     onerror="this.style.display='none'"
   />
-  <div class="hero-title" id="hero-title"></div>
   <div class="hero-sub"   id="hero-sub"></div>
   <div class="hero-links" id="hero-links"></div>
 </div>
