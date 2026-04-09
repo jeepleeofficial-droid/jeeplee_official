@@ -105,7 +105,7 @@
   .hero-logo {
     width: clamp(120px, 16vw, 200px);
     height: auto;
-    mix-blend-mode: screen;  /* 讓白底消失，黑色 Logo 在深色大圖上顯示為白色 */
+    filter: invert(1);  /* 黑色 Logo → 白色，在深色大圖上才看得見 */
     opacity: 0.92;
     margin-bottom: 4px;
     transition: opacity 0.3s, transform 0.4s ease;
