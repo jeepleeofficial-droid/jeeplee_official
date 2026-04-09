@@ -97,6 +97,21 @@
     padding: 40px;
   }
 
+  /* ── Hero Logo ────────────────────────────────
+     logo.png 放在跟 index.html 同一個資料夾即可顯示。
+     黑字白底 PNG：filter:invert(1) 讓黑 logo 在深色大圖上變白。
+     若你的 logo 已是白色透明背景，把 filter 那行刪掉即可。
+     ─────────────────────────────────────────── */
+  .hero-logo {
+    width: clamp(120px, 16vw, 200px);
+    height: auto;
+    filter: invert(1);   /* 黑字白底 → 反轉成白字，黑底在深色背景消失 */
+    opacity: 0.92;
+    margin-bottom: 4px;
+    transition: opacity 0.3s, transform 0.4s ease;
+  }
+  .hero-logo:hover { opacity: 1; transform: scale(1.03); }
+
   /* 半透明黑色遮罩，讓文字更清楚
      調整 0.42 可以改深淺（0=透明，1=全黑）*/
   .hero::before {
@@ -330,6 +345,14 @@
 
 <!-- Hero 大圖區：背景圖、標題、連結都從 content.json 讀取 -->
 <div class="hero" id="hero-el">
+  <!-- ↓ JPL Logo：把 logo.png 放在和 index.html 同一個資料夾
+       圖片找不到時自動隱藏，不影響其他內容 -->
+  <img
+    src="logo.png"
+    alt="橘譜立 JeepLee"
+    class="hero-logo"
+    onerror="this.style.display='none'"
+  />
   <div class="hero-title" id="hero-title"></div>
   <div class="hero-sub"   id="hero-sub"></div>
   <div class="hero-links" id="hero-links"></div>
