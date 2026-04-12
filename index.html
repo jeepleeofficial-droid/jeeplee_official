@@ -13,6 +13,11 @@
 <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
 
+<!-- Noto Sans TC — 載入 300, 400, 500, 700 四個字重 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
 <style>
   /* =====================================================
      色票系統
@@ -35,7 +40,7 @@
   body {
     background: #fff;
     color: var(--ink);
-    font-family: Noto Sans TC, 'Noto Sans TC Bold', serif;
+    font-family: 'Noto Sans TC', sans-serif;
     font-size: 16px;
     line-height: 1.8;
   }
@@ -58,7 +63,7 @@
   }
 
   nav a {
-    font-family: Noto Sans TC, Helvetica, sans-serif;
+    font-family: 'Noto Sans TC', sans-serif;
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -126,7 +131,7 @@
   /* 大標題
      clamp(最小值, 理想值, 最大值)：自動響應式字體大小 */
   .hero-title {
-    font-family: Noto Sans TC, Helvetica, sans-serif;
+    font-family: 'Noto Sans TC', sans-serif;
     font-weight: bold;
     font-size: clamp(28px, 5vw, 64px);
     letter-spacing: 0.32em;
@@ -138,7 +143,7 @@
 
   /* 副標題（景安站 · 彩排室 · 新北市中和區）*/
   .hero-sub {
-    font-family: Noto Sans TC, Helvetica, sans-serif;
+    font-family: 'Noto Sans TC', sans-serif;
     font-size: 11px;
     letter-spacing: 0.2em;
     color: rgba(255,255,255,0.7);
@@ -156,7 +161,7 @@
   }
 
   .hero-links a {
-    font-family: Noto Sans TC, Helvetica, sans-serif;
+    font-family: 'Noto Sans TC', sans-serif;
     font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -195,7 +200,7 @@
 
   /* 橘色小標籤（關於我們、空間、設備等）*/
   .sec-label {
-    font-family: Noto Sans TC, Helvetica, sans-serif;
+    font-family: 'Noto Sans TC', sans-serif;
     font-size: 14px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -203,8 +208,8 @@
     margin-bottom: 28px;
   }
 
-  h2 { font-family: Georgia, serif; font-weight: normal; font-size: 22px; color: var(--ink); margin-bottom: 18px; line-height: 1.3; }
-  h3 { font-family: Noto Sans TC, Helvetica, sans-serif; font-weight: bold; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); margin: 36px 0 10px; }
+  h2 { font-family: 'Noto Sans TC', sans-serif; font-weight: normal; font-size: 22px; color: var(--ink); margin-bottom: 18px; line-height: 1.3; }
+  h3 { font-family: 'Noto Sans TC', sans-serif; font-weight: bold; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); margin: 36px 0 10px; }
 
   p { margin-bottom: 1em; color: var(--ink); line-height: 1.85; }
   p:last-child { margin-bottom: 0; }
@@ -216,22 +221,22 @@
      ===================================================== */
   .gear-block { margin-top: 28px; border-top: 1px solid var(--line); }
   .gear-row { display: flex; justify-content: space-between; align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--line); gap: 24px; }
-  .gear-name { font-family: Georgia, serif; font-size: 15px; color: var(--ink); }
-  .gear-note { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.06em; color: var(--mute); text-align: right; flex-shrink: 0; }
+  .gear-name { font-family: 'Noto Sans TC', sans-serif; font-size: 15px; color: var(--ink); }
+  .gear-note { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 0.06em; color: var(--mute); text-align: right; flex-shrink: 0; }
 
   /* =====================================================
      費率清單
      ===================================================== */
   .rate-item { padding: 16px 0; border-bottom: 1px solid var(--line); }
   .rate-item:first-child { border-top: 1px solid var(--line); }
-  .rate-label { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-bottom: 4px; }
-  .rate-price { font-family: Georgia, serif; font-size: 17px; color: var(--ink); }
-  .rate-note  { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.05em; color: var(--mute); margin-top: 2px; }
+  .rate-label { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-bottom: 4px; }
+  .rate-price { font-family: 'Noto Sans TC', sans-serif; font-size: 17px; color: var(--ink); }
+  .rate-note  { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 0.05em; color: var(--mute); margin-top: 2px; }
 
   /* =====================================================
      聯絡資訊
      ===================================================== */
-  .contact-line { margin-bottom: 6px; font-family: Georgia, serif; }
+  .contact-line { margin-bottom: 6px; font-family: 'Noto Sans TC', sans-serif; }
   .contact-link { color: var(--granite); border-bottom: 0.5px solid var(--granite); padding-bottom: 1px; transition: color .15s; }
   .contact-link:hover { color: var(--ink); border-color: var(--ink); }
 
@@ -239,7 +244,7 @@
      預約按鈕
      ===================================================== */
   .cta-wrap { margin-top: 32px; }
-  .cta { display: inline-block; font-family: Arial, sans-serif; font-weight: bold; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; background: var(--brandy); color: #fff; padding: 12px 24px; transition: opacity .15s; }
+  .cta { display: inline-block; font-family: 'Noto Sans TC', sans-serif; font-weight: bold; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; background: var(--brandy); color: #fff; padding: 12px 24px; transition: opacity .15s; }
   .cta:hover { opacity: .82; }
 
   /* =====================================================
@@ -298,7 +303,7 @@
   .slider-slide .slide-label {
     position: absolute;
     bottom: 14px; left: 16px;
-    font-family: Noto Sans TC, sans-serif;
+    font-family: 'Noto Sans TC', sans-serif;
     font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
     color: rgba(255,255,255,0.85);
     opacity: 0; transition: opacity 0.3s;
@@ -319,8 +324,8 @@
      Footer
      ===================================================== */
   footer { border-top: 1px solid var(--line); padding: 40px; text-align: center; }
-  .footer-logo { font-family: Noto Sans TC, sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); margin-bottom: 10px; }
-  .footer-meta { font-family: Noto Sans TC, sans-serif; font-size: 11px; letter-spacing: 0.06em; color: var(--mute); line-height: 2.0; }
+  .footer-logo { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); margin-bottom: 10px; }
+  .footer-meta { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 0.06em; color: var(--mute); line-height: 2.0; }
   .footer-meta a { color: var(--almond); }
 
   /* =====================================================
