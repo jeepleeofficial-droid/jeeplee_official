@@ -242,6 +242,30 @@
   .contact-link { color: var(--granite); border-bottom: 0.5px solid var(--granite); padding-bottom: 1px; transition: color .15s; }
   .contact-link:hover { color: var(--ink); border-color: var(--ink); }
 
+  /* 聯絡區塊：左右兩欄 */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .contact-map {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .contact-map iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+  }
+  @media (max-width: 600px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
   /* =====================================================
      預約按鈕
      ===================================================== */
@@ -406,7 +430,20 @@
   </div>
   <div class="sec" id="contact">
     <div class="sec-label">聯絡</div>
-    <div id="contact-content"></div>
+    <div class="contact-grid">
+      <div id="contact-content"></div>
+      <!-- Google Map 嵌入
+           要換成你自己的地圖：Google Maps → 分享 → 嵌入地圖 → 複製 iframe 貼在這裡 -->
+      <div class="contact-map">
+        <iframe
+          src="https://maps.app.goo.gl/Hd9LkFnyRiKsCWXX8"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="橘譜立彩排室地圖">
+        </iframe>
+      </div>
+    </div>
   </div>
 </div>
 
