@@ -24,12 +24,12 @@
      想改顏色只需要改這裡，全站會一起變
      ===================================================== */
   :root {
-    --almond: #DE9151;   /* 橘色：小標題、強調用 */
-    --brandy: #C57D59;   /* 磚紅色：預約按鈕、重點連結 */
-    --granite: #4a3f31;  /* 深橘色：次要連結 */
-    --ink: #111;         /* 主要文字色（近黑） */
-    --mute: #888;        /* 次要文字色（灰） */
-    --line: #ccc;        /* 分隔線顏色 */
+    --almond: #DE9151;   /* 標題與強調色：用於小標題、重要視覺焦點 */
+    --brandy: #C57D59;   /* 行動呼籲色 (CTA)：用於預約按鈕、重點導流連結 */
+    --granite: #6a6e5a;  /* 輔助交互色：用於次要功能連結、導航項目 */
+    --ink: #111;         /* 主文字色：用於內文、標題等高對比內容 */
+    --mute: #888;        /* 次文字色：用於註解、描述性文字、提示資訊 */
+    --line: #ccc;        /* 邊框線條色：用於分隔線、容器邊框、輸入框外框 */
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -242,6 +242,24 @@
   .contact-link { color: var(--granite); border-bottom: 0.5px solid var(--granite); padding-bottom: 1px; transition: color .15s; }
   .contact-link:hover { color: var(--ink); border-color: var(--ink); }
 
+  /* 附近停車場按鈕 */
+  .parking-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--granite);
+    border: 1px solid var(--granite);
+    padding: 8px 14px;
+    border-radius: 2px;
+    transition: background .15s, color .15s;
+  }
+  .parking-btn:hover { background: var(--granite); color: #fff; }
+
   /* 聯絡區塊：左右兩欄 */
   .contact-grid {
     display: grid;
@@ -431,7 +449,12 @@
   <div class="sec" id="contact">
     <div class="sec-label">聯絡</div>
     <div class="contact-grid">
-      <div id="contact-content"></div>
+      <div>
+        <div id="contact-content"></div>
+        <a href="https://maps.app.goo.gl/XektNZm2LVaM2kcr8" target="_blank" class="parking-btn">
+          🅿 附近的停車場
+        </a>
+      </div>
       <!-- Google Map 嵌入
            要換成你自己的地圖：Google Maps → 分享 → 嵌入地圖 → 複製 iframe 貼在這裡 -->
       <div class="contact-map">
